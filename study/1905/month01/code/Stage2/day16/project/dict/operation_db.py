@@ -6,6 +6,9 @@
 直接调用
 """
 import pymysql
+import hashlib
+
+SALT = "!%)@(%)@*#@"  # 盐
 
 
 class Database:
@@ -32,11 +35,15 @@ class Database:
 
     # 注册操作
     def register(self, name, password):
-        sql = "select * from user where name = %s" % name
+        sql = "select * from user where name = '%s'" % name
         self.cur.execute(sql)
         r = self.cur.fetchone()
         if r:
             return False  # 用户存在
+        # 密码加密存储处理
+        hash = hashlib.md5((name + SALT).encode())
+        hash.update(password.encode())  # 算法 加密
+        password = hash.hexdigest()  # 加密后的密码
         # 插入数据库
         sql = "insert into user (name,password) values (%s,%s)"
         try:
@@ -46,3 +53,39 @@ class Database:
         except Exception:
             self.db.rollback()
             return False
+
+    # 登录处理
+    def login(self, name, password):
+        # 密码加密存储处理
+        hash = hashlib.md5((name + SALT).encode())
+        hash.update(password.encode())  # 算法 加密
+        password = hash.hexdigest()  # 加密后的密码
+
+        # 进行数据库查找
+        sql = "select * from user where name='%s' and password='%s'" % (name, password)
+        self.cur.execute(sql)
+        r = self.cur.fetchone()
+        # 有数据则允许登录
+        if r:
+            return True
+        else:
+            return False
+
+    # 查单词
+    def query(self,word):
+        sql = "select mean from words where word='%s'"%(word)
+        self.cur.execute(sql)
+        r = self.cur.fetchone()
+        # 如果找到 r --> (mean)
+        if r:
+            return r[0]
+
+    # 插入历史记录
+    def insert_hist(self,name,word):
+        sql = "insert into hist (name,word) values (%s,%s)"
+        try:
+            self.cur.execute(sql,[name,word])
+            self.db.commit()
+        except Exception:
+            self.db.rollback()
+

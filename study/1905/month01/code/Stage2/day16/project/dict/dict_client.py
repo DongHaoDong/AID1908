@@ -6,12 +6,42 @@ dict 客户端
 """
 from socket import *
 from getpass import getpass  # 运行使用客户端
-
+import sys
 # 服务端地址
 ADDRESS = ('127.0.0.1',8000)
 # tcp套接字
 s = socket()
 s.connect(ADDRESS)
+
+# 查单词
+def do_query(name):
+    while True:
+        word = input("单词:")
+        if word == "##":    # 结束单词查询
+            break
+        message = "Q {} {}".format(name,word)
+        s.send(message.encode())    # 返回请求
+        # 得到查询结果
+        data = s.recv(2048).decode()
+        print(data)
+
+# 二级界面,登陆后状态
+def login(name):
+    while True:
+        print("""
+        ================== Query ==================
+            1.查单词        2.历史记录        3.注销
+        ===========================================
+        """)
+        cmd = input("输入指令：")
+        if cmd == '1':
+            do_query(name)
+        elif cmd == '2':
+            pass
+        elif cmd == '3':
+            return
+        else:
+            print("请输入正确指令:")
 
 # 注册函数
 def do_register():
@@ -30,9 +60,24 @@ def do_register():
         data = s.recv(128).decode()  # 接受结果
         if data == 'OK':
             print("注册成功")
+            login(name)
         else:
             print("注册失败")
         return
+
+# 登录函数
+def do_login():
+    name = input("User:")
+    password = getpass()
+    message = "L {} {}".format(name,password)
+    s.send(message.encode())    # 发送请求
+    data = s.recv(128).decode()     # 得到回复
+    if data == 'OK':
+        print("登录成功")
+        login(name)
+    else:
+        print("登录失败")
+
 
 # 搭建客户端网络
 def main():
@@ -46,9 +91,10 @@ def main():
         if cmd == '1':
             do_register()
         elif cmd == '2':
-            s.send(cmd.encode())
+            do_login()
         elif cmd == '3':
-            s.send(cmd.encode())
+            s.send(b"E")
+            sys.exit("谢谢使用")
         else:
             print("请输入正确指令:")
 if __name__ == "__main__":
