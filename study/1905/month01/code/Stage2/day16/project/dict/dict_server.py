@@ -8,18 +8,35 @@ from socket import *
 from multiprocessing import Process
 import signal
 import sys
+from operation_db import Database
 
 # 全局变量
 HOST = '0.0.0.0'
 PORT = 8000
 ADDRESS = (HOST, PORT)
 
+# 建立数据库对象
+db = Database('dict')
+
+# 服务端注册处理
+def do_register(c,data):
+    tmp = data.split(' ')
+    name = tmp[1]
+    password = tmp[2]
+    # 返回True表示注册成功,False表示注册失败
+    if db.register(name,password):
+        c.send(b'OK')
+    else:
+        c.send(b'Fail')
 
 # 接收客户端请求，分配处理函数
 def request(c):
+    db.create_cursor()  # 每个子进程单独生成游标
     while True:
         data = c.recv(1024).decode()
         print(c.getpeername(), ":", data)
+        if data[0] == 'R':
+            do_register(c,data)
 
 
 # 搭建网络
@@ -27,7 +44,7 @@ def main():
     s = socket()
     s.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
     s.bind(ADDRESS)
-    s.listen(3)
+    s.listen(5)
 
     # 处理僵尸进程
     signal.signal(signal.SIGCHLD, signal.SIG_IGN)
@@ -40,6 +57,7 @@ def main():
             print("Connect from", address)
         except KeyboardInterrupt:
             s.close()
+            db.close()
             sys.exit("服务端退出")
         except Exception as e:
             print(e)

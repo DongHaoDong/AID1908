@@ -9,11 +9,33 @@ from getpass import getpass  # 运行使用客户端
 
 # 服务端地址
 ADDRESS = ('127.0.0.1',8000)
+# tcp套接字
+s = socket()
+s.connect(ADDRESS)
+
+# 注册函数
+def do_register():
+    while True:
+        name = input("User:")
+        password01 = getpass()
+        password02 = getpass("Again:")
+        if password01 != password02:
+            print("两次密码不一致!")
+            continue
+        if ' ' in name or ' ' in password01:
+            print("用户名密码不能有空格")
+            continue
+        message = 'R {} {}'.format(name,password01)
+        s.send(message.encode())  # 发送给服务器
+        data = s.recv(128).decode()  # 接受结果
+        if data == 'OK':
+            print("注册成功")
+        else:
+            print("注册失败")
+        return
 
 # 搭建客户端网络
 def main():
-    s = socket()
-    s.connect(ADDRESS)
     while True:
         print("""
         ================== Welcome ================
@@ -22,7 +44,7 @@ def main():
         """)
         cmd = input("输入指令：")
         if cmd == '1':
-            s.send(cmd.encode())
+            do_register()
         elif cmd == '2':
             s.send(cmd.encode())
         elif cmd == '3':
