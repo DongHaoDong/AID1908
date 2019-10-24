@@ -9,6 +9,7 @@ from multiprocessing import Process
 import signal
 import sys
 from operation_db import Database
+from time import sleep
 
 # 全局变量
 HOST = '0.0.0.0'
@@ -54,6 +55,22 @@ def do_query(c,data):
         message = "{} : {}".format(word,mean)
         c.send(message.encode())
 
+# 查看历史记录
+def do_hist(c,data):
+    name = data.split(' ')[1]
+    r = db.history(name)    # 数据库处理
+    if not r:
+        c.send(b'Fail')
+    c.send(b'OK')
+
+    for i in r:
+        # i --> (name,word,time)
+        message = "%s %-16s %s"%i
+        sleep(0.1)
+        c.send(message.encode())
+    sleep(0.1)
+    c.send(b'##')  # 发送结束的标志
+
 
 # 接收客户端请求，分配处理函数
 def request(c):
@@ -69,6 +86,8 @@ def request(c):
             do_login(c,data)
         elif data[0] == 'Q':
             do_query(c,data)
+        elif data[0] == 'H':
+            do_hist(c,data)
 
 
 # 搭建网络

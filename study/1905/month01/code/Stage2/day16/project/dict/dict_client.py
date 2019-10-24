@@ -25,6 +25,20 @@ def do_query(name):
         data = s.recv(2048).decode()
         print(data)
 
+# 查询历史记录
+def do_hist(name):
+    message = 'H ' + name
+    s.send(message.encode())
+    data = s.recv(128).decode()
+    if data == "OK":
+        while True:
+            data = s.recv(1024).decode()
+            if data == "##":
+                break
+            print(data)
+    else:
+        print("您还没有查询记录")
+
 # 二级界面,登陆后状态
 def login(name):
     while True:
@@ -37,7 +51,7 @@ def login(name):
         if cmd == '1':
             do_query(name)
         elif cmd == '2':
-            pass
+            do_hist(name)
         elif cmd == '3':
             return
         else:
