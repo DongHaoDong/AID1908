@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="#">
+        <div>
+            <label for="username">姓名：</label>
+            <!-- 占位符  -->
+            <input readonly placeholder="请输入用户名" type="text" id="username" name="username">
+        </div>
+        <div>
+            <label for="password">密码：</label>
+            <input placeholder="请输入密码" type="password" id="password" name="password">
+        </div>
+        <div>
+            <label for="education">学历：</label>
+            <!-- 下拉列表框元素 使用option列表项 value设置列表值-->
+            <select name="education" id="education">
+                <option value="1">博士生</option>
+                <option value="2">硕士生</option>
+                <option value="3">研究生</option>
+                <option value="4">本科生</option>
+                <option value="5">大专生</option>
+                <option value="6">中专生</option>
+                <option value="7">高中生</option>
+                <option value="8">初中生</option>
+                <option value="9">小学生</option>
+            </select>
+        </div>
+        <div>
+            <label for="sex">性别:</label>
+            <!-- 单选按钮元素，相互排斥时，将name属性值设置为相同的 -->
+            <input type="radio" name="sex" value="1" checked readonly/>男
+            <input type="radio" name="sex" value="2" readonly/>女
+        </div>
+        <div>
+            <label for="hobby">爱好：</label>
+            <input name="hobby1" type="checkbox" checked/>编程
+            <input name="hobby2" type="checkbox" />阅读
+            <input name="hobby3" type="checkbox" />运动
+            <input name="hobby4" type="checkbox" />音乐
+        </div>
+        <div>
+            <label for="Introduction">简介：</label>
+            <!-- 输入多行多列文本内容-->
+            <textarea name="Introduction" id="Introduction" cols="30" rows="10"></textarea>
+        </div>
+        <div>
+            <input type="submit" value="注册" />
+            <input type="reset" value="重置" disabled/>
+        </div>
+    </form>
+</body>
+</html>
