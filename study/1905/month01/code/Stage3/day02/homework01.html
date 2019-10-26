@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #register{
+            width:345px;
+        }
+        label{
+            display:inline-block;
+            width:88px;
+            border:solid 0px red;
+            text-align:right;
+        }
+        .btn{
+            width:180px;
+            background-color:rgb(5,253,110);
+            color:#fff;
+            padding:13px;
+            outline:none;
+            border:0px;
+            border-radius:5px;
+        }
+        div{
+            margin:20px 0px;
+        }
+        .pad{
+            padding:8px;
+        }
+    </style>
+</head>
+<body>
+    <div id="register">
+        <form action="#">
+            <div>
+                <label for="email">*邮箱地址:</label>
+                <input type="text" class="pad" id="email"name="email">
+            </div>
+            <div>
+                <label for="setpassword">*设置密码:</label>
+                <input type="password" class="pad" id="setpassword"name="setpassword">
+            </div>
+            <div>
+                <label for="interest">*兴趣标签:</label>
+                <input type="checkbox">新闻
+                <input type="checkbox">娱乐
+                <input type="checkbox">文化
+                <input type="checkbox">体育
+            </div>
+            <div>
+                <label for="code">*验证码:</label>
+                <input style="width:80px" type="text" class="pad" id="code">
+            </div>
+            <div>
+                <label for=""></label>
+                <input class="btn" type="submit" value="立即注册">
+            </div>
+            <div>
+                <label for=""></label>
+                <a href="#">《新浪网络服务使用协议》</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
