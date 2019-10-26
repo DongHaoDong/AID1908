@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 260px;
+            background-color: blue;
+            color:#fff;
+            text-align: center;
+        }
+        .box:hover{
+            background-color: greenyellow;
+        }
+        #name:focus{
+            background-color: red;
+        }
+        a:link{
+            color:green;
+        }
+        a:visited{
+            color: orange;
+        }
+        a:hover{
+            color:blue;
+        }
+        a:active{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <!-- 有一个div元素，默认一个背景色，移动上后变成另一个颜色 -->
+    <div class="box">
+        我会变背景色
+    </div>
+    <form action="#">
+        <label for="name">姓名：</label>
+        <input type="text" id="name" name="name">
+    </form>
+    <a href="https://www.baidu.com">百度</a>
+</body>
+</html>
