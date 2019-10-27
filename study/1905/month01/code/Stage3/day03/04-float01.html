@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #parent{
+            /*方式一：height:102px;*/
+            width:408px;
+            border:solid 1px red;
+            margin:0 auto;
+            overflow:hidden;
+        }
+        #parent .child{
+            width:100px;
+            height:100px;
+            border:dashed 1px #666;
+            float:left;
+        }
+    </style>
+</head>
+<body>
+    <div id="parent">
+        <div class="child"></div>
+        <div class="child"></div>
+        <div class="child"></div>
+        <div class="child"></div>
+        <!--添加一个清除浮动的元素<div style="clear:left"></div>-->
+    </div>
+    <div>今天的天气很好</div>
+</body>
+</html>

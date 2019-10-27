@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .news{
+            width:308px;
+            border:solid 1px red;
+            overflow:hidden;
+            margin-bottom:8px;
+        }
+        .fl{
+            float:left;
+        }
+        .fr{
+            float:right;
+        }
+        img{
+            width:100px;
+            height:100px;
+        }
+        p{
+            width:200px;
+            padding:0;
+            margin:0;
+            margin-top:8px;
+            margin-left:8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="news">
+        <img class="fl" src="image/cat.jpeg" alt="">
+        <p class="fr">&nbsp;&nbsp;&nbsp;&nbsp;文本环绕：浮动元素遮挡正常元素的位置，无法遮挡正常内容的显示，内容围绕在浮动 元素的周围显示。</p>
+    </div>
+    <div class="news">
+        <img class="fr" src="image/cat.jpeg" alt="">
+        <p class="fl">&nbsp;&nbsp;&nbsp;&nbsp;文本环绕：浮动元素遮挡正常元素的位置，无法遮挡正常内容的显示，内容围绕在浮动 元素的周围显示。</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        ul{
+            padding:0;
+            margin:0;
+            list-style-type:none;
+        }
+        ul>li{
+            border-bottom:solid 1px #ccc;
+            padding:10px;
+        }
+        .last{
+            border:none;
+        }
+        #news{
+            width:834px;
+            padding:0px 15px;
+            border-top:solid 4px #ccc;
+            border-left:solid 1px #ccc;
+            border-right:solid 1px #ccc;
+            border-bottom:solid 1px #ccc;
+        }
+        span{
+            /*内联元素转成块元素*/
+            display:inline-block;
+            width:30px;
+            text-align:center;
+            font-size:25px;
+            font-weight:bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="news">
+        <ul>
+            <li><span>1</span>媒体：勒索病毒还未手长，内幕已经足够惊人</li>
+            <li><span>2</span>媒体：勒索病毒还未手长，内幕已经足够惊人</li>
+            <li><span>3</span>媒体：勒索病毒还未手长，内幕已经足够惊人</li>
+            <li class="last"><span>4</span>媒体：勒索病毒还未手长，内幕已经足够惊人</li>
+        </ul>
+    </div>
+</body>
+</html>
