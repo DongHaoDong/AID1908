@@ -3,8 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        #parent{
+            border:solid 0px red;
+            width:100px;
+            height:50px;
+            background-color:#bbb;
+        }
+        #text{
+            color:#ccc;
+            float:left;
+            height:50px
+            width:50px;
+            border:solid 0px red;
+            padding:5px;
+            margin:8px 10px;
+            font-size:18px;
+        }
+        #subscript{
+            float:left;
+            margin-top:20px;
+            margin-left:-5px;
+            height:0px;
+            width:0px;
+            border:solid 12px;
+            border-left-color:transparent;
+            border-right-color:transparent;
+            border-bottom-color:transparent;
+        }
+    </style>
 </head>
 <body>
-
+    <div id="parent">
+        <div id="text">上海</div>
+        <div id="subscript"></div>
+    </div>
 </body>
 </html>
