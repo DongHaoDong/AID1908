@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #parent{
+            width:150px;
+            height:150px;
+            border:solid 1px red;
+            margin:0 auto;
+            position:relative;
+            
+        }
+        #parent>#child{
+            width:150px;
+            height:30px;
+            background-color:rgba(0,0,255,0.5);
+            position:absolute;
+            bottom:0;
+            color:#fff;
+            text-align:center;
+        }
+        img{
+            /*子元素可以设置为百分比的宽度，这个百分比相对于父元素的*/
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="parent">
+        <img src="image/cat.jpg" alt="">
+        <div id="child">这是一只猫</div>
+    </div>
+</body>
+</html>

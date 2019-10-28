@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #pic{
+            position:relative;
+            width:600px;
+            height:600px;
+            border:solid 1px red;
+            margin:0 auto;
+        }
+        #pic>div:nth-child(1){
+            position:absolute;
+            left:50px;
+            top:30px;
+            /*默认值为1*/
+            /*z-index:2;*/
+        }
+        #pic>div:nth-child(1):hover{
+            z-index:2;
+        }
+        #pic>div:nth-child(2){
+            position:absolute;
+            left:150px;
+            top:130px
+        }
+    </style>
+</head>
+<body>
+    <div id="pic">
+        <div>
+            <img src="image/img02.jpg" alt="">
+        </div>
+        <div>
+            <img src="image/img02.jpg" alt="">
+        </div>
+    </div>
+</body>
+</html>
