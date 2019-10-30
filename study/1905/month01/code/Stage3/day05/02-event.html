@@ -6,28 +6,57 @@
 </head>
 <body>
         <div id="tip"></div>
-        <button onclick="a = document.getElementById('tip');a.innerText='Hello,World!';">点击</button>
+        <div>
+            <input type="text" id="txt" />
+        </div>
         <script type="text/javaScript">
-            /*
-                version:1.0.1
-                author:董浩东
-                url:''
-                payurl:''
-                date:''
-            */
-            // 定义一个小写字母的变量
-            a = 1;
-            // 定义一个大写字母的变量
-            A = 1;  // 我是定一个大写字母变量
+               // /*
+               //      version:1.0.1
+               //      author:董浩东
+               //      url:''
+               //      payurl:''
+               //      date:''
+               // */
+               //  // 定义一个小写字母的变量
+               //  a = 1;
+               //  // 定义一个大写字母的变量
+               //  A = 1;  // 我是定一个大写字母变量
 
-            // 定义一个变量
-            a1 = 2;     // 全局变量
-            var a2 = 3; // 页面局部变量
-            var a2,a3,a5;//定义多个边浪并没有赋值
-            a3=4;a4=5;a5=6;//再赋值
+               //  // 定义一个变量
+               //  a1 = 2;     // 全局变量
+               //  var a2 = 3; // 页面局部变量
+               //  var a2,a3,a5;//定义多个边浪并没有赋值
+               //  a3=4;a4=5;a5=6;//再赋值
 
-            var a6=a7=a8=0;
-            var a9=10,a10=12;
+               //  var a6=a7=a8=0;
+               //  var a9=10,a10=12;
+
+               //  // 定义一个常量
+               //  const PI = 3.14159926;
+               //  // 保留两位小数并显示在页面
+               //  alert(PI.toFixed(2));
+
+                // 定义一个字符变量
+                // var strName = 'dream';
+                // var isSave=false;
+
+                // a = document.getElementById('txt');
+                // b = document.getElementById('tip');
+                // b.innerText = a.value;
+        </script>
+        <button onclick="">点击</button>
+        <script>
+            // var a = 2;
+            // console.log(a++);
+            // console.log(a);
+
+            // var b='A',c="a";
+            // console.log(c.charCodeAt(0))
+            // console.log(b>c);
+            var a = 10;b=20,c=30;
+            var result = a>b?a:b;
+            console.log(result);
+            console.log(!(a>b&&b>c || a<b&&c>b));
         </script>
 </body>
 </html>
