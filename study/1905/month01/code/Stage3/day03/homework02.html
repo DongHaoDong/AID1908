@@ -2,39 +2,74 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
     <style>
-        #introduction{
-            width:520px;
-            height:404px;
-            border:solid 1px red;
-            margin:0 auto;
+        #instr{
+            width: 520px;
+            height: 404px;
+            border: solid 0px red;
+            margin: 0 auto;
+            background-color:#d4cbc6;
+            text-align:center;
+            padding:10px 0px 0px 0px;
         }
-        #instroduction>div:nth-child(1){
-            width:146px;
-            height:146px;
-            margin:20px auto;
-            border:solid 1px red;
-            border-radius:50%;
+        #instr>div:nth-child(1){
+            width: 146px;
+            height: 146px;
+            margin: 20px auto;
+            border: solid 3px #fff;
+            border-radius: 50%;
+            box-shadow:5px 5px 5px #666;
         }
-        #instroduction>div:nth-child(1)>img{
-            border-radius:50%;
+        #instr>div:nth-child(1)>img{
+            border-radius: 50%;
+        }
+        #instr>div{
+            margin:5px 0px;
+        }
+        .btns{
+            padding-top:20px;
+        }
+        .btns>input{
+            width:135px;
+            height:40px;
+            margin-right:5px;
+            border:none;
+            outline:none;
+        }
+        .btns>input:nth-child(1){
+            background-color:#2ea7e0;
+            color:#fff;
+        }
+        .btns>input:nth-child(2){
+            background-color:#03b81d;
+            color:#fff;
+        }
+        .btns>input:nth-child(3){
+            background-color:#cc0003;
+            color:#fff;
         }
     </style>
 </head>
 <body>
-<!--    1.添加页面需求的元素，由大的元素包裹各个子元素-->
-<!--    2.编写样式控制添加好的页面元素-->
-<!--    3.微调编写好的样式，并调优-->
-    <div id="introduction">
-        <div>
-            <img width="146" height="146" src="image/cat.jpg" alt="">
-        </div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
+     <!-- 1.添加页面需求的元素，由大的块元素包裹子类元素 -->
+     <!-- 2.编写样式控制添加好的页面元素 -->
+     <!-- 3.微调编写好的样式，并调优 -->
+     <div id="instr">
+         <div>
+             <img width="146" height="146" src="image/img02.png" alt="">
+         </div>
+         <div>budinger</div>
+         <div>Web前端工程师</div>
+         <div>男，北京</div>
+         <div>这个人什么都没有留下</div>
+         <div class="btns">
+             <input type="button" value="访问主页">
+             <input type="button" value="发消息">
+             <input type="button" value="删除好友">
+         </div>
+     </div>
 </body>
 </html>

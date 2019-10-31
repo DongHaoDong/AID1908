@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #mob{
+            width:352px;
+            height:626px;
+            margin:0 auto;
+            border:solid 0px red;
+            background-image:url(image/img06.png);
+        }
+        /* #mob img{
+            margin-top:74px;
+            margin-left:16px;
+        } */
+        #mob iframe{
+            margin-top:74px;
+            margin-left:16px;
+        }
+    </style>
+</head>
+<body>
+    <div onclick="var a = document.getElementById('mob');
+        a.style.display='none';" id="mob">
+<!--        <img src="image/img05.png" alt="">-->
+<!--       在页面中打开一个指定地址的页面-->
+<!--       如果在一个页面中嵌入一个网址的页面可以使用iframe
+            启动时消耗比较大-->
+        <iframe src="http://www.baidu.com" frameborder="1" scrolling="none" width="322" height="482"></iframe>
+    </div>
+</body>
+</html>
