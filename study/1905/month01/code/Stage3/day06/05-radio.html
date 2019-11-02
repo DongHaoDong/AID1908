@@ -7,23 +7,51 @@
         #pic{
             width:300px;
             margin:0 auto;
-            border:solid 1px red;
+            border:solid 0px red;
+        }
+        #pic input{
+            margin-right:45px;
         }
     </style>
 </head>
 <body>
     <div id="pic">
         <div class="img">
-            <img src="image/gm1.jpg" alt="">
+            <img id="img" width="300px" src="image/gm1.jpg" alt="">
         </div>
         <fieldset>
             <legend>选择按钮</legend>
 <!--            name属性的值相同可以确保单选按钮组相互排斥选择-->
-            <input name="pic" id="pic1" type="radio">
+            <input name="pic" id="pic1" type="radio" checked>
             <input name="pic" id="pic2" type="radio">
             <input name="pic" id="pic3" type="radio">
             <input name="pic" id="pic4" type="radio">
         </fieldset>
     </div>
 </body>
+<script>
+    // 分别获取单选按钮对象，并保存在变量中
+    var btnPic1 = document.getElementById("pic1");
+    var btnPic2 = document.getElementById("pic2");
+    var btnPic3 = document.getElementById("pic3");
+    var btnPic4 = document.getElementById("pic4");
+    var imgShow = document.getElementById("img");
+    // 绑定元素的单击事件
+    btnPic1.onclick=function(){
+        // 改变图片的显示来源,设置或者重置指定属性名称的值
+        imgShow.setAttribute("src","image/gm1.jpg");
+    }
+    btnPic2.onclick=function(){
+        // 改变图片的显示来源,设置或者重置指定属性名称的值
+        imgShow.setAttribute("src","image/gm2.jpg");
+    }
+    btnPic3.onclick=function(){
+        // 改变图片的显示来源,设置或者重置指定属性名称的值
+        imgShow.setAttribute("src","image/gm3.jpg");
+    }
+    btnPic4.onclick=function(){
+        // 改变图片的显示来源,设置或者重置指定属性名称的值
+        imgShow.setAttribute("src","image/gm4.jpg");
+    }
+</script>
 </html>
