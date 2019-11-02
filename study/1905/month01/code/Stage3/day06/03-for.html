@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #result{
+            width:100px;
+            margin:0 auto;
+            border:solid 1px #666;
+            background-color:#eee;
+            text-align:center;
+            font-size:26px;
+        }
+    </style>
+</head>
+<body>
+    <div id="result">
+        0000
+    </div>
+    <script>
+        // 1. 使用while计算1-100之间的和
+        // 定义一个初始变量
+        var i=1,s=0;
+        // -------------------while方式-------------------------
+        // while(i<=100){
+        //     // 2.计算每一次循环变量累加的值，并保存在变量中
+        //     s+=i;
+        //     //累加每一次变量值
+        //     i++;
+        // }
+        // -------------------do while-------------------------
+        // 3.获取 指定id名称的对象，并保存在变量中
+        // do{
+        //    s += i;
+        //    i++;
+        // }while(i<=100);
+        // --------------------for------------------------------
+        for(;i<=100;i++){
+            // 计算某一段的数字使用break;
+            // if(i==51) break;
+            // 计算奇数的值
+            if(i % 2 != 0) continue;
+            s+=i;
+        }
+        var objResult = document.getElementById("result");
+        // 将累加的结果作为内容显示在页面内容中
+        objResult.innerText=s;
+    </script>
+</body>
+</html>

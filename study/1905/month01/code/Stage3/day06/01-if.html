@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #nav{
+            width:200ox;
+            border:solid 1px #ccc;
+            margin:0px auto;
+        }
+        #nav>.title{
+            border-bottom:solid 1px #ccc;
+            padding:5px 8px;
+            background-color:#eee;
+            // 将鼠标外形改为手状
+            cursor:move;
+        }
+        #nav>.content{
+            padding:8px;
+            display:block;
+        }
+    </style>
+</head>
+<body>
+    <div id="nav">
+        <div id="title" class="title" onclick="aa()">
+            程序员的法则
+        </div>
+        <div id="content" class="content">
+            每天都可以写代码，从事开发的工作。<br/>
+            每天都可以写代码，从事开发的工作。<br/>
+            每天都可以写代码，从事开发的工作。<br/>
+            每天都可以写代码，从事开发的工作。<br/>
+            每天都可以写代码，从事开发的工作。<br/>
+        </div>
+    </div>
+    <script>
+        // 绑定元素的单击事件
+        function aa(){
+        // 获取到标题和内容元素对象
+            var a = document.getElementsByClassName("tittle")[0];
+            var b = document.getElementsByClassName("content")[0];
+            if(b.style.display=="block"){
+                b.style.display="none";
+            }else{
+                b.style.display="block";
+            }
+        }
+
+    </script>
+</body>
+</html>
