@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            font-size:13px;
+        }
+        #bg{
+            position:absolute;
+            top:0;
+            left:0;
+            background-color:rgba(0,0,0,0.5);
+            width:100%;
+            height:100%;
+            display:none;
+        }
+        #box{
+            border:solid 0px #ccc;
+            width:260px;
+            position:absolute;
+            z-index:2;
+            left:50%;
+            margin-left:-130px;
+            top:50%;
+            margin-top:-80px;
+            display:none;
+            border-radius:3px;
+        }
+        #box .title{
+            color:#fff;
+            background-color:#008081;
+            padding:10px 20px;
+        }
+        #box .con{
+            overflow:hidden;
+            border:solid 0px red;
+            background-color:#fff;
+        }
+        #box .con .img{
+            margin:10px 10px 0px 10px;
+            float:left;
+        }
+        #box .con .rright{
+            float:left;
+            margin-bottom:30px;
+            margin-top:10px;
+        }
+        #box .con .rright .btn{
+            text-align:center;
+        }
+        #box .con .rright .btn>button{
+            background-color:#008081;
+            border:none;
+            width:62px;
+            color:#fff;
+            padding:5px 0px;
+        }
+    </style>
+</head>
+<body>
+<button id="btnShow">弹出</button>
+<div id="bg"></div>
+<!--定义一个弹框-->
+<div id="box">
+    <div class="title">提示</div>
+    <div class="con">
+        <div class="img">
+            <img src="image/img03.png" alt="">
+        </div>
+        <div class="rright">
+            <p>你真的要删除这条记录吗？</p>
+            <div class="btn" id="cls">
+                <button>确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var btnShow = document.getElementById("btnShow");
+    var divBg = document.getElementById("bg");
+    var divBox = document.getElementById("box");
+    var btnCls = document.getElementById("cls");
+    btnShow.onclick=function(){
+        divBg.style.display="block";
+        divBox.style.display="block";
+        btnCls.onclick=function(){
+            divBg.style.display="none";
+            divBox.style.display="none";
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #wb{
+            width:122px;
+            margin:0 auto;
+            border:solid 0px red;
+        }
+        #wb>.cls{
+            text-align:right;
+        }
+    </style>
+</head>
+<body>
+    <div id="wb">
+        <div class="top">
+            <img src="image/img02.png" alt="">
+        </div>
+        <div class="cls">
+            <img id="cls" src="image/img01.png" alt="">
+        </div>
+    </div>
+    <script>
+        // 参数id表明元素的id值
+        function $$(id){
+            // return 用于返回指定id名称的dom对象
+            return document.getElementById(id)
+        }
+        var btnCls=$$("cls");
+        btnCls.onclick=function(){
+            // 添加一个询问对话框
+            var flag=confirm("你真的想要关闭这个横幅吗？")
+            // 如果选择确定，关闭的程序
+            if (flag){
+                $$("wb").style.display="none";
+            }
+        }
+    </script>
+</body>
+</html>
