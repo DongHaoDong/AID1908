@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="tip">...</div>
+    <script>
+        // 定义一个带名称参数的函数
+        // function hi(name,age){
+        //        return name+",hello!今年的年龄是："+age;
+        // }
+        // 获取指定id号元素对象并保存在变量中
+        // var objTip=document.getElementById("tip");
+        // 设置元素对象中的内容
+        // objTip.innerText=hi('董浩东',21);
+        // function ab(){
+        //     return "ok";
+        // }
+        // function cd(){
+        //     return "no";
+        // }
+
+        // 扩展的JSON格式对象函数
+        // var login = {
+        //     ab:function(){
+        //         return "OK";
+        //     },
+        //     cd:function(){
+        //         return "NO";
+        //     }
+        // }
+        // document.getElementById("tip").innerText=login.cd();
+        // console.log(login.cd());
+        // 定义一个带擦书的匿名函数
+        // (function(name,age){
+        //     var str = name+",hello!今年的年龄是："+age;
+        //     var objTip=document.getElementById("tip");
+        //     objTip.innerText=login.ab();
+        // })("董浩东",21)
+        var c = 300;
+        function aa(){
+            // 在函数体内使用var定义的变量就是局部变量
+            var c = 100;
+            console.log(c);
+        }
+        aa();
+        console.log(c);
+    </script>
+</body>
+</html>
