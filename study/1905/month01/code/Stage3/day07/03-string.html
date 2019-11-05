@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="tip"></div>
+    <input type="text" id="txt">
+</body>
+<script>
+    // 获取文本框和div元素并保存在变量中
+    var objTip = document.getElementById('tip');
+    var objTxt = document.getElementById('txt');
+    // 绑定文本框元素事件
+    objTxt.oninput=function(){
+        var str = "abcdefg";
+        var s = str.substr(0,3);
+        console.log(s);
+        // 获取查询结果
+        // var sp=objTxt.value.indexOf('a');
+        // if(sp!=-1)
+        // var s = objTxt.value.substring(sp,sp+1);
+        // objTip.innerText=s;
+
+        var str = 'ie=utf-8&f=3&rsv_bp=1&rsv_idx=1&tn=baidu'
+        var arr2=str.split('&');
+        var arr4=[];
+        for(var i=0;i<arr2.length;i++){
+            // console.log(arr2[i]);
+            arr3 = arr2[i].split('=');
+            var _obj={}
+            _obj.name=arr3[0];
+            _obj.value=arr3[1];
+            arr4.push(_obj);
+        }
+        console.log(arr4.toString());
+        console.log(arr4[4].name);
+        console.log(arr4[4].value);
+        // console.log(arr3.toString());
+        // if(arr3[0]='tn'){
+        //     console.log(arr3[1]);
+        //     break;
+        // }
+    }
+</script>
+</html>

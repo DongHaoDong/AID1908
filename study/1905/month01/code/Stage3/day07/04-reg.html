@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        // var str = "efgabcde";
+        // // 定义一个正则对象
+        // var reg = /h/ig;
+        // // 使用对象来定义正则表达式
+        // var reg2 = new RegExp("a","ig");
+        // // 开始匹配
+        // console.log(reg2.test(str));
+        // // 查看下一次匹配的索引位置
+        // console.log(reg2.lastIndex);
+        // // 重置起始的索引位置
+        // reg2.lastIndex=0;
+        // // 第二次查询
+        // console.log(reg2.test(str));
+
+        var str="aacbefag";
+        var reg=/a/ig;
+        var arr = str.match(reg);
+        console.log(arr.toString());
+
+        // 将查询后得到的a替换成i
+        var str2 = str.replace(reg,"i");
+        // 输出替换后的str值
+        console.log(str);
+        console.log(str2);
+    </script>
+</body>
+</html>
