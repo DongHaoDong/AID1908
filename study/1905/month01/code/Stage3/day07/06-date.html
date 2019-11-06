@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        // 定义一个日期对象
+        // 参数为空表示当前日期
+        var dt = new Date();
+        console.log(dt.getFullYear());
+        console.log(dt.getMonth()+1);
+        console.log(dt.getDate());
+        console.log(dt.getHours());
+        console.log(dt.getMinutes());
+        console.log(dt.getSeconds());
+        console.log(dt.getTime());
+
+        // 元旦日期
+        var dt2 = new Date("2020/01/01 00:00:00");
+        // 两个时间相减得到毫秒数
+        var num = dt2 - dt;
+        console.log(num/1000/3600/24);
+
+    </script>
+</body>
+</html>

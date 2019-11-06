@@ -184,7 +184,17 @@ Math对象主要提供一系列数学运算的方法
 4. Math.round(x);   对x四舍五入取整数
 ## 5. 日期对象
 ### 1. 创建日期对象
-
+```html
+1. var date2 = new Date("2019/11/06");
+2. var date3 = new Date("2019/11/06 20:33:25");
+```
+### 2. 日期对象方法
+1. 读取或设置当前时间的毫秒数：getTime()
+2. 读取时间分量
+    * getFullYear()
+    * getMonth()
+    * getDate()
+    
 
     
         
