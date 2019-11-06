@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /*这个元素中只能写样式代码*/
+        #box{
+            width: 130px;
+            border:solid 1px #ccc;
+            margin:0 auto;
+            padding:10px 5px;
+            overflow: hidden;
+        }
+        #box>span{
+            width: 20px;
+            font-size: 21px;
+            text-align: center;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <!-- <button id="stop">停止</button> -->
+    
+    <div id="box">
+        <span id="hour">00</span>
+        <span style="width: 30px;">:</span>
+        <span id="min">00</span>
+        <span style="width: 30px;">:</span>
+        <span id="sec">00</span>
+    </div>
+    
+    <script>
+        // 定义一个定时器，每隔一秒获取一次时间对象值
+        var taskId2 = setInterval(function(){
+            // 获取当前时间
+            var dt = new Date();
+            document.getElementById("hour").innerText=changeTo(dt.getHours());
+            document.getElementById("min").innerText=changeTo(dt.getMinutes());
+            document.getElementById("sec").innerText=changeTo(dt.getSeconds());
+        },1000);
+
+        // 定义一个由一位数字变成两位数字的函数
+        function changeTo(n){
+            if(n<10)
+                return "0"+n; 
+            else
+                return n;
+        }
+       
+
+
+
+
+        // 在这个元素中只能写js代码
+
+        // 需求：在控制台每隔一秒输出一次"OK"
+        // var taskId = setInterval(function(){
+        //     console.log("OK");
+        // },1000)
+
+        // 先获取按钮元素对象，并绑定单击事件
+        // document.getElementById("stop").onclick=function(){
+        //     // 停止定时器的进程
+        //     clearInterval(taskId);
+        // };
+
+    </script>
+</body>
+</html>
