@@ -10,6 +10,22 @@
     <!-- 3.解析文件 -->
 </head>
 <body>
-
+    <div id="tip">hello,world</div>
 </body>
+<script>
+    // 输出jq对象
+    console.log($("#tip"));
+    // 输出dom对象
+    console.log(document.getElementById("tip"));
+    // 转成jq对象
+    console.log($(document.getElementById("tip")));
+    // jq转原生对象
+    console.log($("#tip")[0]);
+
+    // 1.使用jq选择器获取元素
+    // 2.改变元素显示的内容
+    $("#tip").html("<b>今天天气很好</b>");
+    
+
+</script>
 </html>
