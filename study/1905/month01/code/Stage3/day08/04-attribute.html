@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        span:hover{
+            color:#fff;
+            background-color: red;
+        }
+        /*定一个类别名为red的样式*/
+        .red{
+            /*设置字体的颜色为红色*/
+            color:red;
+        }
+        /*定一个类别名为fs的样式*/
+        .fs{
+            /*设置字体大小*/
+            font-size: 28px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <span>首页</span>
+        <span>新闻</span>
+        <span>图片</span>
+        <span>热点</span>
+    </div>
+    <div id="tip">你好</div>
+    <script>
+        // 获取元素对象，并给对象添加类别样式，过个类别样式用空格隔开
+        document.getElementById("tip").className="red fs";
+
+
+
+        var spans=document.getElementsByTagName("span");
+        spans[0].setAttribute("title","这是一个首页")
+        spans[1].setAttribute("title",spans[0].getAttribute("title"));
+    </script>
+</body>
+</html>

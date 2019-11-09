@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!-- <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <p class="p1">4</p>
+    <p class="p1">5</p>
+    <p class="p1">6</p> -->
+    <input type="text">
+    <span>1</span>
+    <span>2</span>
+    <script>
+        var inputs=document.getElementsByTagName("input");
+        var spans=document.getElementsByTagName("span");
+        inputs[0].oninput=function(){
+            spans[0].innerText=inputs[0].value;
+            spans[1].innerText=inputs[0].value;
+        }
+        // // 获取标签名称集合
+        // var divs = document.getElementsByTagName("div");
+        // // 在控制台输出标签名集合
+        // console.log(divs);
+        // // 在控制台输出第二个节点
+        // console.log(divs[1]);
+        // // 获取类别名称集合
+        // var ps = document.getElementsByClassName("p1");
+        // // 在控制台输出类别名称集合
+        // console.log(ps);
+        // // 在控制台输出第三个节点
+        // console.log(ps[2]);
+    </script>
+</body>
+</html>

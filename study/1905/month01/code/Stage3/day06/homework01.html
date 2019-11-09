@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #pics{
+            width: 739px;
+            height: 419px;
+            border:solid 0px red;
+            margin: 0 auto;
+            position: relative;
+        }
+        #pics>.lleft{
+            top:48%;
+            left:0;
+            position: absolute;
+            cursor: pointer;
+        }
+        #pics>.rright{
+            top:48%;
+            right: 0;
+            position: absolute;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!--  
+        1.添加页面元素
+        2.添加元素样式
+        3.微调，调优
+    -->
+    <div id="pics">
+        <img id="img" src="image/gm1.jpg" alt="">
+        <div class="lleft">
+            <img src="image/l1.png" alt="">
+        </div>
+        <div class="rright">
+            <img src="image/r1.png" alt="">
+        </div>
+    </div>
+    <script>
+        // 新建一个数组，保存全部图片的地址
+        var arrImgs=['image/gm1.jpg','image/gm2.jpg','image/gm3.jpg','image/gm4.jpg','image/gm5.jpg'];
+        // 获取右侧单击按钮对象
+        var rright=document.getElementsByClassName("rright")[0];
+        // 获取左侧单击按钮对象
+        var lleft=document.getElementsByClassName("lleft")[0];
+        // 获取显示图片元素对象
+        var img = document.getElementById("img");
+        // 定义一个下标变量
+        var index = 0;
+        // 绑定按钮的事件
+        rright.onclick=function(){
+            // 下标累加1
+            index++;
+            // 判断是否超过最大值
+            if(index==arrImgs.length) index=0;
+            // 调用修改属性方法重置图片对象的来源
+            img.setAttribute("src",arrImgs[index]);
+        }
+        // 绑定按钮的事件
+        lleft.onclick=function(){
+            // 判断是否小于0
+            if(index==0) index=arrImgs.length;
+            // 下标累减1
+            index--;
+            // 调用修改属性方法重置图片对象的来源
+            img.setAttribute("src",arrImgs[index]);
+        }
+    </script>
+</body>
+</html>
