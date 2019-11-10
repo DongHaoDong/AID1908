@@ -11,6 +11,10 @@
 </head>
 <body>
     <div id="tip">hello,world</div>
+    <!-- 添加一个id为marry的复选框 -->
+    <input checked type="checkbox" name="marry" id="marry">婚否
+
+    
 </body>
 <script>
     // 输出jq对象
@@ -26,6 +30,9 @@
     // 2.改变元素显示的内容
     $("#tip").html("<b>今天天气很好</b>");
     
+    console.log($("#tip").attr("id"));
 
+    // 获取jq对象
+    console.log($("#marry").prop("checked"));
 </script>
 </html>

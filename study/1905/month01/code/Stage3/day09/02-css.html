@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #tip{
+            border: solid 1px #ccc;
+            width: 200px;
+            margin: 0 auto;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .red{
+            background-color: red;
+            color:#fff;
+        }
+    </style>
+    <script src="js/jquery.min.js"></script>
+</head>
+<body>
+<div id="tip">jQuery框架是如此强大！</div>
+<div>a</div>
+<div id="mid">b</div>
+<div>c</div>
+<div id="parent">
+    <!-- 
+        1. 动态创建一个子类元素
+        2. id为child
+        3. 内容为我是一个动态元素
+        4. 字体是红色
+     -->
+     <div>我是原有内容</div>
+</div>
+<script>
+    $("#tip").on("click",function(){
+        $("#tip").toggleClass("red");
+    });
+    // 获取上一个兄弟元素
+    console.log($("#mid").prev().text());
+    // 获取下一个兄弟元素
+    console.log($("#mid").next().text());
+    // 创建一个div元素
+    var $div = $("<div></div>");
+    // 设置id值和内容
+    $div.attr("id","child").html("我是一个动态元素").css("color","red");
+    console.log($div);
+    $("#parent").prepend($div);
+</script>
+</body>
+</html>

@@ -108,3 +108,67 @@ val() // 设置或读取表单元素的值，等价于原生value属性
 移除指定属性
 ### 7. 操作标签样式
 1. 为元素添加id/class属性，对应选择器样式
+2. 针对类选择器，提供操作class属性值的方法
+    ```
+    addClass("className")  // 添加指定类名
+    removeClass("className")  // 移除指定的类型，如果参数省略，表示清空class属性值
+    toggleClass("className")    // 结合用户行为，实现动态切换类名，如果当前元素存在指定类名，则移除；不存在则添加
+    ```
+3. 操作行内样式
+```
+css("属性名","属性值")    // 设置行内样式
+css(JSON对象)     //  设置一组css样式
+/*
+JSON对象：常用数据传输格式
+语法:
+    {
+        "width":"200px",
+        "height":"200px",
+        "color":"red"
+    }
+*/
+```
+### 8. 根据层级结构获取元素
+1. parent()  
+返回父元素
+2. parents("selector")  
+返回满足选择器的祖先元素
+3. children()/children("selector")  
+返回所有直接子元素/返回值满足选择器的直接子元素
+4. find("selector")  
+返回所有的后代元素(包含直接与间接)
+5. next()/next("selector")  
+返回下一个兄弟元素/返回下一个兄弟元素，必须满足选择器
+6. prev()/prev("selector")  
+返回前一个兄弟元素/返回前一个兄弟元素，要求满足选择器
+7. siblings()/siblings("selector")  
+### 9. 元素的创建，添加，删除
+1. 创建  
+使用$("标签语法"),返回创建好的元素
+    ```html
+    var div=$("<div></div>");  // 创建元素
+    div.html("动态创建").attr("id","d1").css("color":"red");   //链式调用，设置内容和属性
+    var h1 = $("<h1 id='d1'>一级标题</h1>");   // 创建的同时设置内容,属性和样式
+    ```
+2. 添加至页面
+    1. 作为子元素添加
+        ```
+        $obj.append(newobj);    // 在$obj的末尾添加子元素newobj
+        $obj.prepend(newobject) // 作为第一个子元素添加至$obj中
+        ```
+    2. 作为兄弟元素添加
+        ``` 
+        $obj.after(newobj);     // 在$obj的后面添加兄弟元素
+        $obj.before(newobj);    // 在$obj的前面添加兄弟元素
+        ```
+   3. 移除元素
+       ```
+       $obj.remove();           // 移除$obj
+       ```
+### 10. jQuery事件处理
+1. 文档加载完毕
+```
+原生JS方法:window.onload
+jQuery:
+
+```
