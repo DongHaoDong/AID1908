@@ -8,11 +8,11 @@
             list-style-type: none;
             padding: 0;
             margin: 0;
+            width:100px;
         }
         ul>li{
             border-bottom:dashed 1px #ccc;
-            padding: 10px 0;
-            width: 100px 5px;
+            padding: 10px 5px;
         }
 
     </style>
@@ -34,12 +34,12 @@
         $("li:even").css("background-color","#ccc");
         $("#btn").on("click",function(){
             if($("#btn").text()=="隐藏"){
-                    $("ul").hide(2000,function(){
+                    $("ul").slideUp(2000,function(){
                     $("#btn").text("显示");
                 });
             }
             else{
-                $("ul").show(2000,function(){
+                $("ul").slideDown(2000,function(){
                  $("#btn").text("隐藏");
                 });
             }

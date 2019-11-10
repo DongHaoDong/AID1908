@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #ball{
+            width:20px;
+            height:20px;
+            background-color: orangered;
+            border-radius: 50%;
+            position: absolute;
+            top:100px;
+            left:100px;
+        }
+    </style>
+    <script src="js/jquery.min.js"></script>
+</head>
+<body>
+<img id="img" src="image/img02.png" alt=""><br/>
+<button id="btn">隐藏</button>
+<div id="ball"></div>
+<button id="move">移动</button>
+</body>
+<script>
+    $("#btn").on("click",function(){
+        if($(this).text()=="隐藏"){
+                $("#img").fadeOut(2000,function(){
+                $("#btn").text("显示");
+            })
+        }else{
+                $("#img").fadeIn(2000,function(){
+                $("#btn").text("隐藏");
+            })
+        }
+    })
+    $("#move").on("click",function(){
+       $("#ball").fadeIn(2000);
+       $("#ball").animate({
+           left:"200px",
+
+       })
+       setTimeout(function(){
+        $("#ball").animate({
+            top:"10px",
+        })
+       },100) 
+       setTimeout(function(){
+        $("#ball").animate({
+            left:"100px",
+        })
+       },200)
+       setTimeout(function(){
+        $("#ball").animate({
+            top:"100px",
+        })
+       },300)
+       setTimeout(function(){
+        $("#ball").fadeOut(2000)
+       },301)
+    })
+    // window.onload=function(){
+    //     alert("原生页面加载完成")
+    // }
+    // window.onload=function(){
+    //     alert("原生页面加载完成2")
+    // }
+    $(function(){
+        // alert("页面加载完成")
+    })
+    // $(function(){
+    //     alert("页面加载完成2")
+    // })
+</script>
+</html>

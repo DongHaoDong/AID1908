@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        ul{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        ul>li{
+            float: left;
+            border:solid 1px red;
+            text-align: center;
+        }
+        .top{
+            width:404px;
+            overflow: hidden;
+        }
+        .tip{
+            float: left;
+        }
+        .change{
+            float: right;
+        }
+    </style>
+    <script src="js/jquery.min.js"></script>
+</head>
+<body>
+    <div class="top">
+        <div class="tip">相关书籍</div>
+        <div class="change">换一换</div>
+    </div>
+    <ul>
+        
+    </ul>
+    <script>
+        // 定义一个数组保存5项数据
+        var arrBooks = [{url:'image/bk0.jpg',name:'第一本图书',cls:'属于第一类'},{url:'image/bk1.jpg',name:'第二本图书',cls:'属于第二类'},{url:'image/bk2.jpg',name:'第三本图书',cls:'属于第三类'},{url:'image/bk3.jpg',name:'第四本图书',cls:'属于第四类'},{url:'image/bk4.jpg',name:'第五本图书',cls:'属于第五类'},{url:'image/bk5.jpg',name:'第六本图书',cls:'属于第六类'}]
+        // 使用选择器获取换一换按钮
+        $(".change").on("click",function(){
+            // 1. 生成两个随机的下标
+            // 2. 根据下标获取数组元素
+            // 3. 将元素数据显示在页面中
+            // 将生成的数组保存在变量中
+            var _tmpArr=createNum(2);
+            // 遍历数组,获取每一项数据
+            var HTML="";
+            for(var i=0;i<_tmpArr.length;i++){
+                // 根据索引号获取数据
+                HTML+='<li>'
+                HTML+='<img src="'+arrBooks[_tmpArr[i]].url+'" alt="">'
+                HTML+='<h3><a href="javascript:;">'+arrBooks[_tmpArr[i]].name+'</a></h3>'
+                HTML+='<p>'+arrBooks[_tmpArr[i]].cls+'</p>'
+                HTML+='</li>'
+            }
+            $("ul").html($(HTML));
+        })
+        // 生成指定位数的随机数的函数
+        function createNum(count){
+            var arrTmp=[];
+            for(var i=0;i<count;i++){
+                var _index=Math.floor(Math.random()*arrBooks.length)
+                arrTmp.push(_index);
+            }
+            return arrTmp;
+        }
+    </script>
+</body>
+</html>

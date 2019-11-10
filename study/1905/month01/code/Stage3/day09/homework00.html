@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        ul{
+            width:550px;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            border: 5px solid #4c4c4c;
+        }
+        ul>li{
+            border-bottom: #cee2df solid 1px;
+            overflow: hidden;
+        }
+        ul>li>span{
+            width:101px;
+            padding: 5px 4px;
+            float: left;
+            border-right: solid 1px #cee2df;
+        }
+    </style>
+    <script src="js/jquery.min.js"></script>
+</head>
+<body>
+    <ul>
+        <li>
+            <span>Product</span>
+            <span>Price</span>
+            <span>ID Code</span>
+            <span>Quality</span>
+            <span>Exp Date</span>
+        </li>
+        <li>
+            <span>Pro 1</span>
+            <span>51 $</span>
+            <span>4857</span>
+            <span>Good</span>
+            <span>02/01/2009</span>
+        </li>
+        <li>
+            <span>Pro 1</span>
+            <span>51 $</span>
+            <span>4857</span>
+            <span>Good</span>
+            <span>02/01/2009</span>
+        </li>
+        <li>
+            <span>Pro 1</span>
+            <span>51 $</span>
+            <span>4857</span>
+            <span>Good</span>
+            <span>02/01/2009</span>
+        </li>
+        <li>
+            <span>Pro 1</span>
+            <span>51 $</span>
+            <span>4857</span>
+            <span>Good</span>
+            <span>02/01/2009</span>
+        </li>
+        <li>
+            <span>Pro 1</span>
+            <span>51 $</span>
+            <span>4857</span>
+            <span>Good</span>
+            <span>02/01/2009</span>
+        </li>
+        <li>
+            <span>Pro 1</span>
+            <span>51 $</span>
+            <span>4857</span>
+            <span>Good</span>
+            <span>02/01/2009</span>
+        </li>
+    </ul>
+    <script>
+        // 获取除第一行以外的行集合
+        $("ul>li:not(li:first)").each(function(index,element){
+            // 将每一项元素转换成jq对象
+            $(element).on("mouseover",function(){
+                $(this).css({"background-color":"#aaa","color":"#fff"}).on("mouseout",function(){
+                    $(this).css({"background-color":"#fff","color":"#000"})
+                })
+            })
+        })
+    </script>
+</body>
+</html>

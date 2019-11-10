@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            color:#fff;
+        }
+        #aa{
+            background-color: blue;
+        }
+        .red{
+            background-color: red !important;
+        }
+    </style>
+    <script src="js/jquery.min.js"></script>
+</head>
+<body>
+    <div id="aa">
+        这是一个测试内容
+    </div>
+    <script>
+        $("#aa").on("click",function(){
+            $("#aa").toggleClass("red");
+        })
+        
+    </script>
+</body>
+</html>

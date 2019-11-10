@@ -165,10 +165,40 @@ JSON对象：常用数据传输格式
        ```
        $obj.remove();           // 移除$obj
        ```
-### 10. jQuery事件处理
-1. 文档加载完毕
-```
-原生JS方法:window.onload
-jQuery:
-
-```
+### 10. 动画
+1. 显示和隐藏show(2000,callback)/hide(2000,callback)
+2. 下拉和上推(2000,callback)/slideUp(2000,callback)
+3. 淡隐淡现方式显示fadeOut(2000,callback)/fadeIn(2000,callback)
+4. 动画函数，可以实现自定义动画animate函数
+### 11. jQuery事件处理
+1. 文档加载完毕  
+原生JS方法:window.onload  
+jQuery:  
+    ```
+    // 语法一
+    $(document).ready(function(){
+        //文档加载完毕后执行
+    })
+    // 语法二
+    $().ready(function(){
+        // 文档加载完毕后执行
+    })
+    // 语法三
+    $(function(){
+        // 文档加载完毕后执行
+    })
+    ```
+    区别：  
+    原生onload事件不能重复书写，会产生覆盖问题；jquery中对事件做了优化，可以重复书写
+    ready方法依次执行
+2. 事件绑定方式
+事件名称省略on前缀
+    ```
+    // on("事件名称",function)
+    $("div").on("click",function(){});// 新版本使用多些
+    // bind("事件名称",function)
+    $("div").bind("click",function(){}); // 1.6-1.8之间的版本
+    // 事件名作为方法名
+    $("div").click(function(){});
+    ```
+3. this表示事件的触发对象，在jquery中可以使用，注意转换类型。this为原生对象只能使用原生的属性和方法，可以使用$(this)转换为jquery对象，使用jquery方法

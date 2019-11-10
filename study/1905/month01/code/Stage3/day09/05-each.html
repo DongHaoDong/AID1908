@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery.min.js"></script>
+</head>
+<body>
+    <div>abc</div>
+    <div>def</div>
+    <div>ghi</div>
+</body>
+<script>
+    // 使用each函数完成
+    // 写法：选择器.each(function(index,element){
+            // index表示索引号
+            // element表示原生元素
+    // })
+    $("div").each(function(index,element){
+        console.log(index);
+        // 转成jq对象
+        console.log($(element));
+        // 获取元素内容
+        console.log($(element).text());
+    })
+</script>
+</html>
