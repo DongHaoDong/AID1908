@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #tip{
+            color:red;
+            display: none;
+        }
+    </style>
+    <script src="js/jquery.min.js"></script>
+</head>
+<body>
+    <!-- 表单验证事件不在提交按钮上，数据由表单元素提交，按钮是为表单服务，所以验证在表单上
+         在submit事件中，如果返回false则不能提交，如果为true则可以提交-->
+    <!-- action 表示提交到服务器的路径 -->
+    <form action="" onsubmit="return sub();">
+        <!-- 表单中元素的name是用于获取数据的名称 -->
+        <input type="text" name="username" id="username" />
+        <!-- id用于js/css中定位这个元素 -->
+        <input type="submit" value="提交" />
+        <!-- 添加一个信息提示元素 -->
+        <div id="tip">内容不能为空</div>
+
+    </form>
+    <script>
+        // 编写一个用于事件执行的函数
+        function sub(){
+            var username=$("#username");
+            var tip=$("#tip");
+            // 判断文本框的内容是否为空
+            if(username.val()==""){
+                // 阻止提交
+                tip.css("display","block");
+                // 获取文本框元素焦点
+                username.focus();
+                return false;
+            }
+            // 不为空正常提交
+            return true;
+        }
+    </script>
+</body>
+</html>
