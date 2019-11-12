@@ -78,27 +78,27 @@ var arrData=[
     {
         t:'Python语言的优势',
         u:'image/b.jpg',
-        p1='本文探讨了Python语言在AI领域的优势与运用。谁会成为AI和大数据时代的第一开发语言？这本已是一个不需要争论的问题。如果说三年前Matlab、Scala、R、Java……',
-        p2='初学璐 学无止境 2018-5-13 34567阅读 999'
+        p1:'本文探讨了Python语言在AI领域的优势与运用。谁会成为AI和大数据时代的第一开发语言？这本已是一个不需要争论的问题。如果说三年前Matlab、Scala、R、Java……',
+        p2:'初学璐 学无止境 2018-5-13 34567阅读 999'
     },
     {
         t:'Web开发的优势',
         u:'image/b04.jpg',
-        p1='本文探讨了Python语言在AI领域的优势与运用。谁会成为AI和大数据时代的第一开发语言？这本已是一个不需要争论的问题。如果说三年前Matlab、Scala、R、Java……',
-        p2='初学璐 学无止境 2018-5-13 34567阅读 979'
+        p1:'本文探讨了Python语言在AI领域的优势与运用。谁会成为AI和大数据时代的第一开发语言？这本已是一个不需要争论的问题。如果说三年前Matlab、Scala、R、Java……',
+        p2:'初学璐 学无止境 2018-5-13 34567阅读 979'
     },
     {
         t:'JavaScript开发的优势',
         u:'image/b.jpg',
-        p1='本文探讨了Python语言在AI领域的优势与运用。谁会成为AI和大数据时代的第一开发语言？这本已是一个不需要争论的问题。如果说三年前Matlab、Scala、R、Java……',
-        p2='初学璐 学无止境 2018-5-13 34567阅读 979'
+        p1:'本文探讨了Python语言在AI领域的优势与运用。谁会成为AI和大数据时代的第一开发语言？这本已是一个不需要争论的问题。如果说三年前Matlab、Scala、R、Java……',
+        p2:'初学璐 学无止境 2018-5-13 34567阅读 979'
     }
 ]
 // 使用流程
 // 1.遍历数组，获取每一项元素的对象
 // 2.将获取的元素对象填充到模板中
 // 3.向页面元素追加模板内容
-for(var i=0;i<arrData.length;I++){
+for(var i=0;i<arrData.length;i++){
     // 通过模板生成新的数据
     var _HTML=lst.template(arrData[i].t,arrData[i].u,arrData[i].p1,arrData[i].p2);
     // 将数据追加到列表中
@@ -131,7 +131,7 @@ var arrPics=[
     {
         u:'image/b04.jpg',
         n:260,
-        t:'Wieb页面开发的重要性'
+        t:'Web页面开发的重要性'
     },
     {
         u:'image/banner01.jpg',
