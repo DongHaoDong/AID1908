@@ -12,13 +12,23 @@ a{
     text-decoration: none;
     color:#e8f5ec
 }
-/* 设置页面显示的字体大小 */
+/* 设置页面显示的字体大小/背景色 */
 body{
     font-size: 12px;
+    background-color: #f2f2f0;
 }
 /* 焦点颜色样式定义 */
 .focus{
     color: #b8eaee !important;
+}
+/* 全局广告图片样式 */
+.adimg{
+    margin-top: 75px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+.adimg>img{
+    width: 100%;
 }
 /* 编写导航条的样式 */
 #nav{
@@ -125,3 +135,112 @@ body{
     background-color: #666;
     color:#fff;
 }
+
+/* 文章列表页的样式 */
+#list,#pics{
+    width: 960px;
+    margin: 0px auto;
+    border: solid 0px red;
+}
+/* 编写标题样式 */
+#list>.top,#pics>.top{
+    border-bottom: solid 1px #ccc;
+    overflow: hidden;
+}
+#list>.top>.tleft,#pics>.top>.tleft{
+    float: left;
+    background-color: #000;
+    color:#fff;
+    padding: 10px 15px;
+}
+#list>.top>.tright,#pics>.top>.tright{
+    padding-top: 15px;
+    float: right;
+}
+/* 编写列表主体元素样式 */
+#list>.body{
+    overflow: hidden;
+    border: solid 0px blue;
+}
+#list>.body>.lst{
+    float: left;
+}
+#list>.body>.lst>.item{
+    border: solid 0px green;
+    background-color: #fff;
+    padding: 12px 15px 20px 15px;
+    margin-top: 20px;
+}
+#list>.body>.lst>.item>.title{
+    margin-bottom: 8px; 
+}
+/* 设置选项框内容的样式 */
+#list>.body>.lst>.item>.con{
+    overflow: hidden;
+}
+/* 设置图片的大小 */
+#list>.body>.lst>.item>.con>.cleft{
+    width: 210px;
+    float: left;
+}
+#list>.body>.lst>.item>.con>.cright{
+    width: 370px;
+    float: left;
+    padding: 15px 0px 15px 15px;
+}
+#list>.body>.lst>.item>.con>.cright>.pbottom{
+    margin-top: 26px;
+    font-size: 11px; 
+}
+#list>.body>.lst>.item>.con>.cleft>img{
+    width: 100%;
+}
+#list>.body>.ad{
+    margin-top: 20px;
+    float: right;
+    padding: 20px 15px;
+    background-color: #fff;
+}
+#list>.body>.ad>.adtip>.line{
+    border-bottom: solid 2px #000;
+    width:70px;
+}
+/* 设置广告区域的图片大小 */
+#list>.body>.ad>.imglst>ul>li{
+    width: 275px;
+    margin-top: 20px;
+}
+#list>.body>.ad>.imglst>ul>li>img{
+    width: 100%;
+}
+
+/* 设置图片列表的表象样式 */
+#pics>.item{
+    float: left;
+    border: solid 0px red;
+    margin: 20px 6px 20px 6px;
+}
+#pics>.item>.title{
+    height: 45px;
+    padding: 10px 15px;
+    background-color: #fff;
+}
+#pics>.item>.imgs{
+    width: 226px;
+    height: 150px;
+    position: relative;
+}
+#pics>.item>.imgs>.tip{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #cc0138;
+    color: #fff;
+    padding: 5px;
+    border-radius: 3px;
+}
+#pics>.item>.imgs>img{
+    width: 100%;
+    height: 100%;
+}
+
