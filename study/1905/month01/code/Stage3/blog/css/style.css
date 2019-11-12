@@ -72,20 +72,21 @@ body{
 /* log框的样式 */
 #log{
     position: absolute;
-    width: 450px;
-    height: 420px;
-    border: solid 1px red;
+    width: 410px;
+    height: 375px;
+    border: solid 0px red;
     left: 50%;
     top: 20%;   /*视觉向上处于最佳位置*/
-    margin-left: -225px;
-    z-index: 999;
+    margin-left: -205px;
+    z-index: 9999;
     background-color: #fff;
     border-color:#fff;
     border-radius: 10px;
+    box-shadow: 3px 3px 5px #666;
 }
 #log>.title{
     text-align: center;
-    padding: 20px 0;
+    padding: 20px 0 60px 0;
     border-bottom: solid 1px #ccc;
 }
 #log>.title>h3{
@@ -94,8 +95,33 @@ body{
 #log>.tip{
     margin: 32px 0px 10px 28px;
 }
+#log>.item{
+    margin-top: 8px;
+}
 #log>.item>input{
     width: 280px;
     margin-left: 28px;
     padding: 8px;
+    border-radius: 3px;
+    outline: none;/*除掉选中线*/
+    border: solid 1px #ccc;/*设置边框线*/
+}
+#log>.error{
+    margin: 10px 28px;
+    color:red;
+    display: none;
+}
+#log>.btn{
+    margin-top: 20px;
+}
+#log>.btn>input{
+    margin-left: 28px;
+    width: 70px;
+    padding: 8px 0;
+    border: none;
+    border-radius: 3px;
+}
+#log>.btn>input:hover{
+    background-color: #666;
+    color:#fff;
 }
