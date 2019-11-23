@@ -112,3 +112,95 @@ $ python3 manage.py runserver 5000 # 指定只能本机使用127.0.0.1的5000端
                 1. []空列表，表示只有127.0.0.1,localhost,'[::1]'能访问本项目
                 2. ['*'],表示任何网络地址都能访问到当前项目
                 3. ['*.tedu.cn','weimingze.com']表示只有当前两个主机能访问当前项目
+                * 注意：
+                    * 如果要在局域网其他主机也能访问此主机，启动方式应使用如下模式：
+                * python3 manage.py runserver 0.0.0.0:50000 # 指定网络设备所有主机都可以通过5000端口访问(需加ALLOWED_HOSTS = ['*'])
+        4. INSTALLED_APPS
+            * 指定当前项目中安装的应用列表
+        5. MIDDLEWARE
+            * 用于注册中间件
+        6. TEMPLATES
+            * 用于指定模板的配置信息
+        7. DATABASES
+            * 用于指定数据库的配置信息
+        8. LANGUAGE_CODE
+            * 用于指定语言配置
+            * 取值
+                * 英文:"en-us"
+                * 中文:"zh-Hans"
+        9. TIME_ZONE
+            * 用于指定当前服务器时区
+            * 取值
+                * 世界标准时间:"UTC"
+                * 中国时区:"Asia/Shanghai"
+        10. ROOT_URLCONF
+            * 用于配置根级url配置'mysite1.urls'
+            * 如
+                * ROOT_URLCONF = 'mysite1.urls'
+        > 注：此模块可以通过from django.conf import settings 导入使用
+## URL介绍
+* url即统一资源定位符 Uniform Resource Locator
+* 作用
+    * 用来表示互联网上某个资源的地址
+* 说明
+    * 互联网上的每个文件都有一个唯一的URL，它包含的信息指出文件的位置以及浏览器应该怎么处理它
+* URL的一般语法格式为:
+```
+protocol : // hostname[:port] / path [?query][#fragment]
+```
+* 如：
+```
+http://tts.tmooc.cn/video/showVideo?menuId=657421&version=AID201908#subject
+```
+* 说明
+    * protocol(协议)
+        * http通过HTTP访问该资源。格式 HTTP://
+        * https通过安全的HTTPS访问该资源。格式 HTTPS://
+        * file资源是本地计算机上的文件。格式 file:///
+        * ...
+    * hostname(主机名)
+        * 是指存放资源的服务器的域名系统(DNS)主机名、域名或IP地址。
+    * port(端口号)
+        * 整数，可选，省略时使用方案的默认端口
+        * 各种传输协议都有默认的端口号，如http的默认端口为80
+    * path(路由地址)
+        * 由零或多个"/"符号隔开的字符串，一般用来表示主机上的一个目录或文件地址，路由地址决定了服务器端如何处理这个请求
+    * query(查询)
+        * 可选，用于给动态网页传递参数，课有多个参数，用"&"符号隔开,每个参数的名和值用"="符号隔开。
+        * 字符串，用于指定网络资源中的片断。例如一个网页中有多个名次解释，可使用fragment直接定位到某一名词解释。
+    * 注:[]代表其中的内容可以省略
+## 视图函数(view)
+* 视图函数是用于接收一个浏览器请求并通过HttpResponse对象返回数据的函数。此函数可以接收浏览器请求并根据业务逻辑返回相应的内容给浏览器
+* 视图处理的函数的语法格式：
+```
+def xxx_view(request[,其它参数...]):
+    return HttpResponse对象
+```
+* 参数：
+    * request用于绑定HttpRequest对象，通过此对象可以获取浏览器的参数和数据
+* 示例
+    * 视图处理函数 views.py
+    ```
+    # file:<项目名>/views.py
+    from django.http import HttpResponse
+    def page1_view(request):
+        html = "<h1>这是第一个页面</h1>"
+        return HttpResponse(html)
+    ```
+## Django中的路由配置
+* settings.py中的ROOT_URLCONF指定了主路由配置列表urlpatterns的文件位置
+* urls.py主路由配置文件
+    ```
+    # file:<项目名>/urls.py
+    urlpatterns = [
+        url(r'^admin/',admin.site.urls),
+        ... # 此处配置路由
+    ]
+    ```
+    > urlpatterns是一个路由-视图函数映射关系的列表，此列表的映射关系由url函数来确定
+
+3.url()函数
+    
+ 
+  
+                    
