@@ -14,8 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,re_path
+from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',views.index_view),
+    path('page1/', views.page1_view),
+    path('page2/', views.page2_view),
+    re_path(r'^page(\d+)/',views.pagen_view),
+    re_path(r'^(\d+)/(\w{3})/(\d+)',views.math_view),
+    re_path(r'^person/(?P<name>\w+)/(?P<age>\d{1,2})',views.person_view),
+    re_path(r'birthday/(?P<y>\d{4})/(?P<m>\d{1,2})/(?P<d>\d{1,2})',views.birthday_view),
+    re_path(r'birthday/(?P<m>\d{1,2})/(?P<d>\d{1,2})/(?P<y>\d{4})',views.birthday_view),
+    re_path(r'^mypage',views.mypage_view),
 ]
