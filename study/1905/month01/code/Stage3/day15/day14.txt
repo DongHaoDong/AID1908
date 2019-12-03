@@ -1,0 +1,30 @@
+day01回顾
+    URL
+        http://127.0.0.1:8000/a/b/c?a=100&b=200#hello
+    路由
+        /a/b/c
+    视图函数
+        def xxx(request,...):
+            处理相应的业务逻辑
+            return HttpResponse()/HttpRedirect()
+    从路由中获取数据
+        urls.py
+            urlpatterns = [
+                url(正则1,视图函数1),
+                url(正则2,视图函数2),
+                url(正则3,视图函数3),
+            ]
+        正则1
+            re_path(r'^page1')
+            re_path(r'page(\d+)')
+            re_path(r'page(?P<page_number>\d+)')
+            请求方式:
+                GET/POST/HEAD/DELETE/...
+        GET方式传参
+            获取查询字符串的内容
+                xxx？a=100&b=200&a=300
+            def xxx_view(request):
+                if request.method == 'GET'
+                    r = request.GET['b']
+                    s = request.GET.get('b','0')
+                    t = request.GET.getlist('a') # t=['100','300']
