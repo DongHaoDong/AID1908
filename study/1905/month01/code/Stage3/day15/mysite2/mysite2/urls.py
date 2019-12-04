@@ -24,4 +24,12 @@ urlpatterns = [
     re_path(r'sum',sum_view),
     re_path(r'^login$',views.login_view),
     re_path(r'^login2$',views.login2_view),
+    re_path(r'^test$',views.test_view),
+    re_path(r'^test2$',views.mytemp_view),
+    re_path(r'^mycalc$',views.mycalc_view),
+    re_path(r'^test_for',views.for_view),
+    re_path(r'^$',views.index_view),
+    re_path(r'^sport',views.sport_view,name='sport'),
+    re_path(r'^news',views.news_view,name='news'),
+    re_path(r'^page(\d+)',views.pagen_view,name='pagen')
 ]

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block mytitle %}
+    <title>主页</title>
+    {% endblock mytitle%}
+</head>
+<body>
+    <h1 style="background-color:blue;">注册--登录</h1>
+    {% block page_info %}
+    <h1 style="background-color:orange;">网站主页</h1>
+    <a href="/sport">进入运动页</a>
+    <a href="{% url 'sport' %}">进入运动页</a>
+    <a href="/news">进入新闻页</a>
+    <a href="{% url 'pagen' '1' %}">第1页</a>
+    <a href="{% url 'pagen' '2' %}">第2页</a>
+    {% endblock page_info %}
+    <h1 style="background-color:grey;">联系我们:dream.cn</h1>
+</body>
+</html>

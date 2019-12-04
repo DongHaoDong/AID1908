@@ -132,6 +132,148 @@ MTV代表Model-Template-View(模型-模板-视图)模式。这种模式用于应
     * {{变量名.key}}
     * {{对象.方法}}
     * {{函数名}}
+    1. 视图函数中必须将变量封装到字典中才允许传递到模板上
+    ```
+    def xxx_view(request):
+        dic = [
+            "变量1":"值1",
+            "变量2":"值2",   
+        ]
+        return render(request,'xxx.html',dic)
+    ```
+* 练习
+    * 写一个简单的计算器界面，能够在服务端进行简单加减乘除计算
+    ![calc](calc.jpg)
+    * 参考代码
+    ```html
+    <form action="/mycalc" method="post">
+      <input type="text" name="x" value="1">
+      <select name="op">
+          <option value="add">+加</option>
+          <option value="sub">-减</option>
+          <option value="mul">*乘</option>
+          <option value="div">/除</option>
+      </select>
+      <input type="text" name="y" value="2">=<span>3</span>
+      <div>
+          <input type="submit" value="开始计算">
+      </div>
+    </form>
+    ```
+## 模板的标签
+1. 作用
+    * 将一些服务端的功能嵌入到模板中
+2. 标签语法
+    ```
+    {%标签%}
+    ...
+    {%结束标签%}              
+    ```
+3. if标签
+    ```
+    {%if 条件表达式1%}
+    ...
+    {%elif 条件表达式2%}
+    ...
+    {%elif 条件表达式3%}
+    ...
+    {%else%}
+    ...
+    {%endif%}
+    ```
+4. if标签里的布尔运算符
+    * if条件表达式里可以用的运算符==,!=,<,>,<=,>=,in,not in,is,is not,and,or
+    * 在标记中使用实际括号是无效的语法，如果您需要他们指示优先级，则应使用嵌套的if标记
+5. locals函数的使用
+locals()返回当前函数作用域内全部局部变量形成的字典
+6. for标签
+    1. 语法
+        ```
+        {% for 变量 in 可迭代对象 %}
+            ... 循环语句
+        {% empty %}
+            ... 可迭代对象无数据时填充的语句
+        {% endfor %}
+        ```
+    2. 内置变量-forloop  
     
+        |变量|描述|
+        |----|----|
+        |forloop.counter|循环的当前迭代(从1开始索引)|
+        |forloop.counter0|循环的当前迭代(从0开始索引)|
+        |forloop.revcounter|循环结束的迭代次数(从1开始索引)|
+        |forloop.revcounter0|循环结束的迭代次数(从0开始索引)|
+        |forloop.first|如果这是第一次通过循环，则为真|
+        |forloop.last|如果这是最后一次循环，则为真|
+        |forloop.parentloop|当嵌套循环，parentloop表示外层循环|
+## 过滤器
+1. 作用
+    * 在变量输出时对变量的值进行处理
+    * 您可以通过使用过滤器来改变变量的输出的显示
+2. 语法
+    * {{变量|过滤器1:参数值1|过滤器2:参数值2...}}
+3. 常用过滤器
     
+    |过滤器|说明|
+    |-----|----|
+    |lower|将字符串转换为全部小写|
+    |upper|将字符串转换为全部大写|
+    |safe|默认不对变量内的字符串进行html转义|
+    |add:'n'|将value的值增加n|
+    |truncatechars:'n'|如果字符串字符多于指定的字符数量，name会被截断。截断的字符串将以可翻译的省略号序列('...')结尾。|
+4. 文档参见:
+    * https://docs.djangoproject.com/en/3.0/ref/templates/builtins/
+## 模板的继承
+* 模板继承可以使父模板的内容重用，子模板直接继承父模板的全部内容并可以覆盖父模板中相应的块
+* 定义父模板中的块block标签
+    * 标识出那些在子模块中是允许被修改的
+    * block标签:在父模板中定义，可以在子模板中覆盖
+        ```
+        {% block block_name %}
+        定义模板块，此模板块可以被子模板重新定义的同名块覆盖
+        {% endblock block_name %}
+        ```
+* 继承模板extends标签(写在模板文件的第一行)
+    * 子模板继承语法标签
+        * {% extends '父模板名称' %}
+        * 如：
+            * {% ' extends 'base.html' %}
+    * 子模板重写父模板中的内容块
+        ```
+        {% block block_name %}
+        子模板块用来覆盖父模板中block_name块的内容
+        {% endblock block_name %}
+        ```
+    * 重写的覆盖规则
+        * 不重写，将按照父模板的效果显示
+        * 重写，则按照重写的效果显示
+    * 注意
+        * 模板继承时，服务器端的动态内容无法继承
+* 参考文档
+* https://docs.djangoproject.com/en/3.0/ref/templates/
+* 模板的继承示例:
+![templates](templates.jpg)
+## url反向解析
+* url反向解析是指在视图或模板中，用为url定义的名称来查找或计算出相应的路由
+* url函数的语法
+    * url(regex,views,kwargs=None,name="别名")
+    * 例如：
+        url(r'user_login$',views.login_view,name="login")
+* url()的name关键字参数
+    * 作用:
+        * 根据url列表中的name=关键字传参给url确定了个唯一确定的名字，在模板中，可以通过这个名字反向推断出此url信息
+    * 在模板中通过别名实现地址的反向解析
+        ```
+        {% url '别名' %}
+        {% url '别名' '参数值1' '参数值2'%}
+        ```            
+* 练习
+    ```
+    写一个有四个自定义页面的网站，分别对应路由
+    /           主页
+    /page1      页面1
+    /page2      页面2
+    /page3      页面3
+    功能:是主页加三个页面的连接分别跳转到一个页面，三个页面每个页面加入一个连接用于返回主页
+    ```
     

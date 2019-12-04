@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <h5>s={{ s }}</h5>
+        <h5>s | safe ={{ s | safe }}</h5>
+        <h5>s | upper = {{ s | upper }}</h5>
+        <h5>n + 2 = {{ n | add:2 }}</h5>
+        <h5>s2 = {{ s2 }}</h5>
+        <h5>s2 | truncatechars:8 = {{ s2 | truncatechars:'8' }}</h5>
+    </div>
+    <ul>
+        {% for city in lst %}
+        {% if forloop.first %} <li>============</li>{% endif %}
+        <li>{{forloop.counter}}、{{city}}</li>
+        {% if forloop.last %} <li>#############</li>{% endif %}
+        {% empty %}
+        <li>没有城市</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
