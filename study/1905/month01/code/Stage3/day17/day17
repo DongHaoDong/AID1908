@@ -1,0 +1,57 @@
+day16回顾
+    静态文件
+        /static/js/abc.js
+        /static/css/abc.css
+        settings.py
+            STATICFILES_DIRS = (
+                文件夹1,文件夹2
+            )
+    应用 app
+    python3 manage.py startapp 应用名称
+    settings.py
+        INSTALL-APP = [
+            ...
+            '应用名称'
+        ]
+    分布式路由
+        基础路由处理文件mysite3/urls
+            urlpatterns = [
+                url(r'music/',include('子路由模块位置')),
+                url(r'music/',include('music.urls'))
+            ]
+    django连接mysql
+        1. sql>create database xxx default charset = ...
+        2. 修改settings.py
+            DATABASE = {
+                'default':{
+                    'name':'XXX',
+                    ...
+                }
+            }
+        3. mysite3/__init__.py
+            import pymysql
+            pymysql.installed_as_MySQLdb()
+模型类
+    # file: bookstore/models.py
+    from django.db import models
+    class Book(models.Model):
+        字段名 = 字段类型(参数)
+    $ python3 manage.py makemigrations
+    $ python3 manage.py migrate
+ORM技术
+    类           表
+    对象         字段
+    类属性       字段值
+数据库操作
+    增、删、改、查
+    class Book(models.Model):
+        pass
+    Book.objects    绑定管理器对象
+    创建
+        1. Book.objects.create(...)
+        2. abook = Book()
+           abook.title = '值'
+           abook.price = '值'
+           abook.save()
+Django shell的使用
+    python3 manage.py shell
