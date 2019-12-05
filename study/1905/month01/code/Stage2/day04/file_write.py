@@ -4,7 +4,7 @@ file_write.py
 """
 # 打开文件
 f = open('test.txt','a')
-# f = open('image.jpg','ab')
+# f = open('images.jpg','ab')
 # 写操作
 # f.write("hello 死鬼\n".encode())
 # f.write("哎呀，干啥".encode())

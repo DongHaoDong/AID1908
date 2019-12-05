@@ -9,7 +9,7 @@ try:
 except FileNotFoundError as e:
     print(e)
 else:
-    fw = open('image.jpg','wb')  # 二进制写入
+    fw = open('images.jpg','wb')  # 二进制写入
     # 循环读取直至最后
     while True:
         data = fr.read(1024)

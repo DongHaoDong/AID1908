@@ -13,7 +13,7 @@ cur = db.cursor()
 # with open('file.jpg','rb') as f:
 #     data = f.read()
 # try:
-#     sql = "update student_class set image = %s where Student_Name='ZhangLeLe';"
+#     sql = "update student_class set images = %s where Student_Name='ZhangLeLe';"
 #     cur.execute(sql,[data])
 #     db.commit()
 # except Exception as e:
@@ -21,7 +21,7 @@ cur = db.cursor()
 #     print(e)
 
 # 获取图片
-sql = "select image from Student_Class where Student_Name='LiuFan'"
+sql = "select images from Student_Class where Student_Name='LiuFan'"
 cur.execute(sql)
 data = cur.fetchone()
 with open('girl.jpg','wb') as f:

@@ -1,0 +1,50 @@
+day016回顾
+    获取POST请求的数据
+        if request.method == 'POST'：
+            request.POST['key']
+            request.POST.get('key')
+            request.POST.getlist('key') # 列表
+        <form>
+            <input name='xxx'>
+            <select name='yyy'></select>
+            <textarea name='zzz'>内容</textarea>
+            <input type='submit'>
+        </form>
+django的设计模式 MTV         /MVC
+    M - model
+    T - template
+    V - View
+模板的语言:
+    {{变量}}      # 获取变量对应的值
+    {{变量.index}}
+    标签:
+        {{ if 表达式 }} xxx {{ elif 表达式2 }} yyy {{ else }} zzz {{ endif }}
+        {{ for 变量 in 可迭代对象 }}
+        xxx {{ 变量 }}
+            {{ forloop.counter }}
+        {{ empty }}
+            zzz
+        {{ endfor }}
+    过滤器
+        {{ 变量 | 过滤器1 | 过滤器2 | 过滤器3:'n' }}
+        {{ 变量 | add:'2' }}
+        {{ s | truncatechars:'10' }}
+    模板的继承
+        a.html
+            {% block xxx %}
+                abcdefg
+            {% endblock xxx %}
+        b.html
+            {% extends 'a.html' %}
+            {% block xxx %}
+                12345678
+            {% endblock xxx %}
+    url 反向解析
+        urlpatterns = [
+            re_path(r'page1',xxx_view,name='xxx')
+            re_path(r'page(\d+)(\w+)',yyy_view,name='yyy')
+        ]
+        模板中
+        {% url 'xxx' %}  /page1
+        {% url 'yyy' '1' 'abc' %}   /page1abc
+
