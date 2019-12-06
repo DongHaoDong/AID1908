@@ -1,0 +1,37 @@
+day17回顾
+    数据库查询操作
+        MyModel.objects.all()
+        MyModel.objects.filter(关键字传参)
+        MyModel.objects.get(关键字传参)
+        MyModel.objects.exclude(关键字传参)
+        MyModel.objects.aggregate(变量名=聚合函数('列'))
+        MyModel.objects.annotate(变量名=聚合函数('列'))
+        MyModel.objects.raw('sql语句')
+        MyModel.objects.values('列1','列2')
+        MyModel.objects.values_list('列1','列2')
+        MyModel.objects.order_by('列1','-列2')
+    objects.get(id__gt=20)
+    objects.filter(id__gt=20)
+    objects.exclude(id__gt=20)
+返回值是QuerySet([])的方法
+    objects.all()
+    objects.filter()
+    objects.exclude()
+聚合查询：
+    聚合函数
+        from django.db.models import Max,Min,Avg,Count,Sum
+    分组聚合
+    不分组聚合
+F对象
+    from django.db.models import F
+    books = Book.objects.filter(market_price__gt=F('price'))
+Q对象
+    & 与、|或、~非
+    ~Q(price__gt=50) | Q(market_price__lt=20)
+原生的数据库操作方法
+    查询
+        MyModel.objects.raw('sql查询语句')
+    执行其他语句(游标)
+        from django.db import connection
+        with connection.cursor() as cur:
+            cur.execute('SQL语句')
