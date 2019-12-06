@@ -230,5 +230,184 @@ class Book(models.Model):
             auth = Author.objects.get(id=1)
             auth.delete()
         except:
-            
+            print("删除失败")
         ```
+2. 删除查询结果集
+    * 步骤
+        1. 查找查询结果集中满足条件的全部QuerySet查询集合对象 
+        2. 调用查询集合对象的delete()方法实现删除
+    * 示例
+        ```
+        # 删除全部作者中，年龄大于65的全部信息
+        authors = Author.objects.filter(age__gt=65)
+        authors.delete()
+        ```
+# 聚合查询
+* 聚合查询是指对一个数据表中的一个字段的数据进行部分或全部进行统计查询，查bookstore_book数据表中的全部数的平均价格，查询所有书的总个数等，都要使用聚合查询
+1. 不带分组聚合
+    * 不带分组的聚合查询是指将全部数据进行集中统计查询
+    * 聚合函数
+        * 定义模块:django.db.models
+        * 用法: from django.db.models import *
+        * 聚合函数
+            * Sum,Avg,Count,Max,Min
+    * 语法
+        * MyModel.objects.aggregate(结果变量名=聚合函数('列'))
+    * 返回结果
+        * 由结果变量名和值组成的字典
+        * 格式为：
+            * {"结果变量名":值}
+    示例
+        ```
+        # 得到所有书的平均价格
+        from bookstore import models
+        from django.db.models import *
+        result = models.Book.objects.aggregate(myAvg=Avg('price'))
+        print("平均价格是:",result['myAvg'])
+        print("result=",result) # {"myAvg":58.2}
+        # 得到数据表里有多少本书
+        result = models.Book.objects.aggregate(myCount=Count('title'))
+        print("数据记录总个数是:",result['myCount'])
+        print("result=",result)
+        ```
+2. 分组聚合
+    * 分组聚合是指通过计算查询结果中每一个对象所关联的对象集合，从而得出总计值(也可以是平均值或总和)，即为查询集的每一项生成的集合
+    * 语法
+        * QuerySet.annotate(结果变量名=聚合函数('列'))
+    * 用法步骤:
+        1. 通过先用查询结果MyModel.objects.values查找查询要分组聚合的列
+            * MyModel.objects.values('列1','列2')
+            * 如
+                ```
+                pub_set = models.Book.objects.value('pub')
+                print(pub_set)
+                ```
+        2. 通过返回结果的QuerySet.annotate方法分组求合得到分组结果
+            * QuerySet.annotate(名=聚合函数('列'))
+            * 返回QuerySet结果集，内部存储结果的字典
+            * 如
+                ```
+                pub_count_set = pub_set.annotate(myCount=Count('pub'))
+                print(pub_count_set) 
+                ```
+            * values('查询列名')
+            * 示例：
+                * 得到那个出版社共出版多少本书
+                ```
+                def test_annotate(request):
+                    from django.db.models import Count
+                    from . import models
+                    # 得到所有出版社的查询结果集
+                    pub_set=models.Book.objects.annotate(myCount=Count('pub')) # 根据出版社查询分组，出版社和Count的分组聚合查询集合
+                    pub_count_set = pub_set.annotate(myCount=Count('pub')) # 返回查询结果集合
+                    for item in pub_count_set:
+                        print('出版社':item['pub'],'图书有',item['myCount'])
+                    return HttpResponse('请查看服务器端控制台获取结果')
+                ```
+# F对象
+* 一个F对象代表数据库中某条记录的字段的信息
+1. 作用
+    * 通常是对数据库中的字段值在不获取的情况下进行操作
+    * 用于类属性(字段)之间的比较
+2. 用法
+    * F对象在数据包django.db.models中，使用时需要先导入
+        * from django.db.models import F
+3. 语法
+    ```
+    from django.db.models import F
+    F('列名')
+    ```
+4. 说明
+    * 一个F()对象代表了一个model的字段的值
+    * F对象通常是对数据库中的字段值在不加载到内存中的情况下直接在数据库服务器端进行操作
+5. 示例1
+    * 更新Book实例中所有的零售价涨10元
+    ```
+    models.Book.objects.all().update(market_price=F('market_price')+10)
+    # 一下做法好于如下代码
+    books = models.Book.objects.all()
+    for book in books:
+        book.update(market_price=book.market_price+10)
+        book.save()
+    ```
+6. 实例2
+    * 对数据库中两个字段的值进行比较，列出哪些书的零售价高于定价?
+    ```
+    from django.db.models import F
+    from bookstore import models
+    books = models.Book.objects.filter(market_price__gt=F('price'))
+    for book in books:
+        print(book.title,'定价:',book.price,'售价:',book.market_price) 
+    ```
+# Q对象-Q()
+* 当在获取查询结果集，使用复杂的逻辑或 | ,逻辑非 - 等操作时可以借助于Q对象进行操作
+* 如:想找出定价低于20元或清华大学出版社的全部书，可以写成
+```
+models.Book.objects.filter(Q(price__lt=20)|Q(pub='清华大学出版社'))
+```
+* Q对象在数据包django.db.models中。需要先导入再使用
+    * from django.db.models import Q
+1. 作用
+    * 在条件中用来实现除and(&)以外的or(|)或not(-)操作
+2. 运算符
+    * & 与操作
+    * | 或操作
+    * ~ 非操作
+3. 语法
+    ```
+    from django.db.models import Q
+    Q(条件1)|Q(条件2)   # 条件1成立或条件2成立
+    Q(条件1)&Q(条件2)   # 条件1和条件2同时成立
+    Q(条件1)&~Q(条件2)   # 条件1成立且条件2不成立
+    ...
+    ```
+4. 示例
+    ```
+    from django.db.models import Q
+    # 查找清华大学出版社的书或价格低于50的书
+    models.Book.objects.filter(Q(market_price__lt=50)|Q(pub='清华大学出版社'))
+    # 查找不是机械工业出版社的书且价格低于50的书
+    models.Book.objects.filter(Q(market_price_lt=50)&Q~(pub='机械大学出版社'))
+    ```
+# 原生的数据库操作方法
+* 使用MyModel.objects.raw()进行数据库查询操作查询
+    * 在django中，可以使用模型管理器的raw方法来执行select语句进行数据查询
+    1. 语法：
+        * MyModel.objects.raw(sql语句)
+    2. 用法
+        * MyModel.objects.raw('sql语句')
+    3. 返回值
+        * QuerySet集合对象
+    4. 示例
+        ```
+        books = models.Book.objects.raw('select * from bookstore_book')
+        for book in books:
+            print(book)
+        ```
+* 使用django中的游标cursor对数据库进行增删改查操作
+    * 在Django中可以使用如UPDATA,DELETE等SQL语句对数据库进行操作，
+    * 在Django中使用上述非查询语句必须使用游标进行操作
+    * 使用步骤
+        1. 导入cursor所在的包
+            * Django中的游标cursor定义在django.db.connection包中，使用前需要先导入
+            * 如
+                * from django.db import connection
+        2. 用创建cursor类的构造函数创建cursor对象，再使用cursor对象，为保证在出现异常时能释放cursor资源，通常使用with语句进行创建操作
+            * 如
+                ```
+                from django.db import connection
+                with connection.cursor() as cur:
+                    cur.execute('执行SQL语句')
+                ```
+            * 示例
+                ```
+                from django.db import connection
+                with connection.cursor as cur:
+                    cur.execute('update bookstore_book set pub="XXX出版社" where id = 10;')
+                with connection.cursor() as cur:
+                    # 删除id为1的一条记录
+                    cur.execute('delete from bookstore_book where id=10;')
+                ```
+                
+    
+        

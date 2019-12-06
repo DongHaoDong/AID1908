@@ -23,7 +23,8 @@ def add_view(request):
                 price=price,
                 market_price=market_price,
             )
-            return HttpResponse("添加成功！")
+            # return HttpResponse("添加成功！")
+            return HttpResponseRedirect('/bookstore/all')
         except:
             return HttpResponse("添加失败！")
 
@@ -59,3 +60,12 @@ def mod_view(request,id):
         book.save()
         return HttpResponseRedirect('/bookstore/all')
         # return HttpResponseRedirect('../all')
+
+
+def del_view(request,id):
+    try:
+        book = models.Book.objects.get(id=id)
+    except Exception as err:
+        return HttpResponse("删除失败")
+    book.delete()
+    return HttpResponseRedirect('/bookstore/all')
