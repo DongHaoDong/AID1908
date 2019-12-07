@@ -1,0 +1,106 @@
+day18回顾
+1. 后台管理
+    /admin
+    $ python3 manage.py createsuperuser
+    注册
+    # file: admin.py
+    from . import models
+    admin.site.register(models.Book)
+
+    class BookManager(admin.ModelAdmin):
+        list_display = ['id','title',...]
+        list_display_links = ['id','title',...]
+        list_filter = [...]
+        search_field = [...]
+        list_editable
+关系映射
+    一对一
+    一对多
+    多对多
+一对一
+    class A(models.Model):
+        ...
+    class B(models.Model):
+        author = models.OneToOneField(A)
+    a = A(...)
+    b = B()
+    正向查询
+        b.author
+    反向查询
+        a.b
+一对多
+    class pub(models.Model):
+        ...
+    class Book(models.Model):
+        ...
+        pubs = models.ForeignKey(pub)
+    p = Pub()
+    book = Book()
+    通过书找出版社
+        book.pub
+    通过出版社找书
+        p.book_set.all()
+多对多映射
+    class Author(models.Model):
+        ...
+        authors = models.ManyToManyField(Author)
+    author = Author.objects.create(...)
+    book = author.book_set.create(...)
+    通过书找所有作者
+        author.book_set.all()
+    通过作家找所有的书
+        author.book_set.all()
+        author.book_set.filter()
+        author.book_set.get()
+        author.book_set.create()
+cookies
+    HttpResponse对象来进行
+        添加和修改cookie
+            response = HttpResponse()
+            response.set_cookie('key',值,max_age=秒)
+            return response
+        删除cookie
+            response.delete_cookie('key')
+        获取
+            def XXX_view(request):
+                value = request.COOKIES['key']
+                value2 = request.COOKIES.get('key')
+注册用户功能笔记
+1. 创建工程
+2. 配置mysql数据库
+    1）创建数据库mysite6_db
+    create database mysite6_db default charset utf8 collate utf8_general_ci;
+    2)配置settings.py
+    3)在mysite6/__init__.py 添加pymysql支持
+3. 创建应用user编写模型类，添加注册功能
+    1. python3 manage.py startapp user
+    2. 在settings.py中进行注册
+    3. 编写模型类
+    4. 做迁移操作
+添加注册功能
+    1)创建模板
+        templates/user/register.html
+    2)编写视图处理函数
+        def reg_view(request)
+    3)添加分布式路由
+        /user/reg
+cookies对各个站点是隔离的
+    https://www.baidu.com/
+    http://127.0.0.1:8000/
+用session实现用户登录功能
+    路由:/user/login
+    视图:def login_view(request)
+    模板:templates/user/login.html
+编写主页部分
+    应用名称: index
+        python3 manage.py startapp index
+    模板:templates/index.html
+    视图:index_view
+    路由:/
+创建一个云笔记对应的应用
+    应用名:note
+        python3 manage.py startapp
+        安装注册note
+    编写模型类
+
+
