@@ -19,10 +19,12 @@ from django.urls import re_path
 from django.conf.urls import include
 from index.views import index_view
 from index.views import test_view
+from index.views import upload_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^user/',include('user.urls')),
     re_path(r'^$',index_view),
     re_path(r'^note/',include('note.urls')),
-    re_path(r'^test',test_view),
+    re_path(r'^test', test_view),
+    re_path(r'^upload', upload_view),
 ]

@@ -1,0 +1,15 @@
+day19回顾
+session 会话
+    浏览器端：sessionid='XXYYZZ'
+    服务器端:{
+        'XXYYZZ':sessionStore()
+        'AABBCC':sessionStore()
+    }
+    添加/修改session
+        request.session['键'] = 值
+    删除session
+        del request.session['键']
+    获取当前请求对应的session的值
+        value = request.session['键']
+    request.session['user'] = {'name':'xxx','id'=666}
+
