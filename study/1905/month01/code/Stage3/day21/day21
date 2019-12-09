@@ -1,0 +1,78 @@
+day19回顾
+    中间件
+    form表单
+    csrf跨站点请求保护
+    文件上传
+    分页
+中间件
+from django.utils.deprecation import MiddleMixin
+class MyMiddleWare(MiddleMixin):
+    def process_request(self,request):
+        如果返回None，继续执行
+        如果返回HttpResponse结束请求直接返回
+    def process_view(self,request,callback,args,kwargs):
+        如果返回None，继续执行
+        如果返回HttpResponse结束请求直接返回
+    def process_response(self,request,response):
+        如果返回HttpResponse结束请求直接返回
+    def process_exception(self,request,exception):
+        如果返回None，继续执行
+        如果返回HttpResponse结束请求直接返回
+    def process_template_response(self,request,response):
+        如果返回None，继续执行
+        如果返回HttpResponse结束请求直接返回
+跨站点请求伪造保护
+    中间件 django.middleware.csrf.CsrfViewMiddleware
+    <form>
+        {% csrf_token %}
+    </form>
+form表单
+    class XXXForm(forms.Form):
+        m1 = forms.XXXField(label='xxx')
+        m2 = forms.YYYField(label='yyy')
+    作用：
+        生成html代码
+            form = XXXForm()
+            html = form.as_p()      {{ form.as_p }}
+            html = form.as_table()  {{ form.as_table }}
+            html = form.as_ul()     {{ form.as_ul }}
+            {% for f in form %}
+                {{ f.table }} {{ f }}
+            {% endfor %}
+        表单取值
+            form = XXXForm(request.POST)
+            if form.isvalid():
+                dic = form.cleaned_data   绑定字典
+        进行表单验证
+            class XXXForm(forms.Form):
+                m1 = form.XXXField(label='xxx')
+                m2 = form.YYYField(label='yyy')
+                def clean_m1(self):
+                    如果出错 raise forms.ValidationError("...")
+                    如果成功返回m1值
+                def clean(self):
+                    如果出错 raise forms.ValidationError("...")
+                    如果成功 return self.cleaned_data
+分页
+    from django.core.paginator import Paginator
+
+    paginator = Paginator(需要分页的数据,每页的个数)
+    paginator.page_range 返回页码
+    page = paginator.page(当前页的整数)
+    page.object_list
+    {% for r in page %}
+        {{ r.xxx }}
+    {% endfor %}
+    page.number当前页的页码
+    page.has_next()
+    page.next_page_number()
+    ...
+文件上传
+    <form method="post" enctype = 'multipart/form-data'/>
+        <input type="file" name = 'myfile'>
+    </form>
+    def xx_view(request):
+        files = request.FILES('myfile')
+        files.name  # 上传的文件名
+        files.file  # 已经打开的文件流对象
+
