@@ -138,8 +138,10 @@
     * 启动uwsgi
         ```
         $ cd 项目文件夹
-        
+        $ sudo uwsgi --ini 项目文件夹/uwsgi.ini
         ```
+    * 停止uwsgi
+        
         
         
     
