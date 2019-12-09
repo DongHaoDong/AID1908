@@ -134,6 +134,8 @@
             # 服务的日志文件位置
             daemonize=uwsgi.log
             ```
+        * 修改settings.py将DEBUG=True改为DEBUG=False
+        * 修改settings.py将ALLOWED_HOSTS=[]改为ALLOWED_HOSTS=['*']
 * uWSGI的运行管理
     * 启动uwsgi
         ```
@@ -141,6 +143,18 @@
         $ sudo uwsgi --ini 项目文件夹/uwsgi.ini
         ```
     * 停止uwsgi
+        ```
+        $ cd 项目文件夹
+        $ sudo uwsgi --stop uwsgi.pid
+        ```
+    * 说明
+        * 当uwsgi启动后，当前django项目的程序已变成后台守护进程，在关闭当前终端时此进程不会停止
+* 测试
+    * 在浏览器端输入http://127.0.0.1:8000进行测试
+    * 注意，此时端口号是8000
+# nginx反向代理配置
+* Nginx是轻量级的高性能web服务器，提供了诸如HTTP代理和反向代理、负载均衡，缓存等一系列重要特性，在实践之中使用广泛
+
         
         
         
