@@ -154,8 +154,76 @@
     * 注意，此时端口号是8000
 # nginx反向代理配置
 * Nginx是轻量级的高性能web服务器，提供了诸如HTTP代理和反向代理、负载均衡，缓存等一系列重要特性，在实践之中使用广泛
+* C语言编写,执行效率高
+* nginx作用
+    *　负载均衡，多台服务器轮流处理请求
+    ＊　反向代理
+＊　原理：
+＊　客户端请求nginx,再由nginx请求uwsgi运行django下的python代码
+* ubuntu下安装nginx
+    * $ sudo apt install nginx
+* nginx配置
+    * 修改nginx的配置文件/etc/nginx/sites-available/default
+    * 在server节点下添加新的location想,指向uwsgi的ip与端口
+        ```
+        server {
+            ...
+            location / {
+                uwsgi_pass 127.0.0.1:8000; # 重定向到127.0.0.1的8000端口
+                include /etc/nginx/uwsgi_params; # 将所有的参数转到uwsgi下
+            }
+        }
+        ```
+    * nginx服务控制
+        ```
+        $ sudo /etc/init.d/nginx start|stop|restart|status
+        $ sudo service nginx start|stop|restart|status
+        ```
+        >通过start,stop,restart,status可能实现nginx服务的启动,停止,重启,查看状态等操作
+    * 修改uWSGI配置
+        * 修改项目文件夹/uwsgi.ini下的HTTP通信方式改为socket通信方式如
+            ```
+            [uwsgi]
+            # 去掉如下
+            # http=127.0.0.1:8000
+            # 改为
+            socket=127.0.0.1:8000
+            ```
+        * 重启uWSGI服务
+            ```
+            $ sudo uwsgi --stop uwsgi.pid
+            $ sudo uwsgi --ini 项目文件夹/uwsgi.ini
+            ```
+    ```
+    测试:
+        在浏览器端输入<http://127.0.0.1>进行测试
+        注意,此时端口号为80(nginx默认值)
+    ```
+# nginx 配置静态文件路径
+* 解决静态路径问题
+```
+# file: /etc/nginx/sites-available/default
+# 新添加location /static 路由配置,重定向到指定的绝对路径
+server {
+    ...
+    location /static {
+        # root static文件夹所在的绝对路径
+        root /home/tarena/gitproject/AID1908/study/1905/month01/code/Stage3/day21/mysite8; #重定向/static请求的路径,这里改为项目的文件夹
 
-        
+    }
+    ...
+}
+```
+# 404页面
+* 在模板文件夹中添加404.html模板,当视图处罚Http404异常时,将会被显示
+* 404.html仅在发布版中(即settings.py中DEBUG=False时)才起作用
+* 当响应处理函数处罚Http404异常时就会跳转到404界面
+    ```
+    from django.http import 404
+    def xxx_view(request):
+        raise Http404 # 直接返回404
+    ```
+    
         
         
     
