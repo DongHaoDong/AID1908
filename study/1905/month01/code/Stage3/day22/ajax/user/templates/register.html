@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/static/js/common.js"></script>
+    <script src="/static/js/jquery.min.js"></script>
+</head>
+<body>
+    <div>
+        用户名:<input type="text" id="username" />
+        <span id="show"></span>
+    </div>
+    <div>
+        密码:<input type="password" id="password" />
+    </div>
+    <div>
+        <button id="btn">提交</button>
+    </div>
+    <script>
+        $(function(){
+            // 绑定blur事件
+            $('#username').blur(function(){
+                // 1. 创建xhr
+                var xhr = createXhr();
+                // 2. 创建请求
+                var url = '/user/checkname/?username='+$('#username').val();
+                xhr.open('get',url,true);
+                // 3. 回调函数
+                xhr.onreadystatechange=function(){
+                    if(xhr.readyState == 4 && xhr.status == 200){
+                        $('#show').html(xhr.responseText);
+                    }
+                }
+                // 4. 发送请求
+                xhr.send(null);
+            });
+        });
+    </script>
+</body>
+</html>

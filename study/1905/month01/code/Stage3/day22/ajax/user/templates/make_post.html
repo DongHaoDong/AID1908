@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/static/js/common.js"></script>
+    <script src="/static/js/jquery.min.js"></script>
+</head>
+<body>
+    {% csrf_token %}
+    <div>
+        用户名:<input type="text" name="username" id="username">
+    </div>
+    <div>
+        密码:<input type="text" name="password" id="password">
+    </div>
+    <div>
+        <input type="button" id="btn" value="提交">
+    </div>
+    <script>
+        $(function(){
+           $("#btn").click(function(){
+            // 1. 创建xhr
+            var xhr = createXhr();
+            // 2. 创建请求 -open()
+            xhr.open('post','/user/make_post/',true);
+            // 3. 设置回调
+            xhr.onreadystatechange=function(){
+                if(xhr.readyState == 4 && xhr.status == 200){
+                    alert(xhr.responseText);
+                }
+            }
+            // 4. 设置请求头-Content-Type
+            xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+            // 5. 发送请求 key=value&key1=value1
+            var username = $('#username').val();
+            var password = $('#password').val();
+            var csrf = $("[name='csrfmiddlewaretoken']").val();
+            // 拼接post表单提交参数
+            var params = 'username='+username+'&password='+password+'&csrfmiddlewaretoken='+csrf
+            // 6. 发送post请求
+            xhr.send(params);
+           });
+        });
+    </script>
+</body>
+</html>
