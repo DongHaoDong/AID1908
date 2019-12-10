@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 # Create your views here.
 
+
 def index_view(request):
     print("主页被访问！")
     return HttpResponse("主页")

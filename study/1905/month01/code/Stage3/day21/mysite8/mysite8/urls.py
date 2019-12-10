@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from index.views import *
+from index.views import index_view
+from index.views import page1_view
 from django.urls import re_path
 
 urlpatterns = [
