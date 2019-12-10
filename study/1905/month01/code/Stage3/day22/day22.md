@@ -121,7 +121,11 @@ xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 xhr.send('请求数据')
 // 请求数据同查询字符串 "username=donghaodong&age=21"
 ```
-## JSON
+xhr排错指南
+```
+1. 检查浏览器调试工具 - 控制台/console;若发现红色报错,代表JS有错误
+2. 执行发请求的事件，查看调试工具 - 网络/network; 观察所有请求情况。 200 - 预期的正常状态;业务请求出现404 - url映射有问题[xhr写的url错误/django路由分发有问题];304 - 静态资源缓存[正常的浏览器行为,若想关闭浏览器缓存,打开调试工具-网络-禁用缓存/disable cache],500 - django视图层逻辑问题;无状态吗 - xhr请求的地址无服务 [django没启动]
+```
 
 
             

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/static/js/common.js"></script>
+    <script src="/static/js/jquery.min.js"></script>
+</head>
+<body>
+    <div>
+        用户名:<input type="text" id="username" />
+        <span id="show"></span>
+    </div>
+    <div>
+        密码:<input type="password" id="password" />
+    </div>
+    <div>
+        昵称:<input type="text" id="nickname" />
+    </div>
+    <div>
+        <button id="btn">提交</button>
+    </div>
+    <script>
+
+        function checkname(){
+            var result = false;
+            // 1. 创建请求
+            var xhr = createXhr()
+            var url = '/user/checkname/?username='+$("#username").val();
+            // 2. 创建请求
+            xhr.open('get',url,false);
+            // 3. 设置回调
+            xhr.onreadystatechange=function(){
+                if(xhr.readyState == 4 && xhr.status == 200){
+                    if(xhr.responseText == '1'){
+                        result = true;
+                        $("#show").html("用户已存在");
+                    }else{
+                        $("#show").html("注册成功");
+                    }
+                }
+            }
+            // 4. 发送请求
+            xhr.send(null);
+            return result;
+        }
+    /*      $(function(){
+            // 绑定blur事件
+            $('#username').blur(function(){
+                // 1. 创建xhr
+                var xhr = createXhr();
+                // 2. 创建请求
+                var url = '/user/checkname/?username='+$('#username').val();
+                xhr.open('get',url,true);
+                // 3. 回调函数
+                xhr.onreadystatechange=function(){
+                    if(xhr.readyState == 4 && xhr.status == 200){
+                        $('#show').html(xhr.responseText);
+                    }
+                }
+                // 4. 发送请求
+                xhr.send(null);
+            });
+        });
+    */
+    $(function(){
+        // username绑定blur
+        $("#username").blur(function(){
+            checkname();
+        });
+        $("#btn").click(function(){
+             if(checkname()){
+                alert("用户名已经存在，不能注册");
+             }else{
+                alert('用户注册成功');
+             }
+        });
+
+    });
+    </script>
+</body>
+</html>
