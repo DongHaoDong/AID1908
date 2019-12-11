@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/static/js/jquery.min.js"></script>
+</head>
+<body>
+    <h1>This is load test</h1>
+    <button id="btn">show jquery load</button>
+    <div id="show"></div>
+    <script>
+        $(function(){
+            $("#btn").click(function(){
+                $("#show").load('/ajax/load_test_server/ #btn2');
+            });
+        });
+    </script>
+</body>
+</html>

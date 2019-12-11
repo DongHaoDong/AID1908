@@ -7,6 +7,7 @@
     <script src="/static/js/jquery.min.js"></script>
 </head>
 <body>
+    {% csrf_token %}
     <div>
         用户名:<input type="text" id="username" />
         <span id="show"></span>
@@ -36,7 +37,7 @@
                         result = true;
                         $("#show").html("用户已存在");
                     }else{
-                        $("#show").html("注册成功");
+                        $("#show").html("用户名可以注册");
                     }
                 }
             }
@@ -72,10 +73,24 @@
              if(checkname()){
                 alert("用户名已经存在，不能注册");
              }else{
-                alert('用户注册成功');
+                // post完成注册
+                var xhr = createXhr();
+                xhr.open('post','/user/register/',true);
+                xhr.onreadystatechange=function(){
+                    if(xhr.readyState ==4 && xhr.status ==200){
+                        alert(xhr.responseText);
+                    }
+                }
+                xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+                var username = $("#username").val();
+                var password = $("#password").val();
+                var nickname = $("#nickname").val();
+                // csrf
+                var csrf = $("[name='csrfmiddlewaretoken']").val();
+                var params = "username="+username+"&password="+password+"&nickname="+nickname+"&csrfmiddlewaretoken="+csrf;
+                xhr.send(params);
              }
         });
-
     });
     </script>
 </body>

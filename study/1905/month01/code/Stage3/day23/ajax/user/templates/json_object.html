@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/static/js/jquery.min.js"></script>
+</head>
+<body>
+<button onclick="showJson()">showJson</button>
+<script>
+    function showJson(){
+    /*      var json_obj = {
+            "username":"董浩东",
+            "age":"21",
+            "gender":"男"
+        }
+        console.log("username"+json_object.username);
+        console.log("age"+json_object.age);
+        console.log("gender"+json_object.gender);
+    */
+        // 表达多个json对象
+        var json_array = [
+            {
+                "username":"王老师",
+                "age":"19",
+                "nickname":"老王"
+            },
+            {
+                "username":"王夫人",
+                "age":"18",
+                "nickname":"王夫人"
+            }
+        ];
+        // js循环
+    /*    for(var i=0;i<json_array.length;i++){
+            console.log("name:"+json_array[i].username);
+            console.log("name:"+json_array[i].age);
+            console.log("name:"+json_array[i].nickname);
+        }
+    */
+        // jquery - v1 循环多个对象
+    /*    $(json_array).each(function(index,obj){
+            console.log('index:'+index);
+            console.log('name:'+obj.username);
+            console.log('age:'+obj.age);
+            console.log('nickname:'+obj.nickname);
+        });
+    */
+        // jquery - v2 循环多个对象
+    /*    $.each(json_array,function(index,obj){
+            console.log('index:'+index);
+            console.log('name:'+obj.username);
+            console.log('age:'+obj.age);
+            console.log('nickname:'+obj.nickname);
+        });
+    */
+        // xhr拿到响应-响应式json字符串，把json字符串转换为json对象
+        var json_str = '[{"username":"lili","age":18},{"username":"panghu","age":21}]';
+        console.log(json_str);
+        var json_obj = JSON.parse(json_str);
+        console.log(json_obj);
+    }
+
+</script>
+</body>
+</html>
