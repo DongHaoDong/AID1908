@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/static/js/jquery.min.js"></script>
+</head>
+<body>
+    <button id="btn">jquery-ajax-get</button>
+    <div id="show"></div>
+    <script>
+        $(function(){
+            // var params = 'username=abc&age=21';
+            var params = {username:'donghaodong',age:21};
+            $.get('/ajax/jquery_get_server/',params,function(data){
+                var msg = "name is " + data.username;
+                msg += ' age is '+data.age;
+                $("#show").html(msg);
+            },'json');
+        });
+    </script>
+</body>
+</html>

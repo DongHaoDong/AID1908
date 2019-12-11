@@ -90,22 +90,3 @@ return JsonResponse(d)
 ```
 JSON对象=JSON.parse(JSON字符串) // 反序列化
 ```
-# Jquery对ajax的支持
-1. $obj.load()
-    * 作用:把指定的url的内容加载到指定的元素中
-    * 语法
-```
-$obj.load(url,data,callback)
-    $obj:显示内容的元素[jq对象]
-    url:请求地址
-    data:向url传入的参数[可选择]
-        方式1
-            查询字符串
-            key=value&key1=value1...
-            # 注意:用该方式传参,则为get请求
-        方式2
-            使用js对象/json对象
-            {"name":"董浩东"}
-            # 注意:用该方式传参，则为post请求
-    callback:响应成功回调该函数[可选择]
-```

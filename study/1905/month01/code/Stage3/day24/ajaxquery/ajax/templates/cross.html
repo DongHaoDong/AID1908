@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/static/js/jquery.min.js"></script>
+</head>
+<body>
+    <button id="btn">跨域请求</button>
+    <script>
+        // 跨域要用到的预留函数
+    /*    function print(data){
+            console.log(typeof(data));
+            console.log("server data is " + data);
+        }
+    */
+    /*    $(function(){
+            $("#btn").click(function(){
+                // js原生跨域
+                // 获取body
+                var body = document.getElementsByTagName("body")[0];
+                // 创建script
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = 'http://localhost:8000/ajax/cross_server/?callback=print';
+                // 将script标签插入到body
+                body.append(script);
+            });
+        });
+     */
+
+     // jquery cross
+     $(function(){
+        $("#btn").click(function(){
+            // $.ajax跨域
+            /*
+            $.ajax({
+               url:"http://localhost:8000/ajax/cross_server_json/",
+               type:'get',
+               dataType:'jsonp',
+               jsonp:'callback',
+               jsonpCallback:'print'
+            });
+            */
+
+            // jquery跨域超简版
+            $.ajax({
+               url:"http://localhost:8000/ajax/cross_server_json/",
+               type:'get',
+               dataType:'jsonp',
+               success:function(data){
+                console.log("this jquery console");
+                console.log(data);
+               }
+            });
+        });
+     });
+    </script>
+</body>
+</html>

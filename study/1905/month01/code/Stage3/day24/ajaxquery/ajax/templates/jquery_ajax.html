@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/static/js/jquery.min.js"></script>
+</head>
+<body>
+<span id="loading" style="display:none">加载中...</span>
+用户名:<input type="text" id="username">
+<button id="btn">jquery ajax</button>
+    <script>
+        $(function(){
+            $("#btn").click(function(){
+                $.ajax({
+                    url:'/ajax/jquery_ajax_server/',
+                    type:'get',
+                    dataType:'json',
+                    async:true,
+                    success:function(data){
+                        console.log(data.name);
+                        console.log(data.age);
+                        $("#loading").hide(3000);
+                        $("#btn").removeAttr('disabled');
+                    },
+                    error:function(){
+                        alert("Server is busy!!");
+                    },
+                    beforeSend:function(){
+                        // 发送前do something
+                        $("#loading").show();
+                        $("#btn").attr({disabled:'disabled'});
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

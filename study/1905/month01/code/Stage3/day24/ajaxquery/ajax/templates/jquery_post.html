@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/static/js/jquery.min.js"></script>
+</head>
+<body>
+{% csrf_token %}
+<div>
+    用户名:<input type="text" id="username">
+</div>
+<div>
+    年龄:<input type="text" id="age">
+</div>
+<div>
+    <button id="btn">提交</button>
+</div>
+<script>
+    $(function(){
+        $("#btn").click(function(){
+            var data = {
+            username:$("#username").val(),
+            age:$("#age").val(),
+            csrfmiddlewaretoken:$("[name='csrfmiddlewaretoken']").val()
+        };
+            $.post('/ajax/jquery_post_server/',data,function(result){
+                alert("server result is "+result.msg);
+            },'json');
+        });
+    });
+</script>
+</body>
+</html>
