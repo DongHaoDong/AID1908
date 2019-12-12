@@ -1,7 +1,12 @@
+import hashlib
+import time
+
 from django.http import JsonResponse
 from django.shortcuts import render
 import json
 import jwt
+from .models import *
+from btoken.views import make_token
 
 # Create your views here.
 
@@ -41,11 +46,33 @@ def users(request):
         if password_1 != password_2:
             result = {'code': 205, 'error': "Your password not same"}
             return JsonResponse(result)
-        return JsonResponse({'code':200,'username':'donghaodong','data':{'token':'abcdef'}})
+        # 优先查询当前用户名是否存在
+        old_user = UserProfile.objects.filter(username=username)
+        if old_user:
+            result = {'code': 205, 'error': "Your username is already existed"}
+            return JsonResponse(result)
+        # 密码处理md5哈希/散列
+        m = hashlib.md5()
+        m.update(password_1.encode())
+        sign = info = ''
+        try:
+            UserProfile.objects.create(username=username,nickname=username,password=m.hexdigest(),sign=sign,info=info,email=email)
+        except Exception as e:
+            # 数据库down了，用户名已存在
+            result = {'code':207,'error':'Server is busy'}
+            return JsonResponse(result)
+        # make token
+        token = make_token(username)
+        # 正常返回给前端
+        result = {'code':200,'username':username,'data':{'token':token.decode()}}
+        return JsonResponse(result)
 
     elif request.method == 'PUT':
         # 更新数据
         pass
+
     else:
         raise
-    return JsonResponse({'code':200})
+    
+
+

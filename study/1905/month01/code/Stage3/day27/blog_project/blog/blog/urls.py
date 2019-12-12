@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^test/$',views.test_api),
     re_path(r'^v1/users',include('user.urls')),
+    re_path(r'^v1/tokens',include('btoken.urls')),
 ]
