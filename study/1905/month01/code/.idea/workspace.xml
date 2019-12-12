@@ -1,8 +1,183 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1fd6769b-af03-437c-9379-e879267049f8" name="Default Changelist" comment="" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <list default="true" id="1fd6769b-af03-437c-9379-e879267049f8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Stage3/day25/blog_project/jwt_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day25/day25.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/blog/blog/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/blog/blog/settings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/blog/blog/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/blog/blog/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/blog/blog/wsgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/blog/manage.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/blog/user/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/blog/user/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/blog/user/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/blog/user/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/blog/user/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/blog/user/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/blog/user/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/blog/user/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/blog/user/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/REDEME.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/flask_client.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/css/animate.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/css/base.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/css/comments.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/css/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/css/login_reglogin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/css/m.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/5794.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/a.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/auicon.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/author.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/avatar.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/b.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/b04.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/b05.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/banner01.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/banner02.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/banner03.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/bi05.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/bitbug_favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/blank.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/c.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/category.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/commentPhoto.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/comments.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/d.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/date.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/dsbz.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/dzbg.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/e.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/f.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/icons.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/newsbg03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/page_bg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/page_bg1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/page_photo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/page_time.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/re_bg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/searchbg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/tags.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/time.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/toppic01.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/toppic02.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/v1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/v2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/images/zd01.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/js/ckeditor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/js/common.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/js/jquery.easyfader.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/js/jquery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/js/scrollReveal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/js/wangEditor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/static/js/xcConfirm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/templates/about.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/templates/change_info.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/templates/detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/templates/footer.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/templates/gbook.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/templates/header.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/templates/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/templates/list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/templates/list_bak.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/templates/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/templates/photo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/templates/register.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/templates/release.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/templates/time.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/day26.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day26/项目回忆录v1.0.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/blog/blog/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/blog/blog/settings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/blog/blog/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/blog/blog/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/blog/blog/wsgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/blog/manage.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/blog/user/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/blog/user/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/blog/user/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/blog/user/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/blog/user/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/blog/user/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/blog/user/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/blog/user/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/blog/user/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/REDEME.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/flask_client.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/css/animate.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/css/base.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/css/comments.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/css/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/css/login_reglogin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/css/m.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/5794.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/a.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/auicon.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/author.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/avatar.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/b.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/b04.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/b05.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/banner01.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/banner02.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/banner03.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/bi05.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/bitbug_favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/blank.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/c.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/category.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/commentPhoto.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/comments.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/d.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/date.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/dsbz.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/dzbg.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/e.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/f.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/icons.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/newsbg03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/page_bg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/page_bg1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/page_photo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/page_time.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/re_bg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/searchbg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/tags.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/time.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/toppic01.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/toppic02.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/v1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/v2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/images/zd01.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/js/ckeditor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/js/common.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/js/jquery.easyfader.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/js/jquery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/js/scrollReveal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/js/wangEditor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/static/js/xcConfirm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/templates/about.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/templates/change_info.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/templates/detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/templates/footer.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/templates/gbook.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/templates/header.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/templates/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/templates/list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/templates/list_bak.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/templates/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/templates/photo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/templates/register.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/templates/release.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/client/templates/time.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage3/day27/项目回忆录v1.0.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,9 +191,19 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
   <component name="ProjectId" id="1PL1iGzFXhx2p3k5lxHHPiY2A0f" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="ignore.virus.scanning.warn.message" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
@@ -45,18 +230,6 @@
       <recent name="F:\study\1905\month01\code\Stage2\day04" />
       <recent name="F:\study\1905\month01\code\Stage2\day03" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager" selected="Python.fork01">
     <configuration name="fork01" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -174,6 +347,18 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -186,6 +371,12 @@
       <updated>1565638687242</updated>
     </task>
     <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1016" y="541" key="FileChooserDialogImpl" timestamp="1576141938169">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="1016" y="541" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1576141938169" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
