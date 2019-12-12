@@ -40,6 +40,7 @@ def topic_release(username):
     #发表博客
     return send_file('templates/release.html')
 
+
 @app.route('/<username>/topics')
 def topics(username):
     #个人博客列表
