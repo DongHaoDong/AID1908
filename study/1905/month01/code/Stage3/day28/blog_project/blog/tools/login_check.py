@@ -38,3 +38,22 @@ def login_check(*methods):
             return func(request,*args,**kwargs)
         return wrapper
     return _login_check
+
+
+def get_user_by_request(request):
+    '''
+    通过request尝试获取user
+    '''
+    token = request.META.get('HTTP_AUTHORIZATION')
+    if not token:
+        return None
+    try:
+        res = jwt.decode(token,KEY)
+    except:
+        return None
+    username = res['username']
+    try:
+        user = UserProfile.objects.get(username=username)
+    except:
+        return None
+    return user

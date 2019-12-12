@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'user',
     'btoken',
+    'topic',
 ]
 
 MIDDLEWARE = [
@@ -163,3 +164,8 @@ CORS_ALLOW_HEADERS = (
     'x-csrftoken',
     'x-requested-with',
 )
+
+MEDIA_URL = '/media/'
+
+# 媒体资源存放的服务器目录
+MEDIA_ROOT = os.path.join(BASE_DIR,'media/')

@@ -11,6 +11,7 @@ from tools.login_check import login_check
 
 # Create your views here.
 
+
 @login_check('PUT')
 def users(request,username=None):
 
@@ -128,6 +129,24 @@ def users(request,username=None):
     else:
         raise
     return JsonResponse({'code':200})
-    
+
+
+@login_check('POST')
+def user_avatar(request,username):
+    """
+    上传用户头像
+    """
+    if request.method != 'POST':
+        result = {'code':212,'error':'I need post'}
+        return JsonResponse(result)
+    avatar = request.FILES.get('avatar')
+    if not avatar:
+        result = {'code': 213, 'error': 'I need avatar'}
+        return JsonResponse(result)
+    # 判断url中的username是否跟token中的username一致，若不一致，则返回error
+    request.user.avatar = avatar
+    request.user.save()
+    result = {'code':200,'username':request.user.username}
+    return JsonResponse(result)
 
 
