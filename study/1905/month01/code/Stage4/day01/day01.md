@@ -442,8 +442,49 @@ http://app.mi.com/category/2#page=0
 使用进程模块来实现试试？  
 ```
 ```
+* python操作字符串
+```
+import redis
+r = redis.Redis(host='127.0.0.1',port=6379,db=0)
 
-
+# python操作string
+r.set('user001:name','donghaodong')
+m_dict = {
+    'user001:age':21,
+    'user001:gender':'M'
+}
+r.mset(m_dict)
+# b'donghaodong'
+print(r.get('user001:name'))
+# 列表:{'34','M'}
+print(r.mget('user001:age','user001:gender'))
+print(r.strlen('user001:name'))
+# 数值操作
+r.incr('user001:age',1)
+r.decr('user001:age',1)
+r.incrby('user001:age',3)
+r.decrby('user001:age',3)
+r.incrbyfloat('user001:age',1.5)
+r.incrbyfloat('user001:age',-1.5)
+print(r.get('user001:age'))
+```
+* redis数据类型
+```
+# mysql
+1、数值
+2、字符串
+3、枚举类型
+4、日期时间类型
+# redis
+1、字符串 
+    GET SET MGET MSET STRLEN DECR INCR DECRBY INCRBY INCRBYFLOAT
+2、列表 
+    LPUSH RPUSH LPOP RPOP BLPOP BRPOP LREM LINSERT LLEN LTRIM LINDEX
+3、哈希(散列)
+4、集合
+5、有序集合 - redis 特有数据类型
+```
+# 位图操作
 
 
 

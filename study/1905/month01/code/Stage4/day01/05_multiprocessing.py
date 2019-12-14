@@ -2,6 +2,8 @@ import redis
 import time
 import random
 from multiprocessing import Process
+
+
 class Spider(object):
     def __init__(self):
         self.r = redis.Redis(host='127.0.0.1',port=6379,db=0)
@@ -32,3 +34,8 @@ class Spider(object):
         p2.start()
         p1.join()
         p2.join()
+
+
+if __name__ == "__main__":
+    spider = Spider()
+    spider.run()
