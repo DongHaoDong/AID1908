@@ -30,10 +30,8 @@ class Spider(object):
     def run(self):
         p1 = Process(target=self.product)
         p2 = Process(target=self.consumer)
-        p1.start()
-        p2.start()
-        p1.join()
-        p2.join()
+        p1.run()
+        p2.run()
 
 
 if __name__ == "__main__":
