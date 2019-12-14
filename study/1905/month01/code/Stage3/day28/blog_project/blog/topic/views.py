@@ -5,10 +5,11 @@ from django.shortcuts import render
 from tools.login_check import login_check,get_user_by_request
 from .models import Topic
 from user.models import UserProfile
+import html
 # Create your views here.
 
 
-@login_check('POST')
+@login_check('POST','DELETE')
 def topics(request,author_id):
     if request.method == 'GET':
         # 获取用户博客数据
@@ -29,8 +30,13 @@ def topics(request,author_id):
             visitor_name = visitor.username
         category = request.GET.get('category')
         if category in ['tec','no-tec']:
-            # /v1/topics/<author_id> 用户全量数据
-            pass
+            # /v1/topics/<author_id>?category=[tec|no-tec] 用户全量数据
+            if author_id == visitor_name:
+                # 博主访问自己的博客
+                topics = Topic.objects.filter(author_id=author_id,category=category)
+            else:
+                # 访客来了
+                topics = Topic.objects.filter(author_id=author_id,category=category,limit='public')
         else:
             # /v1/topics/<author_id>?category=[tec|no-tec] 用户全量数据
             if author_id == visitor_name:
@@ -39,11 +45,12 @@ def topics(request,author_id):
 
             else:
                 # 方可访问博客，非博主本人
-                topics = Topic.objects.filter(author_id,author_id,category='public')
+                topics = Topic.objects.filter(author_id,author_id,limit='public')
         # 返回
         res = make_topics_res(author,topics)
 
         return JsonResponse(res)
+
     elif request.method == 'POST':
         # 创建用户博客数据
         json_str = request.body
@@ -52,6 +59,9 @@ def topics(request,author_id):
             return JsonResponse(result)
         json_obj = json.loads(json_str)
         title = json_obj.get('title')
+        # xss注入
+        # 进行转义
+        title = html.escape(title)
         if not title:
             result = {'code': 302, 'error': 'Please give me title'}
             return JsonResponse(result)
@@ -75,7 +85,31 @@ def topics(request,author_id):
         Topic.objects.create(title=title,category=category,limit=limit,introduce=introduce,author=request.user)
         result = {'code':200,'username':request.user.username}
         return JsonResponse(result)
-    return JsonResponse({'code':200,'error':'this is test'})
+
+    elif request.method == 'DELETE':
+        # 博主删除自己的文章
+        # /v1/topics/<author_id>
+        # token存储的用户
+        author = request.user
+        token_author_id = author.username
+        # url中传过来的author_id必须与token中的用户名相等
+        if author_id != token_author_id:
+            result = {'code':309,'error':'You can not do it'}
+            return JsonResponse(result)
+        topic_id = request.GET.get('topic_id')
+        try:
+            topic = Topic.objects.get(id=topic_id)
+        except:
+            result = {'code':310,'error':'You can not do it !'}
+            return JsonResponse(result)
+        # 删除
+        if topic.author.username != author_id:
+            result = {'code':311,'error':'You can not do it !!'}
+            return JsonResponse(result)
+        topic.delete()
+        res = {'code':200}
+        return JsonResponse(res)
+
 
 
 def make_topics_res(author,topics):
