@@ -444,6 +444,238 @@ OK
 OK
 ```
 ### 方式二(修改配置文件)
+```
+# 每个redis服务，都有一个和他对应的配置文件
+# 两个redis服务
+    1. 6379 -> /etc/redis/redis.conf
+    2. 6300 -> /home/tarena/redis_6300.conf
+# 修改配置文件
+vi redis_6300.conf
+slaveof 127.0.0.1 6379
+port 6300
+# 启动redis服务
+redis-server redis_6300.conf
+# 客户端连接测试
+redis-cli -p 6300
+127.0.0.1:6300> hset user:1 username donghaodong
+(error) READONLY You can't write against a read only slave.
+```
+### 问题总结:master挂了怎么办
+```
+1. 一个Master可以有多个Slaves
+2. Slave下线，只读请求的处理性能下降
+3. Master下线，写请求无法执行
+4. 其中一台Slave使用SLAVEOF no one命令成为Master,其他Slave执行SLAVEOF命令指向这个新的Master,从他这里同步数据
+# 以上过程是手动的，能够实现自动，这就需要Sentinel哨兵，实现故障转义Failover操作
+```
+### 演示
+```
+1. 启动端口6400redis，设置6379的slave
+    redis-server --port 6400
+    redis-cli -p 6400
+    redis>slaveof 127.0.0.1 6379
+2. 启动端口6401redis,设置为6379的slave
+    redis-server --port 6401
+    redis-cli -p 6401
+    redis>slaveof 127.0.0.1 6379
+3. 关闭6379redis
+    sudo /etc/init.d/redis-server stop
+4. 把6400redis设置为master
+    redis-cli -p 6401
+    redis>slaveof no one
+# 这是手动操作，效率低，而且需要时间，有没有自动的
+```
+## 官方高可用方案Sentinel
+* Redis之哨兵 - sentinel
+```
+1. Sentinel会不断检查Master和Slave是否正常
+2. 每个Sentinel可以监控任意多个Master和Master下的Slaves
+```
+### 案例演示
+1. 环搭建境
+```
+# 共3台redis的服务器，如果是不同机器端口号可以是一样的
+1. 启动6379的redis服务器
+    sudo /etc/init.d/redis-server start
+2. 启动6380的redis服务器，设置为6379的从
+    redis-server --port 6380
+    tarena@tedu:~$ redis-cli -p 6380
+    127.0.0.1:6380> slaveof 127.0.0.1 6379
+    OK
+3. 启动6381的redis服务器，设置为6379的从
+    redis-server --port 6381
+    tarena@tedu:~$ redis-cli -p 6381
+    127.0.0.1:6381> slaveof 127.0.0.1 6379
+```
+2. 安装并搭建sentinel哨兵
+```
+# 安装redis-sentinel
+sudo apt install redis-sentinel
+验证: sudo /etc/init.d/redis-sentinel stop
+# 2. 新建文件sentinel.conf
+port 26379
+Sentinel monitor tedu 127.0.0.1 6379 1
+# 3. 启动sentinel
+方式一: redis-sentinel sentinel.conf
+方式二: redis-server sentinel.conf --sentinel
+# 4. 将master的redis服务终止，查看是否会提升为主
+sudo /etc/init.d/redis-server stop
+# 发现6381提升为master,其他两个为从
+# 在6381上设置新值，6380查看
+127.0.0.1:6381> set name tedu
+OK
+# 启动6379，观察日志，发现变为了6381的从
+主从+哨兵基本就够用了
+```
+sentinel.conf解释
+```
+# sentinel监听端口，默认为26379，可以修改
+port 26379
+# 告诉sentinel去监听地址为ip:port的一个master,这里的master-name可以自定义，quorum是一个数字，指明当有多少个sentinel认为master失效时，master才算真正失效
+sentinel monitor <master-name> <ip> <redis-port> <quorum>
+```
+### 生产环境设置哨兵
+```
+1. 安装sentinel
+sudo apt-get install redis-sentinel
+2. 创建配置文件 sentinel.conf
+port 26379
+Sentinel monitor 名字 IP PORT 投票数
+3. 启动sentinel开始监控
+redis-sentinel sentinel.conf
+```
+## 分布式锁
+### 高并发产生的问题
+```
+1. 购票:多个用户抢到同一张票
+2. 购物:库存只剩1个，被多个用户成功买到
+```
+### 怎么办
+```
+在不同进程需要互斥的访问共享资源时，分布式锁是一种非常有用的技术手段
+```
+### 原理
+```
+1. 多个客户端先到redis数据库中获取一把锁，得到锁的用户才可以操作数据库
+2. 此用户操作完后释放锁，下一个成功获取锁的用户再继续操作数据库
+```
+### 实现
+```
+set key value nx ex 3
+# 见图:分布式锁原理.png
+```
+## 博客项目解决高并发问题
+1. 在项目中创建数据库blog,指定字符编码utf8
+```
+mysql -u root -p 584023982
+mysql> create database blog charset utf8;
+```
+2、同步数据库，并在user_profile中插入表记录
+
+```python
+1、python3 manage.py makemigrations
+2、python3 manage.py migrate
+3、insert into user_profile values ('guoxiaonao','guoxiaonao','guoxiaonao@tedu.cn','123456','aaaaaaaa','bbbbbbbb','cccccccc');
+```
+
+3、启动django项目，并找到django路由测试 test函数
+
+```python
+1、python3 manage.py runserver
+2、查看项目的 urls.py 路由，打开firefox浏览器输入地址：http://127.0.0.1:8000/test/
+# 返回结果：	{"code": 200}
+```
+
+4、在数据库表中创建测试字段score
+
+```python
+1、user/models.py添加:
+   score = models.IntegerField(verbose_name=u'分数',null=True,default=0)
+2、同步到数据库
+   python3 manage.py makemigrations user
+   python3 manage.py migrate user
+3、到数据库中确认查看
+```
+
+3、在blog/views.py中补充 test函数，对数据库中score字段进行 +1 操作
+
+```python
+from user.models import UserProfile
+def test(request):
+    
+
+    u = UserProfile.objects.get(username='guoxiaonao')
+    u.score += 1
+    u.save()
+
+    return JsonResponse('HI HI HI')
+```
+
+4、启多个服务端，模拟30个并发请求
+
+(1)多台服务器启动项目
+
+```python
+python3 manage.py runserver 127.0.0.1:8000
+python3 manage.py runserver 127.0.0.1:8001
+```
+
+(2)在tools中新建py文件 test_api.py，模拟30个并发请求
+
+```python
+import threading
+import requests
+import random
+
+
+def getRequest():
+    url='http://127.0.0.1:8000/test/'
+    url2='http://127.0.0.1:8001/test/'
+    get_url = random.choice([url, url2])
+    requests.get(get_url)
+
+ts = []
+for i in range(30):
+    t=threading.Thread(target=getRequest,args=())
+    ts.append(t)
+
+if __name__ == '__main__':
+
+    for t in ts:
+        t.start()
+
+    for t in ts:
+        t.join()
+```
+
+  (3) python3 test_api.py
+
+ (4) 在数据库中查看 score 字段的值
+
+```python
+并没有+30，而且没有规律，每次加的次数都不同，如何解决？？？
+```
+
+**解决方案：redis分布式锁**
+
+```python
+def test(request):
+	# 解决方法二:redis分布式锁
+    import redis
+    pool = redis.ConnectionPool(host='localhost', port=6379, db=0)
+    r = redis.Redis(connection_pool=pool)
+    while True:
+        try:
+            with r.lock('guoxiaonao', blocking_timeout=3) as lock:
+                u = UserProfile.objects.get(username='guoxiaonao')
+                u.score += 1
+                u.save()
+            break
+        except Exception as e:
+            print('lock is failed')
+    
+    return HttpResponse('HI HI HI')
+```
 
 
 
