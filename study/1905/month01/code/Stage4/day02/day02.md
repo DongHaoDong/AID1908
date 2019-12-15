@@ -256,8 +256,271 @@ hdel(key,*fields)
 ```
 * 代码实现
 ```
+import redis
+import pymysql
+
+r = redis.Redis(host='127.0.0.1',port=6379,db=0)
+db = pymysql.connect(
+    host='127.0.0.1',
+    user='root',
+    password='584023982',
+    database='userdb',
+    port=3306,
+    charset='utf8'
+)
+cursor = db.cursor()
+
+# 1. 用户要查询的用户名
+# 2. 先到redis中查询
+# 3. redis中如果没有，到mysql中查询
+username = input("请输入用户名:")
+result = r.hgetall(username)
+# redis中存在数据
+if result:
+    print('redis',result)
+else:
+    # 1. mysql中查询 -返给用户
+    sel = 'select age,gender,score from user where name=%s'
+    cursor.execute(sel,[username])
+    userinfo = cursor.fetchall()
+    # userinfo:空元组
+    if not userinfo:
+        print('用户不存在')
+    else:
+        print('mysql:',userinfo)
+        # userinfo: ((25,'M',90),)
+        # 2. 缓存到redis中一份，设置过期时间30秒
+        user_dict = {
+            'age':userinfo[0][0],
+            'gender':userinfo[0][1],
+            'score':userinfo[0][2]
+        }
+        r.hmset(username,user_dict)
+        # 设置过期时间30秒
+        r.expire(username,30)
 ```
 * mysql数据库中数据更新信息后同步到redis缓存
 用户修改个人信息时，要将数据同步到redis缓存
+```
+import redis
+import pymysql
+
+
+class Update(object):
+    def __init__(self):
+        self.db = pymysql.connect(
+        host='127.0.0.1',
+        user='root',
+        password='584023982',
+        database='userdb',
+        port=3306,
+        charset='utf8'
+    )
+        self.cursor = self.db.cursor()
+        self.r = redis.Redis(host='127.0.0.1', port=6379, db=0)
+    # 更新mysql表记录
+    def update_mysql(self,score,username):
+        upd = 'update user set score=%s where name=%s'
+        try:
+            # code:0或者1,几行受到了影响
+            code = self.cursor.execute(upd,[score,username])
+            # code为1：说明新成绩和原成绩不一样
+            if code == 1:
+                self.db.commit()
+                return True
+        except Exception as e:
+            self.db.rollback()
+            print('Failed',e)
+    # 同步到redis数据库
+    def update_redis(self,username,score):
+        result = self.r.hgetall(username)
+        # 存在，更新score字段的值
+        if result:
+            self.r.hset(username,'score',score)
+        else:
+            # 到mysql中查询最新数据，缓存到redis中
+            self.select_mysql(username)
+    # mysql查询数据 + 更新到redis数据库
+    def select_mysql(self,username):
+        sel = 'select age,gender,score from user where name=%s'
+        self.cursor.execute(sel,[username])
+        result = self.cursor.fetchall()
+        # 缓存到redis数据库
+        user_dict = {
+            'age': result[0][0],
+            'gender': result[0][1],
+            'score': result[0][2]
+        }
+        self.r.hmset(username,user_dict)
+        self.r.expire(username,60)
+
+    def main(self):
+        username = input('请输入用户名:')
+        new_score = input('请输入新成绩:')
+        if self.update_mysql(new_score,username):
+            self.update_redis(username,new_score)
+        else:
+            print('更改信息失败')
+```
+## 数据类型总结
+```
+# string
+SET,GET,MSET,MSGET,STRLEN
+# list
+LPUSH,RPUSH,LPOP,RPOP,BLPOP,BRPOP,LLEN,LTRIM
+# hash
+HSET,HGET,HMSET,HMGET,HGATALL
+```
+# 集合数据类型(set)
+* 特点
+```
+1. 无序、去重
+2. 元素是字符串类型
+3. 最多包含2^32-1个元素
+```
+* 基本命令
+```
+# 1. 增加一个或者多个元素，自动去重
+SADD key member1 member2
+# 2. 查看集合中所有元素
+SMEMBERS key
+# 3. 删除一个或多个元素，元素不存在自动忽略
+SREM key member1 member2
+# 4. 元素是否存在
+SISMEMBER key member
+# 5. 随机返回集合中指定个数的元素，默认为1个
+SRANDMEMBER key [count]
+# 6. 弹出成员
+SPOP key [count]
+# 7. 返回集合中元素个数，不会遍历整个集合，只是存储
+SCARD key
+# 8. 把元素从源集合移动到目标集合
+SMOVE source destination member
+# 9. 差集(number1 1 2 3 number2  1 2 4 结果为3)
+SDIFF key1 key2
+# 10. 差集保存到另一个集合中
+SDIFFSTORE destination key1 key2
+# 11. 交集
+SINTER key1 key2
+SINTERSTORE destination key1 key2
+# 12. 并集
+SUNION key1 key2
+SUNIONSTORE destination key1 key2
+```
+* 案例：新浪微博好友共同关注好友
+```
+# 需求：当用户访问另一个用户的时候，会显示出两个用户共同关注过哪些相同的用户
+# 设计：将每个用户关注的用户放在集合中，求交集即可
+# 实现
+    user001 = {'peiqi','qiaozhi','danni'}
+    user002 = {'peiqi','qiaozhi','lingyang'}
+user001和user002的共同关注为:
+    SINTER user001 user002
+    结果为:{'peiqi','qiaozhi'}
+python操作set
+```
+* python代码实现微博关注
+```
+1. 创建2个集合
+2. 求交集
+3. 处理成字符串
+```
+# 有序集合sortedset
+* 特点
+```
+1. 有序，去重
+2. 元素是字符串类型
+3. 每个元素都关联着一个浮点数分值(score),并按照分值从小到大的顺序排列集合中的元素(分值可以相同)
+4. 最多包含2^32-1个元素
+```
+* 示例  
+
+一个保存了水果价格的有序集合  
+
+|分值|2.0|4.0|6.0|8.0|10.0|
+|----|---|---|----|----|----|
+|元素|西瓜|葡萄|芒果|香蕉|苹果|
+
+一个保存员工薪水的有序集合  
+
+|分值|6000|8000|10000|12000|
+|----|----|----|-----|-----|
+|元素|lucy|tom|jim|jack|
+
+一个保存了正在阅读某些技术书的人数
+
+|分值|300|400|555|666|777|
+|----|---|---|---|---|---|
+|元素|核心编程|阿凡达|本拉登|阿姆斯特朗|比尔盖茨|
+
+* 有序集合常用命令
+```
+# 在有序集合中添加一个成员
+zadd key score member
+# 查看指定区间元素(降序)
+zrange key start stop [withscores]
+# 查看指定区间元素(降序)
+ZREVRANGE key start stop [withscore]
+# 查看指定元素的分值
+ZSCORE key member
+# 返回指定区间元素
+# offset：跳过多少个元素
+# count:返回几个
+# 小括号:开区间 zrangebyscore fruits:(2,0 8.0
+zrangebyscore key min max [withscores] [limit offset count]
+limit 10 2
+#每页显示10个成员，显示第5页的成员信息
+# limit 40 10
+# MySQL:每页显示10条记录，显示第5页的记录
+# limit 40,10
+# limit 2,3 显示：第3,4,5条记录
+
+# 删除成员
+zrem key member
+# 增加或减少分值
+zincrby key increment member
+#返回元素排名
+zrank key member
+#返回元素逆序排名
+zrevrank key member
+# 删除指定区间内的元素
+zremrangebyscore key min max
+# 返回集合中元素的个数
+zcard key
+# 返回指定范围中元素的个数
+zcount key min max
+zcount salary 6000 8000
+zcount salary (6000 8000 # 6000<salary<=8000
+zcount salary (6000 (8000 # 6000<salary<8000
+# 并集
+zunionstore desination numkeys key [weights 权重值] [AGGREGATE SUM|MIN|MAX]
+# zunionstore salary 3 2 salary salary2 
+weights 1 0.5 AGGREGATE MAX
+# 2代表集合数量，weights之后，权重1给salary，权重0.5给salary2集合，算完权重之后执行聚合AGGREGATE
+# 交集：和并集类似，只取相同元素
+ZINTERSTORE destination numkeys key1 key2 WEIGHTS weight AGGREGATE SUM(默认) | MIN | MAX
+```
+python操作soreted set
+# 今日作业
+1. 网易音乐排行榜 - python
+```
+1. 每首歌的歌名为元素
+2. 每首歌的播放次数为分值
+3. 使用ZREVRANGE来获取播放次数最多的歌曲(前3名)
+```
+2. 京东商品畅销榜 - python
+```
+# 第1天
+ZADD mobile-001 5000 'huawei' 4000 'oppo' 3000 'iphone'
+# 第2天
+ZADD mobile-002 5200 'huawei' 4300 'oppo' 3230 'iphone'
+# 第3天
+ZADD mobile-003 5500 'huawei' 4660 'oppo' 3580 'iphone'
+问题：如何获取三款手机的销量排名?
+ZUNIONSTORE mobile-001:003 3 mobile-001 mobile-002 mobile-003 # 可否
+# 第一名:huawei 销量:xxx部
+# 第二名:xxx 销量:xxx部
+# 第三名:xxx 销量:xxx部
+```
 
 

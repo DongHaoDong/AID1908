@@ -1,0 +1,450 @@
+# day02回顾
+## 五大数据类型及应用场景
+
+|类型|特点|使用场景|
+|----|---|-------|
+|string|简单key-value类型，value可为字符串和数字|常规计数(微博数，粉丝数等功能)|
+|hash|是一个string类型的field和value的映射表，hash特别适合用于存储对象|存储部分需要变更的数据(比如用户信息)|
+|list|有序可重复列表|关注列表，粉丝列表，消息队列|
+|set|无序不可重复列表|存储并计算关系(如微博，关注人或粉丝存放在集合，可通过交集，并集，差集等操作实现如共同关注、共同喜好等功能)|
+|sorted set|每个元素带有分值的集合|各种排行榜|
+## 位图操作(bitmap)
+```
+# 应用场景
+1. 可以实时的进行数据统计(网站用户的上线次数统计)
+# 常用命令
+1. SETBIT key offset value
+2. BITCOUNT key
+```
+## 哈希(散列)类型
+```
+# 应用场景
+1. 很适合存储对象类型 比如说用户ID作为key,用户所有属性及值作为key对应的value(用户维度统计-各种数据统计-发帖数、粉丝数)
+# 常用命令
+HSET key field value
+HSETNX key field value
+HMSET key field value field value
+
+HGET key field
+HMGET key field field
+HGETALL key
+HKEYS key
+HVALS key
+
+HLEN key
+HEXISTS key field
+
+HINCRBY key field increment
+HINCRBYFLOAT key field increment
+
+HDEL key field
+```
+## 集合类型(set)
+```
+# 应用场景
+1. 共同关注、共同好友
+# 常用命令
+SADD key member1 member2
+
+SMEMBERS key
+SCARD key
+
+SREM key member1 member2
+SRANDOMMEMBER key [count]
+
+SISMEMBER key member
+
+SDIFF key1 key2
+SDIFFSTORE destination key1 key2
+
+SINTER key1 key2
+SINTERSTORE destination key1 key2
+
+SUNION key1 key2
+SUNIONSTORE destination key1 key2
+```
+## 有序集合
+```
+# 应用场景
+1. 各种排行榜
+    1. 游戏：列出前100名高分选手
+    2. 列出某用户当前的全球排名
+    3. 各种日排行榜、周排行榜、月排行榜
+# 常用命令
+zadd key score member
+
+ZRANGE key start stop [withscores]
+ZREVRANGE key start stop [withscores]
+ZRANGEBYSCORE key min max [withscores] 
+[limit offset count]
+ZSCORE key member
+ZCOUNT key min max
+ZCARD key
+
+ZRANK key member
+ZREVRANK key member
+
+ZINCRBY key increment member
+
+ZREM key member
+ZREMRANGEBYSCORE key min max
+
+zunionstore destination numkeys key [weights 权重值] [AGGREGATE SUM|MIN|MAX]
+ZINTERSTORE destination numkeys key1 key2 WEIGHTS AGGREGATE SUM|MIN|MAX
+```
+# day03笔记
+## 有序集合sortedset
+* 有序集合的交集与并集
+```
+# 交集(weights代表权重值，aggregate代表聚合方式-先计算权重值，然后再聚合)
+ZINTERSTORE destination numkey key1 key2 WEIGHTS weight AGGREGATE SUM|MIN|MAX
+# 并集(weights代表权重值，aggregate代表聚合方式-先计算权重值，然后再聚合)
+ZUNIONSTORE destination numkeys key [weights 权重值] [AGGREGATE SUM|MIN|MAX] 
+```
+### 案例1：网易云音乐排行榜
+```
+1. 每首歌的歌名作为元素
+2. 每首歌的播放次数作为分值
+3. 使用ZREVRANGE来获取播放次数最多的歌曲
+```
+* python代码实现
+```
+'''
+网易云音乐排行榜 - 前三名
+'''
+import redis
+r = redis.Redis(host='127.0.0.1',port=6379,db=0)
+
+# 有序集合song:rank,参数为字典
+r.zadd('song:rank',{'song1':1,'song2':1,'song3':1})
+r.zadd('song:rank',{'song4':1,'song5':1,'song6':1})
+# 增加分值
+r.zincrby('song:rank',50,'song1')
+r.zincrby('song:rank',60,'song6')
+r.zincrby('song:rank',20,'song5')
+# 查看排名 - 前3名:[(b'song6', 61.0), (b'song1', 51.0), (b'song5', 21.0)]
+rank_list = r.zrevrange('song:rank',0,2,withscores=True)
+
+i = 1
+for rank in rank_list:
+    print('第{}名:{}播放次数:{}'.format(i,rank[0].decode(),int(rank[1])))
+    i+=1
+
+# 第1名:song6 播放次数:61
+# 第2名:song1 播放次数:51
+# 第3名：song5 播放次数:21
+```
+### 案例2：京东商品畅销榜
+```
+# 第1天
+ZADD mobile-001 5000 'huawei' 4000 'oppo' 3000 'iphone'
+# 第2天
+ZADD mobile-002 5200 'huawei' 4300 'oppo' 3230 'iphone'
+# 第3天
+ZADD mobile-003 5500 'huawei' 4660 'oppo' 3580 'iphone'
+问题：如何获取三款手机的销量排名?
+ZUNIONSTORE mobile-001:003 3 mobile-001 mobile-002 mobile-003 # 可否
+# 正确
+方法1：ZRANGE mobile-003 0 -1 WITHSCORES
+方法2：ZUNIONSTORE mobile-001:003 3 mobile-001 mobile-002 mobile-003 AGGREGATE MAX
+```
+* python实现
+```
+'''
+京东手机畅销榜
+'''
+import redis
+r = redis.Redis(host='127.0.0.1',port=6379,db=0)
+
+day01_dict = {
+    'huawei':5000,
+    'oppo':4000,
+    'iphone':3000
+}
+day02_dict = {
+    'huawei':5200,
+    'oppo':4200,
+    'iphone':3200
+}
+day03_dict = {
+    'huawei':5300,
+    'oppo':4300,
+    'iphone':3300
+}
+r.zadd('mobile:001',day01_dict)
+r.zadd('mobile:002',day02_dict)
+r.zadd('mobile:003',day03_dict)
+# 求并集：mobile:001-003,多个集合为元组
+r.zunionstore(
+    'mobile:001-003',
+    ('mobile:001','mobile:002','mobile:003'),
+    aggregate='max'
+)
+# 求排名:zrevrange:[(b'huawei',5300.0),(),()]
+rank_list = r.zrevrange('mobile:001-003',0,2,withscores=True)
+# 打印输出
+i = 1
+for rank in rank_list:
+    print('第{}名:{}销量:{}'.format(i,rank[0].decode(),int(rank[1])))
+    i += 1
+```
+# 数据持久化
+## 数据持久化定义
+```
+将数据从掉电易失的内存放到永久存储设备上
+```
+## 为什么需要持久化
+```
+因为所有的数据都在内存上，所以必须得持久化
+```
+* 数据持久化分类之 - RDB模式(默认开启)
+### 默认模式
+```
+1. 保存真实的数据
+2. 将服务器包含的所有数据库数据以二进制文件的形式保存到硬盘里面
+3. 默认文件名: /var/lib/redis/dump.rdb
+```
+### 创建rdb文件的两种方式
+* 方式一：服务器执行客户端发送的SAVE或者BGSAVE命令
+```
+127.0.0.1:6379> SAVE
+OK 
+# 特点
+1. 执行SAVE命令过程中。redis服务器将被阻塞，无法处理客户端发送的命令请求，在SAVE命令执行完毕后，服务器才会重新开始处理客户端发送请求
+2. 如果RDB文件已经存在，那么服务器将自动使用新的RDB文件代替旧的RDB文件
+# 工作中定时持久化保存一个文件
+127.0.0.1:6379> BGSAVE
+Background saving started
+# 执行过程如下
+1. 客户端发送BGSAVE给服务器
+2. 服务器马上返回Background saving started 给客户端
+3. 服务器 fork()子进程做这件事
+4. 服务器继续提供服务
+5. 子进程创建完RDB文件后再告知Redis服务器
+# 配置文件相关操作
+/etc/redis/redis.conf
+263行: dir /var/lib/redis # 表示rdb文件存放路径
+253行: dbfilename dump.rdb # 文件名
+# 两个命令比较
+SAVE比BGSAVE快，因为需要创建子进程，消耗额外的内存
+# 补充:可以通过查看日志文件来查看redis都做了哪些操作
+# 日志文件:配置文件中搜索logfile
+logfile /var/log/redis/redis-server.log
+查看日志文件后20行: tail -20 redis-server.log
+```
+方式二：设置配置文件条件满足时自动保存(使用最多)
+```
+# 命令行示例
+redis>save 300 10
+表示如果距离上一次创建RDB文件已经过去了300秒，并且服务器的所有数据库总共已经发生了不少于10次修改，那么自动执行BGSAVE命令
+redis>save 6101 10000
+表示如果距离上一次创建rdb已经过去60秒，并且服务器的所有数据库总共已经发生了不少于10000次修改，那么自动执行bgsave命令
+# redis配置文件默认
+218行:save 900 1
+219行:save 300 10
+220行:save 60 10000
+1. 只要三个条件中任意一个被满足时。服务器就会自动执行bgsave
+2. 每次创建RDB文件后，服务器为实现自动持久化而设置的时间计数器和次数计数器就会被清零，并重新开始计数，所以多个保存条件的效果不会叠加
+```
+* 诗句持久化分类值-AOF(AppendOnlyFile,默认不开启)
+### 特点
+```
+1. 存储的是命令，而不是真实的数据
+2. 默认不开启
+# 开启方式(修改配置文件)
+1. /etc/redis/redis.conf
+    672行:appendonly yes # 把 no 改为 yes
+    676行:appendfilename "appendonly.aof"
+2. 重启服务
+sudo /etc/init.d/redis-server restart
+```
+### RDB缺点
+```
+1. 创建RDB文件需要将服务器所有的数据库的数据都保存起来，这是一个非常消耗资源和时间的操作，所以服务器需要隔一段时间才创建一个新的RDB文件，也就是说，创建RDB文件不能执行过于频繁，否则会严重影响服务器的性能
+2. 可能丢失数据
+```
+### AOF持久化原理及优点
+```
+# 原理
+    1. 每当有修改数据库的命令被执行时，服务器就会将执行的命令写入到AOF文件的末尾
+    2. 因为AOF文件里面存储了服务器执行过的所有数据库修改的命令，所以给定一个AOF文件，服务器只要重新执行一遍AOF文件里面包含的所有命令，就可以达到还原数据库的目的。
+# 优点    
+    用户可以根据自己的需要对AOF持久化进行调整，让Redis在遭遇意外停机时不丢失任何数据，或者只丢失一秒钟的数据，这比RDB持久化丢失的数据要少的多  
+```
+### 安全性问题考虑
+```
+# 因为
+    虽然服务器执行一个修改数据库的命令，就会把执行的命令写入到AOF文件，但这并不意味着AOF文件持久化不会丢失任何数据，在目前常见的操作系统中，执行系统调用write函数，将一些内容写入到某个文件里面时，为了提高效率，系统通常不会直接将内容写入硬盘里面，而是将内容放入一个内存缓冲区(buffer)里面，等到缓冲区被填满时才将存储在缓冲区里面的内容真正写到硬盘里
+# 所以
+    1. AOF持久化:当一条命令真正的被写入到硬盘里面时，这条命令才不会因为停机而意外丢失
+    2. AOF持久化在遭遇停机时丢失命令的数量，取决于命令被写入到硬盘的时间
+    3. 越早将命令写入到硬盘，发生意外停机时丢失的数据就越少，反之亦然
+```
+### 策略-配置文件
+```
+# 打开配置文件:/etc/redis/redis.conf,找到相关策略
+1. 701行: always
+    服务器每写入一条命令，就将缓冲区里面的命令写入到硬盘里面，服务器就算意外停机，也不会丢失任何已经成功执行的命令
+2. 702行: everysec(# 默认)
+    服务器每一秒将缓冲区里面的命令写入到硬盘里面，这种模式下，服务器即使遭遇意外停机，最多只丢失1秒的数据
+3. 703行: no
+    服务器不主动将命令写入硬盘，由操作系统决定何时将缓冲区里面的命令写入到硬盘里面，丢失命令数量不确定
+# 运行速度比较
+always:速度慢
+everysec和no都很快，默认值为everysec
+```
+### AOF文件中是否会产生很多的冗余命令?
+```
+为了让AOF文件的大小控制在合理范围，避免胡乱增长，redis提供了AOF重写功能，通过这个功能，服务器可以产生一个新的AOF文件
+    新的AOF文件记录的数据库数据和原由的AOF文件记录的数据库数据完全一样
+    新的AOF文件会使用尽可能少的命令来记录数据库数据，因此新的AOF文件的体积通常会小很多
+    AOF重写期间，服务器不会阻塞，可以正常处理客户端发送的命令请求
+```
+### 示例
+|原有的AOF文件|重写后的AOF文件|
+|------------|--------------|
+|select 0|SELECT 0|
+|sadd myset peiqi|SADD myset peiqi qiaozhi danni lingyang|
+|sadd myset qiaozhi|SET msg 'hello tarena'|
+|sadd myset danni|RPUSH mylist 2 3 5|
+|sadd myset lingyang||
+|INCR number||
+|INCR number||
+|DEL number||
+|SET message 'hello world'||
+|SET message 'hello tarena'||
+|RPUSH mylist 1 2 3||
+|RPUSH mylist 5||
+|LPOP mylist||
+### AOF文件重写方法触发
+```
+1. 客户端向服务器发送BGREWRITEAOF命令
+    127.0.0.1:6379> BGREWRITEAOF
+    Background append only file rewriting started
+2. 修改配置文件让服务自动执行BGREWRITEAOF命令
+    auto-aof-rewrite-percentage 100
+    auto-aof-rewrite-min-size 64mb
+    # 解释
+        1. 只有当AOF文件的增量大于100%时才会进行重写，也就是大一倍的时候才会触发
+            # 第一次重写新增:64M
+            # 第二次重写新增:128M
+            # 第三次重写新增:256M(新增128M) 
+```
+## RDB和AOF持久化对比
+|RDB持久化|AOF持久化|
+|--------|---------|
+|全量备份，一次保存整个数据库|增量备份，一次保存一个修改数据库的命令|
+|保存的间隔较长|保存的间隔默认为一秒钟|
+|数据还原速度快|数据还原速度一般，冗余命令多，还原速度慢|
+|执行SAVE命令时会阻塞服务器，但手动或者自动触发的BGSAVE不会阻塞服务器|无论是平时还是进行AOF重写时，都不会阻塞服务器|
+|更适合数据备份|更适合用来保存数据，通常意义上的数据持久化，在appendfsync always模式下运行|
+```
+# 用redis用来存储真正数据，每一条都不能丢失，都要用always，有的做缓存，有的保存真数据，我可以开多个redis服务，不同业务使用不同持久化，新浪每个服务器上有4个redis服务，整个业务中有上千个redis服务，分不同的业务，每个持久化的级别都是不一样的。
+```
+### 数据恢复(无需手动操作)
+```
+既有dump.rdb又有appendonly.aof,恢复时找谁?
+先找appendonly.aof
+```
+### 配置文件常用配置总结
+```
+# 设置密码
+1. requirepass password
+# 开启远程连接
+2. bind 127.0.0.1 ::1 注释掉
+3. protected-mode no 把默认的yes改为no
+# rdb持久化-默认配置
+4. dbfilename 'dump.rdb'
+5. dir /var/lib/redis
+# rdb持久化-自动触发(条件)
+6. save 900 1
+7. save 300 10 
+8. save 60 10000
+# aof持久化开启
+9. appendonly yes
+10. appendfilename 'appendonly.aof'
+# aof持久化策略
+11. appendfsync always
+12. appendfsync everysec # 默认
+13. appendfsync no
+# aof重写触发
+14. auto-aof-rewrite-percentage 100
+15. auto-aof-rewrite-min-size 64MB
+# 设置为从服务器
+16. salveof <master-ip> <master-port>
+```
+### Redis相关文件存放路径
+```
+1. 配置文件: /etc/redis/redis.conf
+2. 备份文件: /var/lib/redis*.rdb|*.aof
+3. 日志文件: /var/log/redis/redis-server.log
+4. 启动文件: /etc/init.d/redis-server
+# /etc/下存放配置文件
+# /etc/init.d/存放服务启动文件
+```
+## Redis主从复制
+* 定义
+```
+1. 一个Redis服务可以有多个该服务的复制品，这个Redis服务称为master,其他复制品称为slaves
+2. master会一直将自己的数据更新同步给slaves,保持主从同步
+3. master可以执行写命令，slave只能执行读命令
+```
+* 作用
+```
+分担了读的压力(高并发)
+```
+* 原理
+```
+从服务器执行客户端发送的读命令，比如GET，LRANGE、SMEMMBERS、HGET、ZRANGE等等，客户端可以连接slaves执行读请求，来降低master的读压力
+```
+* 两种实现方式
+### 方式一(Linux命令实现1)
+redis-server --slaveof <master-ip> <master-port>
+```
+# 从服务端
+redis-server --port 6300 --slaveof 127.0.0.1 6379
+# 从客户端
+redis-cli -p 6300
+127.0.0.1:6300> keys *
+# 发现是赋值了原6379端口的redis中数据
+127.0.0.1:6300> set mykey 123
+(error) READONLY You can't write against a read only slave.
+127.0.0.1:6300>
+# 从服务器只能读数据，不能写数据
+```
+### 方式一(Redis命令行实现2)
+```
+# 两条命令
+1. >slaveof IP PORT
+2. >slaveof no one
+```
+### 示例
+```
+# 服务端启动
+redis-server --port 6301
+# 客户端连接
+tarena@tedu:~$ redis-cli -p 6301
+127.0.0.1:6301> keys *
+1) "myset"
+2) "mylist"
+127.0.0.1:6301> set mykey 123
+OK
+# 切换为从
+127.0.0.1:6301> slaveof 127.0.0.1 6379
+OK
+127.0.0.1:6301> set newkey 456
+(error) READONLY You can't write against a read only slave.
+127.0.0.1:6301>keys *
+1) "myset"
+2) "mylist"
+# 再切换为主
+127.0.0.1:6301> slaveof no one
+OK
+127.0.0.1:6301> set name hello 
+OK
+```
+### 方式二(修改配置文件)
+
+
+
+

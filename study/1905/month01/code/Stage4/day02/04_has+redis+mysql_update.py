@@ -18,9 +18,12 @@ class Update(object):
     def update_mysql(self,score,username):
         upd = 'update user set score=%s where name=%s'
         try:
-            self.cursor.execute(upd,[score,username])
-            self.db.commit()
-            return True
+            # code:0或者1,几行受到了影响
+            code = self.cursor.execute(upd,[score,username])
+            # code为1：说明新成绩和原成绩不一样
+            if code == 1:
+                self.db.commit()
+                return True
         except Exception as e:
             self.db.rollback()
             print('Failed',e)
@@ -33,7 +36,7 @@ class Update(object):
         else:
             # 到mysql中查询最新数据，缓存到redis中
             self.select_mysql(username)
-    #
+    # mysql查询数据 + 更新到redis数据库
     def select_mysql(self,username):
         sel = 'select age,gender,score from user where name=%s'
         self.cursor.execute(sel,[username])
