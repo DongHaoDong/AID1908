@@ -573,28 +573,28 @@ mysql> create database blog charset utf8;
 2、同步数据库，并在user_profile中插入表记录
 
 ```python
-1、python3 manage.py makemigrations
-2、python3 manage.py migrate
-3、insert into user_profile values ('guoxiaonao','guoxiaonao','guoxiaonao@tedu.cn','123456','aaaaaaaa','bbbbbbbb','cccccccc');
+# 1、python3 manage.py makemigrations
+# 2、python3 manage.py migrate
+# 3、insert into user_profile values ('guoxiaonao','guoxiaonao','guoxiaonao@tedu.cn','123456','aaaaaaaa','bbbbbbbb','cccccccc');
 ```
 
 3、启动django项目，并找到django路由测试 test函数
 
 ```python
-1、python3 manage.py runserver
-2、查看项目的 urls.py 路由，打开firefox浏览器输入地址：http://127.0.0.1:8000/test/
+# 1、python3 manage.py runserver
+# 2、查看项目的 urls.py 路由，打开firefox浏览器输入地址：http://127.0.0.1:8000/test/
 # 返回结果：	{"code": 200}
 ```
 
 4、在数据库表中创建测试字段score
 
 ```python
-1、user/models.py添加:
-   score = models.IntegerField(verbose_name=u'分数',null=True,default=0)
-2、同步到数据库
-   python3 manage.py makemigrations user
-   python3 manage.py migrate user
-3、到数据库中确认查看
+# 1、user/models.py添加:
+   # score = models.IntegerField(verbose_name=u'分数',null=True,default=0)
+# 2、同步到数据库
+#    python3 manage.py makemigrations user
+   # python3 manage.py migrate user
+# 3、到数据库中确认查看
 ```
 
 3、在blog/views.py中补充 test函数，对数据库中score字段进行 +1 操作
@@ -616,8 +616,8 @@ def test(request):
 (1)多台服务器启动项目
 
 ```python
-python3 manage.py runserver 127.0.0.1:8000
-python3 manage.py runserver 127.0.0.1:8001
+# python3 manage.py runserver 127.0.0.1:8000
+# python3 manage.py runserver 127.0.0.1:8001
 ```
 
 (2)在tools中新建py文件 test_api.py，模拟30个并发请求
@@ -653,7 +653,7 @@ if __name__ == '__main__':
  (4) 在数据库中查看 score 字段的值
 
 ```python
-并没有+30，而且没有规律，每次加的次数都不同，如何解决？？？
+# 并没有+30，而且没有规律，每次加的次数都不同，如何解决？？？
 ```
 
 **解决方案：redis分布式锁**
