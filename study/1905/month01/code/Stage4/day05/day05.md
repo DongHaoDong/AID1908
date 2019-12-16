@@ -378,6 +378,8 @@ SELECT NAME,TIME FROM filmtab WHERE TIME>='1990-01-01' AND TIME<='2000-12-31';
 ## 数据持久化存储-MongoDB数据库
 ```
 MongoDB是一个基于磁盘的菲关系型(key-value)数据库，value为json串
+MySQL:库 表 表记录
+Mongo:库 集合 文档
 ```
 ### pymongo操作mongodb数据库
 ```
@@ -389,4 +391,76 @@ conn = pymongo.MongoClient('127.0.0.1',27017)
 db = conn['库名']
 # 3.集合对象
 myset = db['集合名']
+# 4. 插入数据
+myset.insert_one({字典})
 ```
+### 思考
+```
+1. 能否到电影详情页把评论抓取下来?
+2. 能否到电影详情页把电影图片抓取下来? - 并按照电影名称分别创建文件夹
+```
+### 代码实现
+```
+from urllib import request
+import re
+import time
+import random
+from useragents import ua_list
+import csv
+import pymongo
+
+class MaoyanSpider(object):
+    def __init__(self):
+        self.url = 'https://maoyan.com/board/4?offset={}'
+        # 添加计数变量
+        self.i = 0
+
+    # 请求
+    def get_html(self,url):
+        headers = {'User-Agent':random.choice(ua_list)}
+        req = request.Request(url=url,headers=headers)
+        res = request.urlopen(req)
+        html = res.read().decode()
+        # 直接调用解析函数
+        self.parse_html(html)
+        # 创建3个对象
+        self.conn = pymongo.MongoClient('127.0.0.1',27017)
+        self.db = self.conn['maoyandb']
+        self.myset = self.db['filmtab']
+
+
+    # 解析
+    def parse_html(self,html):
+        # r_list:[('月光宝盒'),('周星驰'),(1994-01-01)]
+        re_bds = '<div class="movie-item-info">.*?title="(.*?)".*?class="star">(.*?)</p>.*?releasetime">(.*?)</p>'
+        pattern = re.compile(re_bds,re.S)
+        r_list = pattern.findall(html)
+        # 直接调用写入函数
+        self.write_html(r_list)
+    # 保存
+    def write_html(self,r_list):
+        for r in r_list:
+            item = {}
+            item['name'] = r[0].strip()
+            item['star'] = r[1].strip()
+            item['time'] = r[2].strip()[5:15]
+            # 插入到monggodb数据库中
+            self.myset.insert_one(item)
+    # 主函数
+    def run(self):
+        for offset in range(0,91,10):
+            url = self.url.format(offset)
+            self.get_html(url)
+            # 随机休眠 - uniform生成随机的浮点数
+            time.sleep(random.uniform(1,2))
+        print('数量:',self.i)
+
+
+if __name__ == "__main__":
+    start = time.time()
+    spider = MaoyanSpider()
+    spider.run()
+    end = time.time()
+    print('执行时间:%2.f'%(end-start))
+```
+
