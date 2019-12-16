@@ -394,6 +394,16 @@ myset = db['集合名']
 # 4. 插入数据
 myset.insert_one({字典})
 ```
+### mongodb常用命令
+```
+1. mongo                    # 进入到mongo数据库
+2. show dbs                 # 查看所有库
+3. use 库名                  # 切换库
+4. show collections         #查看当前库中所有集合
+5. db.集合名.find().pretty() # 格式化输出文档
+6. db.集合名.count()         # 统计集合中文档个数
+7. db.dropDatabase()        # 删除库
+```
 ### 思考
 ```
 1. 能否到电影详情页把评论抓取下来?
