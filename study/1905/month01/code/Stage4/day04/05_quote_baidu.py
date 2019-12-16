@@ -1,12 +1,11 @@
 from urllib import request
 from urllib import parse
-import time
 
 # 1. 拼接url地址函数
 def get_url(word):
-    baseurl = 'http://www.baidu.com/s?'
+    baseurl = 'http://www.baidu.com/s?wd='
     #编码+拼接
-    params = parse.urlencode({'wd':word})
+    params = parse.quote(word)
     url = baseurl + params
     return url
 # 2. 请求+保存
@@ -25,10 +24,5 @@ def write_html(url,word):
 if __name__ == '__main__':
     word = input('请输入要搜索的内容:')
     url = get_url(word)
-    while True:
-        try:
-            write_html(url, word)
-            break
-        except Exception as e:
-            time.sleep(0.5)
+    write_html(url,word)
 

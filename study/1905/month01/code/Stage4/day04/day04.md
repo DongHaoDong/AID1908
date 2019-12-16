@@ -349,8 +349,256 @@ if __name__ == '__main__':
     url = get_url(word)
     write_html(url,word)
 ```
-quote(string)编码
+### quote(string)编码
 * 示例1
+```
+from urllib import parse
+string = '美女'
+print(parse.quote(string))
+# 结果:%E7%BE%8E%E5%A5%B3
+```
+### 改写之前urlencode()代码，使用quote()方法实现
+```
+from urllib import parse
+url = 'http://www.baidu.com/s?wd={}'
+word = input('请输入要搜索的内容:')
+query_string = parse.quote(word)
+print(url.format(query_string))
+```
+### unquote(string)解码
+```
+from urllib import parse
+string = '%E7%BE%8E%E5%A5%B3'
+result = parse.unquote(string)
+print(result)
+```
+### 总结
+```
+# 1. urllib.request
+req = request.Request(url=url,header=header)
+res = request.urlopen(req)
+html = res.read().decode()
+# 2. 响应对象res方法
+res.read()
+res.geturl()
+res.getcode()
+# 3. urllib.parse
+parse.urlencode({})
+parse.quote('')
+parse.unquote('')
+```
+## 百度贴吧数据抓取案例
+### 要求
+```
+1. 输入贴吧名称:赵丽颖吧
+2. 输入起始页:1
+3. 输入终止页:3
+4. 保存本地文件
+    赵丽颖吧-第1页.html、赵丽颖吧-第2页.html...
+```
+### 实现步骤
+* 1. 查看是否为静态页面
+```
+右键 - 查看网页源代码 - 搜索数据关键字
+```
+* 2. 找URL规律
+```
+第一页:http://tieba.baidu.com/f?kw=??&pn=0
+第二页:http://tieba.baidu.com/f?kw=??&pn=50
+第n页:http://tieba.baidu.com/f?kw=??&pn=(n-1)*50
+```
+* 3. 获取网页内容
+* 4. 提取所需数据
+* 5. 保存(本地文件、数据库)
+### 代码实现-06_tieba_spider.py
+```
+from urllib import request,parse
+import random
+import time
+from useragents import ua_list
+
+class TiebaSpider(object):
+    def __init__(self):
+        self.url = 'http://tieba.baidu.com/f?kw={}&pn={}'
+
+    # 获取响应内容
+    def get_page(self,url):
+        headers = {'User-Agent': random.choice(ua_list)}
+        req = request.Request(url=url,headers=headers)
+        res = request.urlopen(req)
+        html = res.read().decode()
+        return html
+
+    # 解析，提取数据
+    def parse_page(self):
+        pass
+
+    # 保存数据
+    def write_page(self,filename,html):
+        with open(filename,'w',encoding='utf-8') as f:
+            f.write(html)
+
+    # 入口函数
+    def run(self):
+        name = input('请输入贴吧名:')
+        start = int(input('请输入起始页:'))
+        end = int(input('请输入终止页:'))
+        kw = parse.quote(name)
+        # 拼接 + 获取内容 + 保存
+        for i in range(start,end+1):
+            pn = (i-1)*50
+            url = self.url.format(kw,pn)
+            html =self.get_page(url)
+            filename = '{}-第{}页.html'.format(name,i)
+            self.write_page(filename,html)
+            print('第{}页抓取成功'.format(i))
+            # 每爬取1个页面随机休眠1-3秒
+            time.sleep(random.randint(1,3))
+
+if __name__ == '__main__':
+    begin = time.time()
+    spider = TiebaSpider()
+    spider.run()
+    stop = time.time()
+    print('执行时间:%.2f'%(stop-begin))
+```
+## 正则解析模块
+### re模块使用流程
+* 方法一
+```
+r_list=re.findall(r'正则表达式',html,re.S)
+```
+* 方法二
+```
+# 1. 创建正则编译对象
+pattern = re.compile(r'正则表达式',re.S)
+r_list = pattern.findall(html)
+```
+### 正则表达式元字符
+|元字符|含义|
+|-----|----|
+|.|任意一个字符(不包括\n)|
+|\d|一个数字|
+|\s|空白字符|
+|\S|非空白字符|
+|[]|包含[]内容|
+|*|出现0次或多次|
+|+|出现1次或多次|
+### 思考:请写出匹配任意一个字符的正则表达式？
+```
+import re
+# 方法一
+pattern = re.compile('.',re.S)
+# 方法二
+pattern = re.compile('[\s\S]')
+```
+### 贪婪匹配和非贪婪匹配
+* 贪婪匹配(默认)
+```
+1. 在整个表达式匹配成功的前提下，尽可能多的匹配* + ?
+2. 表示方式:.* .+ .?
+```
+* 非贪婪匹配
+```
+1. 在整个表达式匹配成功的前提下，尽可能少的匹配*
+2. 表示方式:.*? .+? .??
+```
+### 示例代码-05.re_greed.py
+```
+import re
+
+html='''
+<div><p>九霄龙吟惊天变</p></div>
+<div><p>风韵际会潜水游</p></div>
+'''
+# 贪婪匹配
+pattern = re.compile('<div><p>.*</p></div>',re.S)
+r_list = pattern.findall(html)
+# 非贪婪匹配
+pattern = re.compile('<div><p>.*?</p></div>',re.S)
+r_list = pattern.findall(html)
+print(r_list)
+```
+## 正则表达式分组
+* 作用
+在完整的模式中定义子模式，将每个圆括号中子模式匹配出来的结果提取出来
+* 示例
+```
+import re
+
+s = 'A B C D'
+p1 = re.compile('\w+\s+\w+')
+print(p1.findall(s))
+# 结果: ['A B','C D']
+p2 = re.compile('(\w+)\s+\w+')
+print(p2.findall(s))
+# 第1步:匹配完整 -> ['A B','C D']
+# 第2步:匹配()-> ['A','C']
+p3 = re.compile('(\w+)\s+(\w+)')
+print(p3.findall(s))
+# 第1步:匹配完整 -> ['A B','C D']
+# 第2步:匹配()-> [('A','B'),('C','D')]
+```
+* 分组总结
+```
+1. 在网页中，想要什么内容,就加()
+2. 先按整体正则匹配，然后再提取分组()中的内容
+    如果有2个以上分组，则结果中以元组形式显示 [('小区1','500万'),('小区2','600万'),()]
+```
+* 练习
+页面结构如下:
+```html
+# <div class="animal">.*?title="(.*?)".*?content">(.*?)</p>
+<div class="animal">
+    <p class="name">
+        <a title="Tiger"></a>
+    </p>
+    <p class="content">
+        Two tigers two tigers run fast
+    </p>
+</div>
+<div class="animal">
+    <p class="name">
+        <a title="Rabbit"></a>
+    </p>
+    <p class="content">
+        Small while rabbit white and white
+    </p>
+</div>
+```
+从以上html代码结构中完成如下内容信息的提取
+```
+# 问题1
+[('Tiger','Two...'),('Rabbit','Small...')]
+# 问题2
+动物名称:Tiger
+动物描述:Two tigers two tigers run fast
+**********************************************
+动物名称:Rabbit
+动物描述:Small while rabbit while and white
+```
+### 代码实现-09_re_exercise.py
+```
+
+```
+## 今日作业
+1. 把百度贴吧案例重写一遍，不要参照课堂上代码
+2. 爬取猫眼电影信息:猫眼电影-榜单-top100榜
+```
+第1步完成：
+    猫眼电影-第1页.html
+    猫眼电影-第2页.html
+    ...
+第二步完成:
+    1. 提取数据:电影名称、主演、上映时间
+    2. 先打印输出，然后再写入本地文件
+```
+3. 复习任务
+```
+pymysql、MySQL基本命令
+MySQL:建库建表普通查询等
+```
+
 
 
 
