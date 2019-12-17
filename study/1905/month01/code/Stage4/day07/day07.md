@@ -492,18 +492,43 @@ print(html)
 ```
 ```
 **私密代理**
-* 语法格式
-1. 语法结构
+
+- **语法格式**
+
+```
+1、语法结构
 proxies = {
     '协议':'协议://用户名:密码@IP:端口号'
 }
-## 今日作业
+
+2、示例
+proxies = {
+	'http':'http://用户名:密码@IP:端口号',
+  'https':'https://用户名:密码@IP:端口号'
+}
 ```
-1. 总结前几天内容，理顺知识点
-2. 代理参数 - 如何建立自己的IP代理池，并使用随机代理IP访问网站
-    1.  URL:https://www.xicidaili.com/nn/{}
-    2. 数据:IP和端口
-    3. 一次测试每个IP是否可用:访问百度,res.status_code == 200，可用
-    4. 把测试完后能用的IP+端口写入到本地文件 - 代理池
-3. Web客户端验证 - 如何下载、保存
+
+**示例代码**
+
+```python
+import requests
+url = 'http://httpbin.org/get'
+proxies = {
+    'http': 'http://309435365:szayclhp@106.75.71.140:16816',
+    'https':'https://309435365:szayclhp@106.75.71.140:16816',
+}
+headers = {
+    'User-Agent' : 'Mozilla/5.0',
+}
+
+html = requests.get(url,proxies=proxies,headers=headers,timeout=5).text
+print(html)
+```
+
+## **今日作业**
+
+```
+1、总结前几天内容,理顺知识点
+2、代理参数 - 如何建立自己的IP代理池,并使用随机代理IP访问网站
+3、Web客户端验证 - 如何下载、保存
 ```
