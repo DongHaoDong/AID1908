@@ -42,15 +42,23 @@ class LianjiaSpider(object):
             item = {}
             for li in li_list:
                 # 名称
-                item['name']=li.xpath('//div[@class="positionInfo"]/a[@class="no_resblock_a"]/text()')[0].strip()
+                re_bds = '//div[@class="positionInfo"]/a[@class="no_resblock_a"]/text()'
+                name_list = li.xpath(re_bds)
+                item['name'] = [name_list[0].strip() if name_list else None][0]
                 # 户型+面积+方位+精装
                 # info_list:['','三室两厅','100.99平米','南北','精装']
-                info_list = li.xpath('.//div[@class="houseInfo"]/text()')[0].split('|')
-                item['model'] = info_list[0].strip()
-                item['area'] = info_list[1].strip()[:-2]
-                item['direction'] = info_list[2].strip()
-                item['prefect'] = info_list[3].strip()
-                item['floor'] = info_list[4].strip()
+                re_bds = './/div[@class="houseInfo"]/text()'
+                info_list = li.xpath(re_bds)
+                info_list = [info_list[0].split('|') if info_list else None][0]
+                if len(info_list) == 6:
+                    item['model'] = info_list[0].strip()
+                    item['area'] = info_list[1].strip()[:-2]
+                    item['direction'] = info_list[2].strip()
+                    item['prefect'] = info_list[3].strip()
+                    item['floor'] = info_list[4].strip()
+                else:
+                    item['model'] = item['area'] = item['direction'] = item['prefect'] = item['floor'] = None
+
                 # 楼层+地区+总价+单价
                 item['address'] = li.xpath('.//div[@class="positionInfo"]/a/text()')[0].strip()
                 item['total'] = li.xpath('.//div[@class="totalPrice"]/span/text()')[0].strip()
