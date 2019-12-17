@@ -411,66 +411,101 @@ myset.insert_one({字典})
 ```
 ### 代码实现
 ```
-from urllib import request
-import re
-import time
-import random
-from useragents import ua_list
-import csv
-import pymongo
+# 一级页面正则
+<div class="movie-item-info">.*?href="(.*?).*?"title="(.*?)".*?class="star">(.*?)</p>.*?releasetime">(.*?)</p>
+# 二级页面评论正则
+# ['','','']
+<div class="comment-content">(.*?)</div>
+# 图片正则 - 涉及到反爬，响应内容做调整
+<img class="default-img" data-src="(.*?)" alt="">
+```
+# 电影天堂二级页面抓取案例
+## 领取任务
+```
+# 地址
+电影天堂 - 2019年新片精品 -更多
+# 目标
+电影名称、下载链接
+# 分析
+***********一级页面抓取***********
+        1. 电影详情页链接
+***********二级页面抓取***********
+        2. 电影名称
+        3. 电影下载链接
+```
+- **2、找URL规律**
 
-class MaoyanSpider(object):
-    def __init__(self):
-        self.url = 'https://maoyan.com/board/4?offset={}'
-        # 添加计数变量
-        self.i = 0
+```
+第1页 ：https://www.dytt8.net/html/gndy/dyzz/list_23_1.html
+第2页 ：https://www.dytt8.net/html/gndy/dyzz/list_23_2.html
+第n页 ：https://www.dytt8.net/html/gndy/dyzz/list_23_n.html
+```
 
-    # 请求
-    def get_html(self,url):
-        headers = {'User-Agent':random.choice(ua_list)}
-        req = request.Request(url=url,headers=headers)
-        res = request.urlopen(req)
-        html = res.read().decode()
-        # 直接调用解析函数
-        self.parse_html(html)
-        # 创建3个对象
-        self.conn = pymongo.MongoClient('127.0.0.1',27017)
-        self.db = self.conn['maoyandb']
-        self.myset = self.db['filmtab']
+- **3、写正则表达式**
 
+```
+1、一级页面正则表达式
+   <table width="100%".*?<td width="5%".*?<a href="(.*?)".*?ulink">.*?</table>
+2、二级页面正则表达式
+   <div class="title_all"><h1><font color=#07519a>(.*?)</font></h1></div>.*?<td style="WORD-WRAP.*?>.*?>(.*?)</a> 
+```
 
-    # 解析
-    def parse_html(self,html):
-        # r_list:[('月光宝盒'),('周星驰'),(1994-01-01)]
-        re_bds = '<div class="movie-item-info">.*?title="(.*?)".*?class="star">(.*?)</p>.*?releasetime">(.*?)</p>'
-        pattern = re.compile(re_bds,re.S)
-        r_list = pattern.findall(html)
-        # 直接调用写入函数
-        self.write_html(r_list)
-    # 保存
-    def write_html(self,r_list):
-        for r in r_list:
-            item = {}
-            item['name'] = r[0].strip()
-            item['star'] = r[1].strip()
-            item['time'] = r[2].strip()[5:15]
-            # 插入到monggodb数据库中
-            self.myset.insert_one(item)
-    # 主函数
-    def run(self):
-        for offset in range(0,91,10):
-            url = self.url.format(offset)
-            self.get_html(url)
-            # 随机休眠 - uniform生成随机的浮点数
-            time.sleep(random.uniform(1,2))
-        print('数量:',self.i)
+- **4、代码实现**
 
+```
+1、请求功能函数
+2、解析功能函数
+3、解析页面函数中
+	1、先解析一级页面  - 提取出30个电影链接
+    2、for link in link_list:
+        	# 查看link在数据库中是否存在
+            # 存在：直接结束整个程序
+            # 不存在： 开始抓取此链接，抓完后把此链接存入到数据库表中
+```
 
-if __name__ == "__main__":
-    start = time.time()
-    spider = MaoyanSpider()
-    spider.run()
-    end = time.time()
-    print('执行时间:%2.f'%(end-start))
+- **5、练习**
+
+   把电影天堂数据存入MySQL数据库 - 增量爬取
+
+  ```python
+  # 思路
+  # 1、MySQL中新建表 urltab,存储所有爬取过的链接的指纹
+  # 2、在爬取之前,先判断该指纹是否爬取过,如果爬取过,则不再继续爬取
+  ```
+
+  **练习代码实现**
+
+  ```mysql
+  # 建库建表
+  create database filmskydb charset utf8;
+  use filmskydb;
+  create table request_finger(
+  finger char(32)
+  )charset=utf8;
+  create table filmtab(
+  name varchar(200),
+  download varchar(500)
+  )charset=utf8;
+  ```
+
+  ```
+  from hashlib import md5
+  url = 
+  'https://www.dytt8.net/html/gndy/dyzz/20191003/59198.html'
+  
+  s = md5()
+  s.update(url.encode())
+  finger = s.hexdigest()
+  ```
+
+## 今日作业
+
+```
+1、电影天堂数据,存入MySQL、MongoDB、CSV文件
+2、百度图片抓取: 输入要抓取的图片内容,抓取首页的30张图片,保存到对应的文件夹，比如:
+   你想要谁的照片，请输入: 赵丽颖
+   创建文件夹到指定目录: 赵丽颖  并把首页30张图片保存到此文件夹下
+3、抓取链家二手房房源信息（房源名称、总价）,把结果存入到MySQL数据库,MongoDB数据库,CSV文件
+  # 小区名 、总价 、单价
 ```
 
