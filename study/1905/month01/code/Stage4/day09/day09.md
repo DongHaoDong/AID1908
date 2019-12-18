@@ -203,8 +203,28 @@ n = a       n = 4999
     应用链接
 ```
 **实现步骤**
-* 
+* 确认是否为动态加载
 ```
+1. 页面局部刷新
+2. 右键查看网页源代码，搜索关键字未搜到
+# 此网站为动态加载网站，需要抓取网络数据包分析
+```
+* F12抓取网络数据包
+```
+1. 抓取返回json数据的URL地址(Headers中的Request URL)
+    http://app.mi.com/categotyAllListApi?page={}&categoryId=2&pageSize=30
+2. 查看并分析查询参数(headers中的QueryStringParameters)
+    page: 0
+    categoryId: 2
+    pageSize: 30
+    # 只有page在变,0,1,2...这样我们就可以通过page的值拼接多个返回json数据的URL地址
+```
+* 代码实现
+```
+# 类别
+li_list = //ul[@class="category-list"]/li
+name = li.xpath('./a/text()')
+code = li.xpath('./a/@href')[0].split('/')[-1]
 ```
 
 
