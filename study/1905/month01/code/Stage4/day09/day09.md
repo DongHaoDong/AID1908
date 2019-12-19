@@ -226,5 +226,171 @@ li_list = //ul[@class="category-list"]/li
 name = li.xpath('./a/text()')
 code = li.xpath('./a/@href')[0].split('/')[-1]
 ```
+- **将抓取数据保存到csv文件**
+
+```
+# 注意多线程写入的线程锁问题
+from threading import Lock
+lock = Lock()
+# 加锁
+lock.acquire()
+python语句
+# 释放锁
+lock.release()
+```
+
+- **整体思路**
+
+```
+# 假如说存json
+1、在 __init__(self) 中创建文件对象，多线程操作此对象进行文件写入
+   self.f = open('xiaomi.json','w') 
+   self.item_list = []
+2、把所有数据抓取完成后,存入到json文件
+   for app in xxx:
+        item['name'] = app['xxx']
+        self.item_list.append(item)
+3、所有数据抓取完成关闭文件
+   程序最后: 
+  json.dump(self.item_list,self.f,ensure_ascii=False)
+```
+
+- **代码实现**
+
+```python
+# 正则 [(2,'聊天社交'),(3,'图书')]
+<a href="/category/(.*?)">(.*?)</a>
+```
+
+### cookie模拟登录
+
+**适用网站及场景**
+
+```
+抓取需要登录才能访问的页面
+```
+
+**cookie和session机制**
+
+```python
+# http协议为无连接协议
+cookie: 存放在客户端浏览器
+session: 存放在Web服务器
+```
+
+### 人人网登录案例
+
+* **方法一 - 登录网站手动抓取Cookie**
+
+```
+1、先登录成功1次,获取到携带登录信息的Cookie
+   登录成功 - 个人主页 - F12抓包 - 刷新个人主页 - 找到主页的包(profile)
+2、携带着cookie发请求
+   ** Cookie
+   ** User-Agent
+```
+
+```python
+# 1、将self.url改为 个人主页的URL地址
+# 2、将Cookie的值改为 登录成功的Cookie值
+import requests
+from lxml import etree
+
+class RenrenLogin(object):
+  def __init__(self):
+    self.url = 'xxxxxxx'
+    self.headers = {
+      'Cookie':'xxxxxx',
+      'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36'
+    }
+
+  def get_html(self):
+    html = requests.get(url=self.url,headers=self.headers).text
+    self.parse_html(html)
+
+  def parse_html(self,html):
+    parse_html = etree.HTML(html)
+    r_list = parse_html.xpath('//*[@id="operate_area"]/div[1]/ul/li[1]/span/text()')
+    print(r_list)
+
+if __name__ == '__main__':
+  spider = RenrenLogin()
+  spider.get_html()
+```
+
+- **方法二**
+
+原理
+
+```
+1、把抓取到的cookie处理为字典
+2、使用requests.get()中的参数:cookies
+```
+
+处理cookie为字典
+
+```
+# 处理cookies为字典
+
+```
+
+代码实现
+
+```
+11
+```
+
+- **方法三 - requests模块处理Cookie**
+
+原理思路及实现
+
+```
+# 1. 思路
+requests模块提供了session类,来实现客户端和服务端的会话保持
+
+# 2. 原理
+1、实例化session对象
+   session = requests.session()
+2、让session对象发送get或者post请求
+   res = session.post(url=url,data=data,headers=headers)
+   res = session.get(url=url,headers=headers)
+
+# 3. 思路梳理
+浏览器原理: 访问需要登录的页面会带着之前登录过的cookie
+程序原理: 同样带着之前登录的cookie去访问 - 由session对象完成
+1、实例化session对象
+2、登录网站: session对象发送请求,登录对应网站,把cookie保存在session对象中
+3、访问页面: session对象请求需要登录才能访问的页面,session能够自动携带之前的这个cookie,进行请求
+```
+
+具体步骤
+
+```
+1、寻找Form表单提交地址 - 寻找登录时POST的地址
+   查看网页源码,查看form表单,找action对应的地址: http://www.renren.com/PLogin.do
+
+2、发送用户名和密码信息到POST的地址
+   * 用户名和密码信息以什么方式发送？ -- 字典
+     键 ：<input>标签中name的值(email,password)
+     值 ：真实的用户名和密码
+     post_data = {'email':'','password':''}
+
+session = requests.session()        
+session.post(url=url,data=data)
+```
+
+程序实现
+
+```
+
+```
+
+## 今日作业
+
+```
+1、多线程改写 - 腾讯招聘案例
+2、多线程改写 - 链家二手房案例
+3、尝试破解百度翻译 - 找到相关的js代码即可
+```
 
 
