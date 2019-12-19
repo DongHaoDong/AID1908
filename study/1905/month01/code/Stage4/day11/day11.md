@@ -201,6 +201,131 @@ https://mail.qq.com/
 ```
 ## 百度翻译破译案例
 ### 目标
+```
+破解百度翻译接口，抓取翻译结果数据
+```
+### 实现步骤
+* F12抓包,找到json的地址,观察查询参数
+```
+1. POST地址:
+https://fanyi.baidu.com/v2transapi
+2. Form表单数据(多次抓取在变的字段)
+    from: en
+    to: zh
+    query: dream
+    simple_means_flag: 3
+    sign: 679690.965691
+    token: 815b3f89458ebbbecbd9a7d41b42cf4e # 基本固定，但也想办法获取
+```
+* 抓取相关JS文件
+```
+右上角 - 搜索 - sign: - 找到具体JS文件(index_c8a141d.js) - 格式化输出
+```
+* 在JS中寻找sign的生成码
+```
+1. 在格式化输出的JS代码中搜索:sign:找到如下JS代码:sign:m(a)
+2. t通过设置断点,找到m(a)的函数的位置,即生成sign的具体函数
+```
+* 具体代码实现
+```
+1. 获取token和gtk的值
+    GET:地址:百度翻译首页发送请求，从响应内容中获取
+    https://fanyi.baidu.com/?aldtype=16047
+2. POST请求
+    https://fanyi.baidu.com/v2transapi
+    requests.post(URL,data,headers=headers)
+    
+# formdata
+data = {
+    "from": "en",
+    "to": "zh",
+    "query": "hello",
+    "transtype": "realtime",
+    "simple_means_flag": "3",
+    "sign": "54706.276099",
+    "token": "815b3f89458ebbbecbd9a7d41b42cf4e",
+}  
+
+# headers
+headers = {
+    "accept": "*/*",
+    "accept-encoding": "gzip, deflate, br",
+    "accept-language": "zh-CN,zh;q=0.9,en;q=0.8",
+    "cache-control": "no-cache",
+    "content-length": "121",
+    "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+    "cookie": "BIDUPSID=10654A2CFBEA2F15A893A2E2FF68A8A9; PSTM=1576175989; BDORZ=B490B5EBF6F3CD402E515D22BCDA1598; REALTIME_TRANS_SWITCH=1; FANYI_WORD_SWITCH=1; HISTORY_SWITCH=1; SOUND_SPD_SWITCH=1; SOUND_PREFER_SWITCH=1; APPGUIDE_8_2_2=1; BAIDUID=10654A2CFBEA2F150E0109A25E628154:SL=0:NR=10:FG=1; delPer=0; PSINO=1; to_lang_often=%5B%7B%22value%22%3A%22en%22%2C%22text%22%3A%22%u82F1%u8BED%22%7D%2C%7B%22value%22%3A%22jp%22%2C%22text%22%3A%22%u65E5%u8BED%22%7D%2C%7B%22value%22%3A%22zh%22%2C%22text%22%3A%22%u4E2D%u6587%22%7D%5D; from_lang_often=%5B%7B%22value%22%3A%22zh%22%2C%22text%22%3A%22%u4E2D%u6587%22%7D%2C%7B%22value%22%3A%22en%22%2C%22text%22%3A%22%u82F1%u8BED%22%7D%5D; sideAdClose=18249; H_PS_PSSID=1454_21116_30211_30283; Hm_lvt_64ecd82404c51e03dc91cb9e8c025574=1576642503,1576764598,1576765700,1576767418; Hm_lpvt_64ecd82404c51e03dc91cb9e8c025574=1576767418; __yjsv5_shitong=1.0_7_95958817e0e9f0f806df35f4c7b00392d131_300_1576767421965_124.89.86.156_41c36524; yjs_js_security_passport=e67cadd372d2371c6436e1cc08c2961b9998eb55_1576767432_js",
+    "origin": "https://fanyi.baidu.com",
+    "pragma": "no-cache",
+    "referer": "https://fanyi.baidu.com/?aldtype=16047",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36",
+    "x-requested-with": "XMLHttpRequest",
+}
+
+# 正则获取gtk + token
+"window.gtk = '(.*?)'"
+"token: '(.*?)'"
+```
+## Scrapy框架
+* 定义
+```
+异步处理框架，可配置和可扩展程度非常高，Python中使用最广泛的爬虫框架
+```
+* 安装
+```
+# Ubuntu安装
+1. 安装依赖包
+    1. sudo apt-get install libffi-dev
+    2. sudo apt-get install libssl-dev
+    3. sudo apt-get install libxml2-dev
+    4. sudo apt-get install python3-dev
+    5. sudo apt-get install libxslt1-dev
+    6. sudo apt-get install zlib1g-dev
+    7. sudo apt-get install -I -U 
+service_identity
+2. 安装scrapy框架
+    1. sudo pip3 install Scrapy
+```
+```
+# Window安装
+cmd命令行(管理员):python -m pip install Scrapy
+# Error:Microsoft Visual C++ 14.0 is required xxx
+```
+* Scrapy框架五大组件
+```
+1. 引擎(Engine)       : 整个框架的核心
+2. 调度器(Scheduler)  : 维护请求队列
+3. 下载器(Downloader) : 获取响应对象
+4. 爬虫文件(Spider)   : 数据解析提取
+5. 项目管道(pipeline) : 数据入库处理
+****************************************
+# 下载器中间件(Downloader Middlewares):引擎->下载器,包装请求(随机代理)
+# 蜘蛛中间件(Spider Middlewares):引擎->爬虫文件，可修改响应对象属性
+```
+- **scrapy爬虫工作流程**
+
+```
+# 爬虫项目启动
+1、由引擎向爬虫程序索要第一个要爬取的URL,交给调度器去入队列
+2、调度器处理请求后出队列,通过下载器中间件交给下载器去下载
+3、下载器得到响应对象后,通过蜘蛛中间件交给爬虫程序
+4、爬虫程序进行数据提取：
+   1、数据交给管道文件去入库处理
+   2、对于需要继续跟进的URL,再次交给调度器入队列，依次循环
+```
+
+**常用命令**
+
+```
+
+```
+
+### **今日作业**
+
+```
+1、熟练使用 execjs 模块
+2、熟记scrapy框架的组件及工作流程 - 要求能口头描述清楚
+```
 
 
 
