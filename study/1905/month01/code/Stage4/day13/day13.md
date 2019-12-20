@@ -224,6 +224,146 @@ class TencentMysqlPipeline(object):
         self.cursor.close()
         self.db.close()
 ```
+## 图片管道(360图片抓取案例)
+* 目标
+```
+www.so.com -> 图片 -> 美女
+```
+* 抓取网络数据包
+```
+2. F12抓包,抓取到json地址和查询参数(QueryString)
+    url = 'http://image.so.com/zjl?ch=beauty&sn={}&listtype=new&temp=1'.format(sn)
+    ch:beauty
+    sn:90
+    listtype:new
+    temp:1
+```
+* 项目实现
+1. 创建爬虫地址
+```
+scrapy startproject So
+cd So
+scrapy genspider so image.so.com
+```
+2. 定义要爬取的数据结构(items.py)
+```
+img_link = scrapy.Field()
+img_title = scrapy.Field()
+```
+3. 爬虫文件实现图片链接+名字抓取
+```
+
+```
+4. 管道文件(pipelines.py)
+```
+```
+5. 设置settings.py
+```
+```
+6. 创建run.py运行爬虫
+**字符串方法总结**
+```
+1. strip()
+2. split()
+3. replace('','')
+4. ''.join()
+5. 字符串切片(正向切,反向切)
+# content = '我是&小&说*内容**'
+# result = content.replace('&','').replace('*','')
+```
+## Scrapy shell的使用
+* 基本使用
+```
+# scrapy shell URL地址
+*1. request.url     :请求URL地址
+*2. request.headers :请求头(字典)
+*3. request.meta    :item数据传递,定义代理(字典)
+
+4. response.text    :字符串
+5. response.body    :bytes
+6. response.xpath('')       
+```
+* scrapy.Request()参数
+```
+1. url
+2. callback
+3. headers
+4. meta:传递数据,定义代理
+5. dont_filter:是否忽略组限制
+默认False，检查allowed_domains['']
+```
+## 设置中间件(随机User-Agent)
+### 少量User-Agent切换
+* 方法一
+```
+# settings.py
+USER_AGENT = ''
+DEFAULT_REQUEST_HEADERS = {}
+```
+* 方法二
+```
+# spider
+yield scrapy.Request(url,callback=函数名,headers={})
+```
+### 大量User-Agent.py设置中间件
+* middlewares.py设置中间件
+```
+1. 获取User-Agent
+    # 方法1:新建useragents.py,存放大量的User-Agent,random模块随机切换
+    # 方法2:安装fake_useragent模块(sudo pip3 install fake_useragent)
+        from fake_useragent import UserAgent()
+        ua_obj = ua_obj.random
+2. middlewares.py新建中间件类
+    class RandomUseragentMiddleware(object):
+        def process_request(self,request,spider):
+            ua = UserAgent()
+            request.headers['User-Agent'] = ua.random
+3. settings.py添加此下载器中间件
+    DOWNLOADER_MIDDLEWARES = {'':优先级}
+```
+## 设置中间件(随机代理)
+```
+class RandomProxyDownloaderMiddleware(object):
+    def process_request(self,request.spider):
+        request.meta['proxy'] = xxx
+        
+    def process_exception(self,request,exception,spider):
+    return request
+```
+## Fiddler抓包工具
+* 配置Fiddler
+```
+# 添加证书信任
+1. Tools - Options - HTTPS
+    勾选Decrypt Https Traffic 后弹出窗口,一路确认
+# 设置只抓取浏览器的数据包
+2. ...from browsers only
+# 设置监听端口(默认为8888)
+3. Tools - Options - Connections
+# 配置完成后重启Fiddler(重要)
+```
+* 配置浏览器代理
+```
+1. 安装Proxy SwitchOmega插件
+2. 浏览器右上角:SwitchOmega->选项->新建情景模式->AID1908(名字)->新建
+    输入:HTTP:// 127.0.0.1 8888
+    点击:应用选项
+3. 点击右上角SwitchOmega可切换代理
+```
+* Fiddler常用菜单
+```
+1. Inspector :查看数据包详细内容
+    整体分为请求和响应两部分
+2. 常用菜单
+    Headers :请求信息
+    WebForms
+        # 1. POST请求Form表单数据:<body>
+        # 2. GET请求查询参数:<QueryString>
+    Raw
+    将整个请求显示为纯文本
+```
+
+
 
 
 
