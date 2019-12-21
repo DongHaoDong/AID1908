@@ -149,3 +149,46 @@ REDIS_HOST = '192.168.43.220'
 REDIS_PORT = 6379
 ```
 ### 2. 改写为分布式(同时存入mysql)
+* 修改管道
+```
+ITEM_PIPELINES = {
+    'Tencent.pipelines.TencentPipeline': 300,
+    'Tencent.pipelines.TencentMysqlPipeline': 500,
+    # 'scrapy_redis.pipelines.RedisPipeline':200,
+}
+```
+* 清除redis数据库
+```
+flushdb
+```
+* 代码拷贝一份到分布式中其他机器,两台或多态机器同时执行此代码
+**远程连接MySQL设置**
+```
+1. 配置文件 - 允许远程连接
+sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
+# bind-address=127.0.0.1 把此行注释
+2. 添加授权用户
+mysql -u root -p123456
+mysql> grant all privileges on *.* to '用户名'@'%' identified by '密码' with grant option;
+mysql> flush privileges;
+3. 重启MySQL服务
+sudo /etc/init.d/mysql restart
+```
+## 腾讯招聘分布式改写-方法二
+* 使用redis_key改写
+```
+# 第一步:settings.py无需改动和第一种写法一致
+settings.py和上面分布式代码一致
+# 第二步:tencent.py
+from scrapy redis.spiders import RedisSpider
+class TencentSpider(RedisSpider):
+    # 1. 去掉start_urls
+    # 2. 定义redis_key
+    redis_key = 'tencent:spider'
+    def parse(self,response):
+        pass
+# 第三步:把代码复制到所有爬虫服务器,并启动项目
+# 第四步
+
+        
+```
