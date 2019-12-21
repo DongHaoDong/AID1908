@@ -75,8 +75,8 @@ DEFAULT_REQUEST_HEADERS = {
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'Tencent.pipelines.TencentPipeline': 300,
-    # 'Tencent.pipelines.TencentMysqlPipeline': 500,
-    'scrapy_redis.pipelines.RedisPipeline':200,
+    'Tencent.pipelines.TencentMysqlPipeline': 500,
+    # 'scrapy_redis.pipelines.RedisPipeline':200,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -101,7 +101,7 @@ ITEM_PIPELINES = {
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 # 定义mysql相关变量
-MYSQL_HOST = '127.0.0.1'
+MYSQL_HOST = '192.168.43.220'
 MYSQL_USER = 'root'
 MYSQL_PASSWORD = '584023982'
 MYSQL_DB = 'tencentdb'
