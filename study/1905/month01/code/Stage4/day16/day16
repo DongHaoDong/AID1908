@@ -1,0 +1,309 @@
+# Day15笔记
+## 使用命令必须养成的习惯
+```
+1. tab键自动补全
+2. ctrl + l:清理屏幕
+3. ctrl + c:终止当前命令的执行
+```
+## 常用远程连接软件
+```
+# 终端仿真程序,其实就是windows下登录UNIX或Linux服务主机的软件,支持ssh,telnet
+1. Xshell
+2. Secure CRT
+# Xshell实现文件互传
+1. xshell图形界面:新建文件传输
+2. 安装:lrzsz,是一款可在linux里可代替ftp上传和下载的程序
+```
+## 常见服务的端口号
+```
+MySQL - 3306
+MongoDB - 27017
+Redis - 6379
+redis-sentinel - 26379
+SSH - 22
+HTTP - 80
+NGINX - 80
+HTTPS - 443
+TELNET - 23
+FTP - 21
+```
+## 文本处理工具 - awk
+### 语法格式
+```
+awk 选项 '动作' 文件列表
+```
+### 常用方式
+```
+Linux命令 | awk 选项 '动作'
+```
+## 作业
+```
+# nginx的访问日志目录
+/var/log/nginx/access.log
+问题1:把访问过自己的IP地址输出
+    # awk '{print $1}' access.log
+问题2:统计有多少个IP访问过我
+    # awk '{print $1}' access.log | sort | uniq | wc -l
+问题3:统计每个IP地址的访问次数,输出前10个访问量最大的用户IP
+    # awk '{print $1}' access.log | sort | sort -rn -k 1 | head -10
+```
+## grep命令之正则表达式
+```
+# 正则表达式元字符集 - 使用grep命令
+. : 任意一个字符
+* : 0次或多次
+# 正则表达式扩展字符集 - 使用 egrep命令
++        : 1次或多次
+{n}      : 出现n次
+()       : 分组
+[a-z]    : 所有小写字母
+[A-Z]    : 所有大写字母
+[a-Z]    : 所有字母
+[0-9]    : 所有数字
+[a-z0-9] : 所有的字母和数字
+```
+### 应用场景
+```
+# Mac地址正则匹配
+# 00:0c:29:c6:36:2d
+([0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2}
+egrep "" 文件名
+ifconfig | egrep "([0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2}" | awk '{print $2}'
+```
+## shell编程
+### Shell格式
+```
+1. 扩展名: xxx.sh
+2. 正文第一行必须指定解释器: #!/bin/bash
+```
+### shell执行方式
+```
+# 方式一:加权限, ./xxx.sh执行
+1. chmod +x xxx.sh
+2. ./xxx.sh
+# 方式二:手动指定解释器
+bash xxx.sh
+```
+### 变量
+* 自定义变量
+```
+# 1. 自定义变量
+变量名=值       ---> 注意: =两侧绝对不能有空格
+eg1: name="take me to your heart"
+# 2. 调用变量的格式
+echo $变量名
+# 3. 小细节:单引号和双引号的区别
+单引号:无法获取变量的值
+双引号:可以获取变量的值
+```
+* 环境变量+位置变量+预设变量
+```
+# 环境变量
+echo $USER -- 当前用户
+echo $UID  -- 当前用户的UID号
+echo $PWD  -- 当前路径
+echo $PATH -- 命令搜索路径
+# 位置变量
+$1 $2 $3 ... ... shell的位置变量
+# 预定义变量
+$# $* $?
+# $? : 返回上一条命令的执行状态(0代表正确,非0代表失败)
+```
+**示例**
+```
+输出$1+$2,例如输出结果:3+5
+#!/bin/bash
+echo $1 + $2
+```
+* 变量赋值-接收用户从终端输入的值
+```
+# 语法格式
+read -p 提示信息 变量名
+# 示例
+#!/bin/bash
+echo $1 + $2 = `expr $1 + $2` 
+```
+* 变量赋值-接收用户从终端输入的值
+```
+# 语法格式
+read -p 提示信息 变量名
+# 示例
+#!/bin/bash
+read -p 请输入姓名:name
+echo "您的姓名是:$name"
+# 指定超时时间
+read -p 提示信息 变量名
+read -t -p 提示信息 变量名
+# 示例
+#!/bin/bash
+read -t 3 -p 请输入用户名:username
+```
+**练习**
+```
+1. 输入学生姓名:赵敏
+2. 输入学生成绩:88
+3. 输出赵敏的成绩为88分
+#!/bin/bash
+read -p "请输入姓名:" name
+read -t 3 -p "请输入成绩:" score
+echo "$name的成绩为$score分"
+```
+## shell - 算数运算符
+```
+# 运算符
+1. + - * / %
+2. ++: 自加运算，类似于python中的i++,等同于i+=1
+3. --:同++
+# 运算命令
+1. let 运算表达式
+    i=1
+    let i++
+    echo $1
+2. expr 运算表达式
+    i=1
+    sum=`expr $1 +5` # +两侧要有空格
+    echo $sum
+3. $[]
+    echo $[1+1]
+    echo $[1-1]
+    echo $[a+a] # 调用变量不用多次添加$符号
+    echo $[1*1] # 乘法无需转义
+```
+**练习**
+```
+使用位置变量+以上方法一、方法二中任意一种，实现2个数字的相加
+#!/bin/bash
+echo $[$1+$2]
+echo `expr $1 + $2`
+```
+## shell - 比较运算符
+```
+# 语法格式
+    [ 判断语句 ] # 注意括号必须有空格
+# 1.字符比较
+    [ A == A ] # 相等(等号两边需要有空格)
+    [ A != B ] # 不相等
+    [ -z $变量 ] # 判断是否为空
+# 2. 数字比较
+    -eq 等于(equal)
+    -ne 不等于(not equal)
+    -gt 大于(greater than)
+    -ge 大于等于(great or equal)
+    -lt 小于(less than)
+    -le 小于等于(less or equal)
+# 3. 文件|目录比较
+    [ -e 文件或目录 ] # 是否存在exist
+    [ -f 文件 ] # 存在且为文件file
+    [ -d 目录 ] # 存在且为目录directory
+    [ -r 文件或目录 ] # 判断是否可读read
+    [ -w 文件或目录 ] # 判断是否可写write
+    [ -x 文件或目录 ] # 判断是否可执行
+```
+## shell - if分支结构
+```
+# 1. 单分支语法格式
+    if 判断 ;then
+        命令
+        命令
+    fi
+# 2. 双分支语法格式
+    if 判断 ;then
+        命令1
+    else
+        命令2
+    fi
+# 3. 多分支语法格式
+    if 判断 ;then
+        判断1 
+    elif 判断;then
+        命令2
+    else
+        命令3
+    fi
+# 示例
+#!/bin/bash
+if [ $USER == tarena ];then
+    echo "Yes,You are Tarena"
+else
+    echo "You are other man"
+```
+**猜数字游戏**
+```
+#!/bin/bash
+
+read -p "数字已生成,请猜:" you
+
+if [ $you -gt $C ];then
+	echo "大"
+elif [ $you -lt $C ];then
+	echo "小"
+else
+	echo "对"
+fi
+```
+## shell - for循环
+```
+# 语法格式
+for 变量 in 值序列
+do
+    命令
+done
+# 示例
+for i in 1 2 3 4 5
+do
+    echo "hello world"
+done
+```
+**练习判断指定网段的IP地址那些可以用,那些不能用？**
+```
+#!/bin/bash 
+
+for i in {1..254}
+do
+	# /dev/null为黑洞,不想要的输出放在里面
+	ping -c 2 192.168.43.$i &> /dev/null
+	# $?返回上一条命令的执行状态
+	if [ $? -eq 0 ];then
+		echo "192.168.43.$i is up"
+	else
+		echo "192.168.43.$i is down"
+	fi
+done
+```
+## shell - while循环
+```
+# 语法格式
+while 条件判断
+do
+    命令
+done
+# 示例
+#!/bin/bash
+
+i=1
+while [ $i -le 5 ]
+do
+	echo $i
+	# 自加1
+	let i++
+done
+```
+**while补充**
+```
+1. 死循环
+while :
+do 
+    循环体
+done
+2. vim批量缩进
+显示行号:set nu
+命令行模式输入:
+1,3>敲Enter - 向右缩进
+3,8<敲Enter - 向左缩进
+```
+## shell - case分支结构
+```
+# 1. 特点
+根据变量值不同,执行不同操作
+
+```
