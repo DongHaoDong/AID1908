@@ -21,7 +21,7 @@ class TencentSpider(RedisSpider):
     def parse(self,response):
         total = self.get_total()
         # 生成一级页面所有页的URL地址,交给调度器
-        for index in range(1,50):
+        for index in range(1,total+1):
             url = self.one_url.format(self.keyword,index)
             yield scrapy.Request(
                 url=url,
