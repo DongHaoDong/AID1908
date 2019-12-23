@@ -2,84 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1fd6769b-af03-437c-9379-e879267049f8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/01_sum.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/01_test.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/02_input.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/02_variable.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/02_variable.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/03_if1.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/04_guess_if.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/05_for_1.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/06_for_ip.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/07_guess_while.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/07_while.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/08_onechar.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/09_nginx.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/10_mysqladmin.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/11_md5sum.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/12_mysqldump.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/13_randompass.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/14_randompass.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/15_function.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/16_function_calc.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/r1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/r2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/CoffeeMonitor/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/CoffeeMonitor/settings.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/CoffeeMonitor/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/CoffeeMonitor/wsgi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/Coffee_System.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/db.sqlite3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/form.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/css/hw_index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/img/hw.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/img/newLogo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/img/p9.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/img/phone01.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/img/phone02.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/img/phone03.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/img/phone05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/img/phone06.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/img/slide01.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/img/slide02.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/img/slide03.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/img/slide04.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/img/slide05.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/img/vip.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/js/hw_index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/templates/data_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/templates/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/templates/map_test.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/coffee_server/.vscode/settings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/coffee_server/Coffee_System_all.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/coffee_server/coffee_cli.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/coffee_server/db_coffee_dao.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/coffee_server/db_conf.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/coffee_server/db_helper.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/coffee_server/machine_checker.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/coffee_server/main_server.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/coffee_server/msg.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/coffee_server/msg_handler.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/doc/智能咖啡机手册.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/doc/智能咖啡机监控管理系统_详细设计.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/doc/智能咖啡机监控管理系统_部署运维手册.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/doc/智能咖啡机监控管理系统_需求规格说明书.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day17/doc/智能设备监控系统原理与应用.pptx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day18/Warehouse_reqirement.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage4/day18/Warehouse_table.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage5/day01/day01.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage5/day01/demo01_numpy.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage5/day01/demo02_ndarray.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage5/day01/demo03_attr.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage5/day01/demo04_cls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/code.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/code.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stage4/day16/day16" beforeDir="false" afterPath="$PROJECT_DIR$/Stage4/day16/day16" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +66,91 @@
       <recent name="F:\study\1905\month01\code\day12\day11_exercise" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.fork01">
+  <component name="RunManager" selected="Python.demo04_cls">
+    <configuration name="demo01_numpy" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="code" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Stage5/day01" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Stage5/day01/demo01_numpy.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="demo02_ndarray" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="code" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Stage5/day01" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Stage5/day01/demo02_ndarray.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="demo03_attr" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="code" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Stage5/day01" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Stage5/day01/demo03_attr.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="demo04_cls" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="code" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Stage5/day01" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Stage5/day01/demo04_cls.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="fork01" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="code" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -159,97 +172,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="http_server" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="code" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Stage2/day07" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Stage2/day07/http_server.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="http_test (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="code" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Stage2/day07" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Stage2/day07/http_test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="http_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="code" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Stage2/day06" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Stage2/day06/http_test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="struct_recv" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="code" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Stage2/day07" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Stage2/day07/struct_recv.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.demo04_cls" />
+        <item itemvalue="Python.demo03_attr" />
+        <item itemvalue="Python.demo02_ndarray" />
+        <item itemvalue="Python.demo01_numpy" />
         <item itemvalue="Python.fork01" />
-        <item itemvalue="Python.struct_recv" />
-        <item itemvalue="Python.http_server" />
-        <item itemvalue="Python.http_test (1)" />
-        <item itemvalue="Python.http_test" />
       </list>
     </recent_temporary>
   </component>
@@ -283,7 +212,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576193318283</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="第八次提交">
+      <created>1577095928729</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1577095928729</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -292,26 +228,42 @@
     <option name="LAST_COMMIT_MESSAGE" value="第八次提交" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1045" y="117" key="CommitChangelistDialog2" timestamp="1576193317221">
+    <state x="1045" y="117" key="CommitChangelistDialog2" timestamp="1577095926949">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="1045" y="117" key="CommitChangelistDialog2/0.0.1920.1050@0.0.1920.1050" timestamp="1576193317221" />
+    <state x="1045" y="117" key="CommitChangelistDialog2/0.0.1920.1050@0.0.1920.1050" timestamp="1577095926949" />
     <state x="1016" y="541" key="FileChooserDialogImpl" timestamp="1576166768061">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="1016" y="541" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1576166768061" />
+    <state width="916" height="189" key="GridCell.Tab.0.bottom" timestamp="1577105687112">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="916" height="189" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1577105687112" />
+    <state width="916" height="189" key="GridCell.Tab.0.center" timestamp="1577105687111">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="916" height="189" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1577105687111" />
+    <state width="916" height="189" key="GridCell.Tab.0.left" timestamp="1577105687111">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="916" height="189" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1577105687111" />
+    <state width="916" height="189" key="GridCell.Tab.0.right" timestamp="1577105687112">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="916" height="189" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1577105687112" />
     <state x="922" y="167" key="SettingsEditor" timestamp="1577093637882">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="922" y="167" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1577093637882" />
-    <state x="1032" y="258" key="Vcs.Push.Dialog.v2" timestamp="1576193334081">
+    <state x="1032" y="258" key="Vcs.Push.Dialog.v2" timestamp="1577095937284">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="1032" y="258" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1576193334081" />
-    <state x="1103" y="231" width="672" height="678" key="search.everywhere.popup" timestamp="1576218128047">
+    <state x="1032" y="258" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1577095937284" />
+    <state x="1103" y="231" width="672" height="678" key="search.everywhere.popup" timestamp="1577103548841">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="1103" y="231" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1576218128047" />
+    <state x="1103" y="231" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1577103548841" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
