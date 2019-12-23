@@ -2,19 +2,84 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1fd6769b-af03-437c-9379-e879267049f8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/blog/btoken/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/blog/btoken/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/blog/btoken/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/blog/btoken/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/blog/btoken/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/blog/btoken/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/blog/btoken/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/blog/btoken/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/01_sum.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/01_test.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/02_input.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/02_variable.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/02_variable.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/03_if1.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/04_guess_if.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/05_for_1.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/06_for_ip.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/07_guess_while.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/07_while.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/08_onechar.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/09_nginx.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/10_mysqladmin.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/11_md5sum.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/12_mysqldump.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/13_randompass.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/14_randompass.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/15_function.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/16_function_calc.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/r1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day16/shell/r2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/CoffeeMonitor/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/CoffeeMonitor/settings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/CoffeeMonitor/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/CoffeeMonitor/wsgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/Coffee_System.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/db.sqlite3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/form.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/css/hw_index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/img/hw.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/img/newLogo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/img/p9.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/img/phone01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/img/phone02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/img/phone03.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/img/phone05.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/img/phone06.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/img/slide01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/img/slide02.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/img/slide03.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/img/slide04.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/img/slide05.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/img/vip.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/static/js/hw_index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/templates/data_form.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/templates/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/templates/map_test.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/CoffeeMonitor/manage/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/coffee_server/.vscode/settings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/coffee_server/Coffee_System_all.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/coffee_server/coffee_cli.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/coffee_server/db_coffee_dao.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/coffee_server/db_conf.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/coffee_server/db_helper.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/coffee_server/machine_checker.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/coffee_server/main_server.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/coffee_server/msg.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/coffee_server/msg_handler.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/doc/智能咖啡机手册.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/doc/智能咖啡机监控管理系统_详细设计.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/doc/智能咖啡机监控管理系统_部署运维手册.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/doc/智能咖啡机监控管理系统_需求规格说明书.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day17/doc/智能设备监控系统原理与应用.pptx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day18/Warehouse_reqirement.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Stage4/day18/Warehouse_table.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/code.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/code.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stage3/day26/blog_project/client/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/Stage3/day26/blog_project/client/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stage3/day27/blog_project/blog/blog/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/blog/blog/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stage3/day27/blog_project/blog/blog/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/blog/blog/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Stage3/day27/blog_project/blog/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Stage3/day27/blog_project/blog/user/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Stage4/day16/day16" beforeDir="false" afterPath="$PROJECT_DIR$/Stage4/day16/day16" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,18 +98,21 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
   </component>
   <component name="ProjectId" id="1PL1iGzFXhx2p3k5lxHHPiY2A0f" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="ignore.virus.scanning.warn.message" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -55,18 +123,18 @@
     </option>
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\习惯就好\Desktop\gitproject\study\1905\month01\code\Stage3" />
+      <recent name="E:\study\1905\month01\code\Stage2\day07" />
+      <recent name="F:\study\1905\month01\code\Stage2\day06" />
+      <recent name="F:\study\1905\month01\code\Stage2\day05" />
+      <recent name="F:\study\1905\month01\code\Stage2\day04" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\study\1905\month01\code\day14\day13_exercise" />
       <recent name="F:\study\1905\month01\code\day14" />
       <recent name="F:\study\1905\month01\code\day11\day10_exercise" />
       <recent name="F:\study\1905\month01\code\day12\day11_exercise" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\study\1905\month01\code\Stage2\day07" />
-      <recent name="F:\study\1905\month01\code\Stage2\day06" />
-      <recent name="F:\study\1905\month01\code\Stage2\day05" />
-      <recent name="F:\study\1905\month01\code\Stage2\day04" />
-      <recent name="F:\study\1905\month01\code\Stage2\day03" />
     </key>
   </component>
   <component name="RunManager" selected="Python.fork01">
@@ -208,13 +276,42 @@
       <option name="presentableId" value="Default" />
       <updated>1565638687242</updated>
     </task>
+    <task id="LOCAL-00001" summary="第八次提交">
+      <created>1576193318283</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1576193318283</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="第八次提交" />
+    <option name="LAST_COMMIT_MESSAGE" value="第八次提交" />
+  </component>
   <component name="WindowStateProjectService">
+    <state x="1045" y="117" key="CommitChangelistDialog2" timestamp="1576193317221">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="1045" y="117" key="CommitChangelistDialog2/0.0.1920.1050@0.0.1920.1050" timestamp="1576193317221" />
     <state x="1016" y="541" key="FileChooserDialogImpl" timestamp="1576166768061">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="1016" y="541" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1576166768061" />
+    <state x="922" y="167" key="SettingsEditor" timestamp="1577093637882">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="922" y="167" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1577093637882" />
+    <state x="1032" y="258" key="Vcs.Push.Dialog.v2" timestamp="1576193334081">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="1032" y="258" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1576193334081" />
+    <state x="1103" y="231" width="672" height="678" key="search.everywhere.popup" timestamp="1576218128047">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="1103" y="231" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1576218128047" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

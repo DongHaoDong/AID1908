@@ -302,8 +302,205 @@ done
 3,8<敲Enter - 向左缩进
 ```
 ## shell - case分支结构
-```
+```shell script
 # 1. 特点
 根据变量值不同,执行不同操作
-
+# 语法格式
+case $变量名 in
+模式1)
+    代码块
+    ;;
+模式2)
+    代码块
+    ;;
+*)
+    代码块
+    ;;
+esac
 ```
+**示例-输入一个字符，判断为数字、字母还是其他字符**
+```shell script
+#!/bin/bash
+
+echo "+-----------------------------+"
+echo "|      Welcome(q to quit)     |"
+echo "+-----------------------------+"
+
+read -p "请输入一个字符:" char
+
+if [ ${#char} -ne 1 ];then
+	echo "$char不是1个字符！！"
+	exit
+elif [ $char == "q"  ];then
+	echo "程序退出"
+	exit
+fi
+
+case $char in
+[a-z]|[A-Z])
+	echo "字母"
+	;;
+[0-9])
+	echo "数字"
+	;;
+*)
+	echo "其他字符"
+	;;
+esac
+```
+**练习：编写一个nginx的启动脚本，包含start|stop|restart**
+```shell script
+#!/bin/bash
+
+read -p "请选择操作(start|stop|restart):" operation
+
+case $operation in
+"start")
+	sudo /etc/init.d/nginx start
+	;;
+"stop")
+	sudo /etc/init.d/nginx stop
+	;;
+"restart")
+	sudo /etc/init.d/nginx restart
+	;;
+*)
+	echo "Usage: nginx {start|stop|restart}"
+	;;
+esac
+````
+**知识点总结**
+```
+# 1. 获取字符串长度
+${#变量名}
+# 2. 字符串索引及切片
+${string:index:number}
+key='ABCDE'
+${key:0:1} # A 获取下标索引为0的元素
+${key:1:2} # BC
+# 3. vim批量缩进
+1. 进入命令行模式 : shift +:
+2. 1,3> + Enter :  1-3行缩进
+2. 1,3< + Enter :  1-3行往回缩进
+```
+## shell实战
+### 1. 每2秒钟检测一次MySQL数据库的连接数量
+```
+# mysqladmin命令
+mysql服务器管理任务的工具，它可以检查mysql服务器的配置和当前工作状态
+```
+**代码实现**
+```shell script
+#!/bin/bash
+# 每2秒钟检测一次MySQL并发连接数
+user="root"
+passwd="123456"
+while :
+do
+	count=`mysqladmin -u$user -p$passwd status | awk '{print $4}'`
+	echo "`date +%H:%M:%S` 并发连接数为:$count"    
+	sleep 2
+done
+```
+### 2. 根据md5校验码,检测文件是否被修改
+```
+# 1. 生成md5的文件校验码
+md5sum nginx.conf
+```
+**代码实现**
+```
+#!/bin/bash
+# 本示例脚本检测的是/etc目录下所有的conf结尾的文件
+# 本脚本的目标数据没有被修改时执行一次，当怀疑数据被人篡改，再执行一次
+# 将两次执行结果作对比，MD5码发生改变的文件就是被人篡改的文件
+#!/bin/bash
+
+for file in $(ls /etc/*.conf)
+do
+	md5sum $file >> r2.txt
+done
+# 如何查看两个文件的不同
+diff 文件1 文件2
+# 结果
+# 1. test.conf发生了改变
+# 2. 第30行发生了变化(changge)
+30c30
+< 84007bd881d1d5fb40eaf3a9bd263ba8  /etc/test.conf
+---
+> 970c7552bfa8322ac62a7de2a9c0b263  /etc/test.conf
+```
+### 3. 备份MySQL数据库
+```shell script
+# 备份MySQL数据库汇总的mysql
+#!/bin/bash
+
+user="root"
+passwd="123456"
+dbname="mysql"
+filename=$(date +%Y-%m-%d)-mysql.sql
+
+# 测试备份目录是否存在,不存在则自动创建该目录
+if [ ! -d "/home/tarena/backup" ]; then
+	mkdir -p /home/tarena/backup
+fi
+
+# 备份
+mysqldump -u$user -p$passwd $dbname > /home/tarena/backup/$filename
+```
+### 4. 随机生成8位密码-数字、字母、下划线
+```
+#!/bin/bash
+# 设置变量key，存储密码的所有可能性(密码库),如果还需要其他字符请自行添加其他密码字符
+# 使用$#统计密码库的长度
+key="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_"
+length=${#key}
+# 设置初始密码为空
+pass=''
+# 循环8次，生成8位随机密码
+# 每次都是随机数对密码库的长度取余,确保提取的密码字符不超过密码库的长度
+# 每次循环提取一位随机密码，并将该随机码追加到pass变量之后
+for i in {1..8}:
+do
+	index=$[RANDOM%$length]
+	pass=$pass${key:$index:1}
+done
+echo $pass
+```
+## shell - 函数
+```
+1. 语法格式
+函数名(){
+    代码块
+}
+2. 调用
+函数名
+```
+**示例代码**
+```shell script
+#!/bin/bash
+
+sumn(){
+	echo $[n1+n2]
+}
+
+subn(){
+	echo $[n1-n2]
+}
+
+read -p "First:" n1
+read -p "Second:" n2
+read -p "Operation(+|-):" op
+
+case $op in
+"+")
+	sumn
+	;;
+"-")
+	subn
+	;;
+*)
+	echo "Invalid"
+	;;
+esac
+````
+
