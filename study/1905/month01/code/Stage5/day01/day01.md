@@ -239,7 +239,7 @@ print(a[1::3]) # 2 5 8
 print(a[2::3])  # 3 6 9
 ```
 ### 多维数组切片操作
-```python
+```
 import numpy as np
 a = np.arange(1,28)
 a.resize(3,3,3)
@@ -250,6 +250,8 @@ print(a[1,:,:])
 print(a[:,1,:])
 # 切出0页的1行1列
 print(a[0,:,1])
+
+img -> (h,w)
 ```
 ### ndarray数组的掩码操作
 ```python
