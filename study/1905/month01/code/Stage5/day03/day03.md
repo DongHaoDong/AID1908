@@ -419,5 +419,30 @@ mp.xlabel('Day', fontsize=12)
 mp.ylabel('Price', fontsize=12)
 # 拿到坐标轴
 ax = mp.gca()
+# 设置主刻度定位器为周定位器(每周一显示主刻度文本)
+ax.xaxis.set_major_locator(md.WeekdayLocator(byweekday=md.MO))
+ax.xaxis.set_major_formatter(md.DateFormatter('%d %b %Y'))
+# 设置次刻度定位器为日定位器
+ax.xaxis.set_minor_locator(md.DayLocator())
+mp.tick_params(labelsize=8)
+dates = dates.astype(md.datetime.datetime)
+mp.plot(dates,opening_prices,color='dodgerblue',linestyle='-')
+mp.gcf().autofmt_xdate()
+mp.show()
+```
+2. 每日蜡烛图
+```
+#绘制每一天的蜡烛图
+#填充色：涨为白色，跌为绿色
+rise = closeing_prices >= opening_prices
+color = np.array([('white' if x else 'limegreen') for x in rise])
+#边框色：涨为红色，跌为绿色
+edgecolor = np.array([('red' if x else 'limegreen') for x in rise])
 
+#绘制线条
+mp.bar(dates, highest_prices - lowest_prices, 0.1,
+	lowest_prices, color=edgecolor)
+#绘制方块
+mp.bar(dates, closeing_prices - opening_prices, 0.8,
+	opening_prices, color=color, edgecolor=edgecolor)
 ```
