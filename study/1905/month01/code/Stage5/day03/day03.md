@@ -405,3 +405,19 @@ dates, opening_prices,highest_prices, \
     dtype='M8[D], f8, f8, f8, f8',		# 制定返回每一列数组中元素的类型
     converters={1:dmy2ymd})
 ```
+案例：使用matplotlib绘制K线图
+1. 绘制dates与收盘价的折线图
+```
+import numpy as np
+import datetime as dt
+import matplotlib.pyplot as mp
+import matplotlib.dates as md
+# 绘制k线图，x为日期
+mp.figure('APPL k',facecolor='lightgray')
+mp.title('APPL k')
+mp.xlabel('Day', fontsize=12)
+mp.ylabel('Price', fontsize=12)
+# 拿到坐标轴
+ax = mp.gca()
+
+```
