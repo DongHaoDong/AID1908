@@ -93,7 +93,7 @@ DATABASES = {
         'USER': 'root',
         'HOST': 'localhost',
         'POST': 3306,
-        'PASSWORD': '584023982',
+        'PASSWORD': '123456',
     }
 }
 
