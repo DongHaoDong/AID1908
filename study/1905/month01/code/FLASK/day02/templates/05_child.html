@@ -1,0 +1,7 @@
+{% extends '04_parent.html' %}
+<!--重写04_parent.html的container的内容-->
+{% block container %}
+<!--调用父模板中的内容-->
+{{ super() }}
+<h1>这是字模板中被重写的内容</h1>
+{% endblock %}
