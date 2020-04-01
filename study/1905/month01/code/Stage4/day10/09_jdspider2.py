@@ -17,7 +17,7 @@ class JdSpider(object):
         search = '//*[@id="key"]'
         button = '//*[@id="search"]/div/div[2]/button'
         self.browser.get(self.url)
-        self.browser.find_element_by_xpath(search).send_keys('爬虫书')
+        self.browser.find_element_by_xpath(search).send_keys("python")
         self.browser.find_element_by_xpath(button).click()
         # 必须的:给页面留出加载时间
         time.sleep(5)
